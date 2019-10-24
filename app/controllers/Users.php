@@ -16,7 +16,7 @@ class Users extends Controller {
         $_SESSION['firstName'] = $user->firstName;
         $_SESSION['lastName'] = $user->lastName;
 
-        redirect('pages/index');
+        redirect('plannings/dashboard');
     }
 
     public function logout(){
@@ -31,13 +31,6 @@ class Users extends Controller {
         redirect('users/login');
     }
 
-    public function isLoggedIn(){
-        if (isset($_SESSION['id'])){
-            return true;
-        } else{
-            return false;
-        }
-    }
 
     public function login(){    // check if post
 

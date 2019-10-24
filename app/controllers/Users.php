@@ -6,7 +6,8 @@ class Users extends Controller {
      */
     public function __construct()
     {
-
+        // load a model
+        $this->userModel = $this->model('User');
     }
 
     public function login(){    // check if post
@@ -26,6 +27,10 @@ class Users extends Controller {
             // validate email
             if (empty($data['email'])){
                 $data['email_err'] = 'Entrez une adresse email valide.';
+            } else {
+                if (!$this->userModel->findUsersByEmail($data['email'])){
+                    $data['email_err'] = "Cette adresse email n'existe pas";
+                }
             }
 
             // validate password

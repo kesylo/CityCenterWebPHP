@@ -41,6 +41,8 @@ class Users extends Controller {
             // make sure errors are empty
             if (empty($data['email_err']) && empty($data['password_err'])){
                 // validation Ok
+                // display flash message
+                flash('login_success', 'you are connected');
                 die('success');
             }else {
                 // load view with errors

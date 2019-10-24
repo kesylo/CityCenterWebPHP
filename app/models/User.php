@@ -26,4 +26,19 @@ class User
             return false;
         }
     }
+
+    public function login($email, $password){
+        $this->db->query('SELECT * FROM employees WHERE email = :email and password = :password');
+        $this->db->bind(':email', $email);
+        $this->db->bind(':password', $password);
+
+        $row = $this->db->single();
+
+        if ($this->db->rowCount() > 0){
+            // user found
+            return $row;
+        }else{
+            return false;
+        }
+    }
 }

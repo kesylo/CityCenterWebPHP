@@ -10,6 +10,35 @@ class Users extends Controller {
         $this->userModel = $this->model('User');
     }
 
+    public function createUserSession($user){
+        $_SESSION['id'] = $user->id;
+        $_SESSION['email'] = $user->email;
+        $_SESSION['firstName'] = $user->firstName;
+        $_SESSION['lastName'] = $user->lastName;
+
+        redirect('pages/index');
+    }
+
+    public function logout(){
+        // just delete session variables
+        unset($_SESSION['id']);
+        unset($_SESSION['email']);
+        unset($_SESSION['firstName']);
+        unset($_SESSION['lastName']);
+
+        session_destroy();
+
+        redirect('users/login');
+    }
+
+    public function isLoggedIn(){
+        if (isset($_SESSION['id'])){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
     public function login(){    // check if post
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -27,10 +56,6 @@ class Users extends Controller {
             // validate email
             if (empty($data['email'])){
                 $data['email_err'] = 'Entrez une adresse email valide.';
-            } else {
-                if (!$this->userModel->findUsersByEmail($data['email'])){
-                    $data['email_err'] = "Cette adresse email n'existe pas";
-                }
             }
 
             // validate password
@@ -38,12 +63,28 @@ class Users extends Controller {
                 $data['password_err'] = 'Entrez un mot de  passe valide.';
             }
 
+            // check if email & password combination exist
+            if ($this->userModel->findUsersByEmail($data['email'])){
+                // user found
+            } else{
+                // user not found
+                $data['email_err'] = "Cet utilisateur n'existe pas";
+            }
+
             // make sure errors are empty
             if (empty($data['email_err']) && empty($data['password_err'])){
                 // validation Ok
-                // display flash message
-                flash('login_success', 'you are connected');
-                die('success');
+                // check and set login user
+                $loggedInUser = $this->userModel->login($data['email'], $data['password']);
+
+                if ($loggedInUser){
+                    // create session variable
+                    $this->createUserSession($loggedInUser);
+                }else{
+                    $data['password_err'] = "Mot de passe incorrect";
+                    // reload the view
+                    $this->view('users/login', $data);
+                }
             }else {
                 // load view with errors
                 $this->view('users/login', $data);

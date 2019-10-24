@@ -2,6 +2,9 @@
     // load config
     require_once 'config/config.php';
 
+    // load helpers
+    require_once 'helpers/url_helper.php';
+
     // load libraries
     /** auto add libraries to this file without typing manually
      *  all files found in libraries folder are loaded on start

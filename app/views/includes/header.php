@@ -11,4 +11,7 @@
     <title> <?php echo SITENAME; ?> </title>
 </head>
 <body>
+
+<!--Add navbar php file to header-->
+<?php require APPROOT . '/views/includes/navbar.php'; ?>
 <div class="container">

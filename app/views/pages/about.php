@@ -4,7 +4,6 @@
 <h1>
     <!--receive data array and display-->
     <?php
-    $data ="";
     echo $data['title'];
     ?>
 </h1>

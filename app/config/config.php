@@ -14,3 +14,6 @@ define('URLROOT', 'http://localhost/CityCenter');
 
 // site name
 define('SITENAME', 'CityCenterPlanning');
+
+// app version
+define('APPVERSION', '1.0.0');

@@ -19,7 +19,7 @@ class Pages extends Controller {        // default controller
     public function index(){
         // prepare data to send to view
         $data = [
-            'title' => 'Acceuil'
+            'title' => 'CityCenterPlanning'
         ];
 
         // view from the controller class we inherited

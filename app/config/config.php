@@ -2,15 +2,15 @@
 
 // DB params
 define('DB_HOST', 'localhost');
-define('DB_USER', 'YOUR_USER');
-define('DB_PASS', 'YOUR_PASS');
-define('DB_NAME', 'YOUR_DB');
+define('DB_USER', 'root');
+define('DB_PASS', 'azerty');
+define('DB_NAME', 'cityappdberp');
 
 // App root constant
 define('APPROOT', dirname(dirname(__FILE__)));
 
 // url root
-define('URLROOT', 'YOUR_URL'); // http://localhost/CityAppPlanningPHP
+define('URLROOT', 'http://localhost/CityCenter');
 
 // site name
-define('SITENAME', 'YOUR_SITE_NAME'); // CityCenterWeb
+define('SITENAME', 'CityCenterPlanning');

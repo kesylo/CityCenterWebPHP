@@ -17,6 +17,10 @@ class Pages extends Controller {        // default controller
 
     // default method
     public function index(){
+        if (isLoggedIn()){
+            redirect("plannings/dashboard");
+        }
+
         // prepare data to send to view
         $data = [
             'title' => 'Planning Manager'

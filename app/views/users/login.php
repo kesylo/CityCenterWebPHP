@@ -13,7 +13,7 @@
 <div class="row">
     <div class="col-md-5 mx-auto">
         <div class="card card-body bg-light mt-1">
-            <p>Veuillez remplir vos informations d'identification pour vous connecter</p>
+            <p>Veuillez remplir vos informations</p>
             <form action="<?php echo URLROOT; ?>/users/login" method="post">
                 <div class="form-group">
                     <label for="email">Email: <sup>*</sup></label>
@@ -30,6 +30,9 @@
                 </div>
             </form>
         </div>
+
+
+
 
     </div>
 </div>

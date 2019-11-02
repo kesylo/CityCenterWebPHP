@@ -17,7 +17,7 @@ session_start();
  * @param string $class
  */
 // flash messages helper
-function flash($name = '', $message = '', $class = 'alert alert-success'){
+function flash($name = '', $message = '', $class = 'alert alert-success alert-dismissible fade show'){
 
     if (!empty($name)){
         if (!empty($message) && empty($_SESSION[$name])){
@@ -35,7 +35,8 @@ function flash($name = '', $message = '', $class = 'alert alert-success'){
 
         } elseif (empty($message) && !empty($_SESSION[$name])){
             $class = !empty($_SESSION[$name. '_class']) ? $_SESSION[$name. '_class'] : '';
-            echo '<div class="'.$class.'" id=msg-flash">' .$_SESSION[$name]. '</div>';
+            echo '<div class="'.$class.'" id=msg-flash">' .$_SESSION[$name].
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span></button>' .'</div>';
             unset($_SESSION[$name]);
             unset($_SESSION[$name. '_class']);
         }

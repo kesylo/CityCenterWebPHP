@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3 portfolio-navbar gradient" style=" height: 56px;">
 
     <div class="container">
 
@@ -10,21 +10,29 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo URLROOT; ?>">Acceuil</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">A propos</a>
                 </li>
             </ul>
 
             <ul class="navbar-nav ml-auto">
                 <?php if (isset($_SESSION['id'])) : ?>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo URLROOT; ?>/users/logout">Déconnexion</a>
+                        <a class="nav-link" href="#">
+                            <?php echo $_SESSION['firstName']; ?> <?php echo $_SESSION['lastName']; ?>
+                        </a>
                     </li>
-                <?php else: ?>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo URLROOT; ?>/users/login">Connexion</a>
+                        <a class="nav-link" href="<?php echo URLROOT; ?>/users/logout">
+                            Déconnexion  <i class="fa fa-power-off"></i>
+                        </a>
+                    </li>
+
+                <?php else: ?>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo URLROOT; ?>/users/login"> Connexion</a>
                     </li>
                 <?php endif; ?>
             </ul>

@@ -9,7 +9,7 @@
     flash("planning_message");
 
 /*print_r($data);*/
-//echo $_COOKIE["nextWeekDate"];
+//echo $_COOKIE["rowId"];
 ?>
 
 

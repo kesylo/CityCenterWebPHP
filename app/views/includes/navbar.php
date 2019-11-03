@@ -1,42 +1,51 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3 portfolio-navbar gradient" style=" height: 56px;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark portfolio-navbar gradient py-1 mb-3">
+    <a class="navbar-brand" href="<?php echo URLROOT; ?>"><?php echo strtoupper(SITENAME); ?></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <div class="container">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-        <a class="navbar-brand" href="<?php echo URLROOT; ?>"><?php echo SITENAME; ?></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <ul class="navbar-nav mr-auto">
 
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">A propos <span class="sr-only">(current)</span></a>
+            </li>
+
+            <!--show admin link if user is admin-->
+            <?php if (isset($_SESSION['id'])) : ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">A propos</a>
+                    <a class="nav-link" href="<?php echo URLROOT; ?>/plannings/admin">Mode Administrateur</a>
                 </li>
-            </ul>
+            <?php endif; ?>
+        </ul>
 
-            <ul class="navbar-nav ml-auto">
-                <?php if (isset($_SESSION['id'])) : ?>
+        <ul class="navbar-nav ml-auto">
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <?php echo $_SESSION['firstName']; ?> <?php echo $_SESSION['lastName']; ?>
-                        </a>
-                    </li>
+            <?php if (isset($_SESSION['id'])) : ?>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo URLROOT; ?>/users/logout">
-                            Déconnexion  <i class="fa fa-power-off"></i>
-                        </a>
-                    </li>
+                <div id="col" class="my-auto mr-4">
+                    <span style="font-weight:bold">
+                        { <?php echo $_SESSION['firstName']; ?> <?php echo $_SESSION['lastName']; ?> }
+                    </span>
+                </div>
 
-                <?php else: ?>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo URLROOT; ?>/users/login"> Connexion</a>
-                    </li>
-                <?php endif; ?>
-            </ul>
-        </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo URLROOT; ?>/users/logout">
+                        Déconnexion  <i class="fa fa-power-off"></i>
+                    </a>
+                </li>
+
+            <?php else: ?>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo URLROOT; ?>/users/login"> Connexion</a>
+                </li>
+
+            <?php endif; ?>
+
+        </ul>
 
     </div>
 </nav>

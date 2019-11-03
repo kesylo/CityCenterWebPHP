@@ -17,10 +17,6 @@ class Plannings extends Controller{
     }
 
     public function index(){
-        // get next week monday
-        /*$nextWeek = date("d-m-Y", strtotime( "next monday" ));
-        $nextWeekDate = $_COOKIE["nextWeekDate"];*/
-
         $plannings = $this->planningModel->getUserPlannings($_SESSION['id'], $_COOKIE["nextWeekDate"]);
 
         $data = [
@@ -96,6 +92,22 @@ class Plannings extends Controller{
 
             $this->view('plannings/edit', $data);
         }
+    }
+
+    public function admin(){
+
+        if (isset($_SESSION['id']) && $_SESSION['role'] > 4){
+            $data = [
+                'plannings' => '',
+            ];
+
+            $this->view('plannings/admin', $data);
+        }else{
+            redirect('plannings/dashboard');
+            flashError('planning_message', "Désolé vous ne pouvez pas passer en mode administrateur!");
+        }
+
+
     }
 
     public function add(){

@@ -15,6 +15,7 @@ class Users extends Controller {
         $_SESSION['email'] = $user->email;
         $_SESSION['firstName'] = $user->firstName;
         $_SESSION['lastName'] = $user->lastName;
+        $_SESSION['role'] = $user->role;
 
         redirect('plannings/dashboard');
     }
@@ -25,6 +26,7 @@ class Users extends Controller {
         unset($_SESSION['email']);
         unset($_SESSION['firstName']);
         unset($_SESSION['lastName']);
+        unset($_SESSION['role']);
 
         session_destroy();
 

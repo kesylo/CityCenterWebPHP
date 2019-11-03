@@ -13,7 +13,7 @@ define('APPROOT', dirname(dirname(__FILE__)));
 define('URLROOT', 'http://localhost/CityCenter');
 
 // site name
-define('SITENAME', 'CityCenterPlanning');
+define('SITENAME', 'City Apartments');
 
 // app version
 define('APPVERSION', '1.0.0');

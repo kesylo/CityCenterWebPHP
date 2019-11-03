@@ -3,29 +3,31 @@
 if (sizeof($data['plannings']) > 0) :
     foreach ($data['plannings'] as $planning) : ?>
 
-        <div class="card">
-            <h6 class="card-header" style="font-weight:bold"><?php echo fullDate($planning->date); ?></h6>
-            <div class="card-body">
 
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary"><?php echo fullDate($planning->date); ?></h6>
+            </div>
+            <div class="card-body">
 
                 <div class="row mb-2 ">
                     <div class="col-md-4">
 
-                    <span style="font-weight:bold">
-                        Plage horaire:
-                    </span>
-                        <span style="font-weight:normal">
-                            <?php echo $planning->startTime . ' - ' . $planning->endTime ?>
-                    </span>
-
-                        <br>
-
                         <span style="font-weight:bold">
-                            Rédirection:
-                    </span>
-                        <span style="font-weight:normal">
-                            <?php echo $planning->callRedirect ?>
-                    </span>
+                            Plage horaire:
+                        </span>
+                            <span style="font-weight:normal">
+                                <?php echo $planning->startTime . ' - ' . $planning->endTime ?>
+                        </span>
+
+                            <br>
+
+                            <span style="font-weight:bold">
+                                Rédirection:
+                        </span>
+                            <span style="font-weight:normal">
+                                <?php echo $planning->callRedirect ?>
+                        </span>
 
                     </div>
 
@@ -51,6 +53,7 @@ if (sizeof($data['plannings']) > 0) :
                 </div>
             </div>
         </div>
+
 
     <?php endforeach; ?>
 

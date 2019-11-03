@@ -8,7 +8,7 @@
 
         <ul class="navbar-nav mr-auto">
 
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">A propos <span class="sr-only">(current)</span></a>
             </li>
 
@@ -26,7 +26,7 @@
 
                 <div id="col" class="my-auto mr-4">
                     <span style="font-weight:bold">
-                        { <?php echo $_SESSION['firstName']; ?> <?php echo $_SESSION['lastName']; ?> }
+                        <i class="fa fa-user"></i> <?php echo $_SESSION['firstName']; ?> <?php echo $_SESSION['lastName']; ?>
                     </span>
                 </div>
 

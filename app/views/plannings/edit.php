@@ -7,7 +7,7 @@
     <div class="col-md-9 mx-auto">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h1 class="m-0 font-weight-bold text-primary text-center">Ajouter un planning</h1>
+                <h1 class="m-0 font-weight-bold text-primary text-center">Modifier un planning</h1>
             </div>
             <div class="card-body">
                 <div class="col-md-7 mx-auto">

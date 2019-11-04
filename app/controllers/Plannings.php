@@ -100,8 +100,27 @@ class Plannings extends Controller{
 
             $plannings = $this->planningModel->getAllUsersPlannings($_COOKIE["nextWeekDate"]);
 
+            $ids = array();
+            $users = array();
+            $names = array();
+
+            // store all user ids who created a planning
+            foreach ($plannings as $key=>$pl){
+                $ids[$key] = $pl->id_user;
+            }
+
+            // remove duplicates
+            $uniqueIds = array_unique($ids);
+
+            // trim names only and store
+            foreach ($uniqueIds as $key=>$id){
+                $users[$uniqueIds[$key]] = $this->planningModel->getUserById($uniqueIds[$key]);
+                $names[$uniqueIds[$key]] = $users[$uniqueIds[$key]]->firstName . ' ' . $users[$uniqueIds[$key]]->lastName;
+            }
+
             $data = [
                 'plannings' => $plannings,
+                'unique' => $names,
             ];
 
             $this->view('plannings/admin', $data);

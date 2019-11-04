@@ -61,6 +61,15 @@ class Planning{
         return $row;
     }
 
+    public function getUserById($idUser){
+        $this->db->query('SELECT * FROM employees WHERE id = :id_user');
+        $this->db->bind(':id_user', $idUser);
+
+        $row = $this->db->single();
+
+        return $row;
+    }
+
     public function updatePlanning($data){
         $this->db->query('UPDATE planning SET week = :workweek, callRedirect = :callRedirect, date = :workdate, startTime = :startTime, endTime = :endTime, status = :workstatus 
                             WHERE id_planning = :id_planning');

@@ -1,11 +1,15 @@
 <?php /** @var TYPE_NAME $data */
 
+
+
+
 if (sizeof($data['plannings']) > 0) :
     foreach ($data['plannings'] as $planning) : ?>
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary"><?php echo fullDate($planning->date); ?></h6>
+                <h6 class="m-0 font-weight-bold text-primary d-inline"><?php echo fullDate($planning->date); ?></h6>
+                <h6 class="m-0 font-weight-bold pull-right d-inline"><?php echo $data['unique'][$planning->id_user]; ?></h6>
             </div>
             <div class="card-body">
 

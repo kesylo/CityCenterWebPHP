@@ -3,7 +3,6 @@
 if (sizeof($data['plannings']) > 0) :
     foreach ($data['plannings'] as $planning) : ?>
 
-
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary"><?php echo fullDate($planning->date); ?></h6>
@@ -50,35 +49,24 @@ if (sizeof($data['plannings']) > 0) :
 
                     <div class="col-md-4">
 
-                        <!--Delete-->
-                        <form action="<?php echo URLROOT; ?>/plannings/delete/<?php echo $planning->id_planning; ?>" method="post" onclick="return confirm('Voulez-vous supprimer ce planning ?')">
-                            <button type="submit" class="btn btn-danger pull-right ml-2"
-                                <?php
-                                    if ($planning->status == 'Accepté' || $planning->status == 'Refusé'){
-                                        echo 'disabled';
-                                    }else{
-                                        echo '';
-                                    }
-                            ?>>
-                                <i class="fa fa-trash"></i>
+                        <!--Deny-->
+                        <form action="<?php echo URLROOT; ?>/plannings/deny/<?php echo $planning->id_planning; ?>" method="post" onclick="return confirm('Refuser ce planning ?')">
+                            <button type="submit" class="btn btn-danger pull-right ml-2" >
+                                <i class="fa fa-times"></i>
                             </button>
                         </form>
 
-                        <!--edit-->
-                        <a href="<?php echo URLROOT; ?>/plannings/edit/<?php echo $planning->id_planning; ?>" class="btn btn-primary pull-right ml-2
-                        <?php
-                            if ($planning->status == 'Accepté' || $planning->status == 'Refusé'){
-                                echo 'disabled';
-                            }else{
-                                echo '';
-                            }
-                        ?>"><i class="fa fa-edit"></i>  </a>
+                        <!--Confirm-->
+                        <form action="<?php echo URLROOT; ?>/plannings/accept/<?php echo $planning->id_planning; ?>" method="post" onclick="return confirm('Accepter ce planning ?')">
+                            <button type="submit" class="btn btn-success pull-right ml-2" >
+                                <i class="fa fa-check"></i>
+                            </button>
+                        </form>
 
                     </div>
                 </div>
             </div>
         </div>
-
 
     <?php endforeach; ?>
 

@@ -17,7 +17,12 @@ class Users extends Controller {
         $_SESSION['lastName'] = $user->lastName;
         $_SESSION['role'] = $user->role;
 
-        redirect('plannings/dashboard');
+        if ($user->role > 4){
+            redirect('plannings/admin');
+        }else{
+            redirect('plannings/dashboard');
+        }
+
     }
 
     public function logout(){
@@ -94,7 +99,6 @@ class Users extends Controller {
                 'password_err' => '',
             ];
 
-            // load the about page
             $this->view('users/login', $data);
         }
     }

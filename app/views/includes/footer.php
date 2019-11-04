@@ -1,12 +1,11 @@
+
 </div>
 
-
-<footer class="footer mt-auto gradient py-3">
+<footer class="mt-auto gradient py-3">
     <div class="container text-center">
         <span>City Center Apartments ERP &copy; 2019 Brusselscitycenterapartments.com</span>
     </div>
 </footer>
-
 
 <!-- Bootstrap core JavaScript-->
 <script src="<?php echo URLROOT; ?>/js/jquery.min.js"></script>

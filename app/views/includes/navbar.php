@@ -13,7 +13,7 @@
             </li>
 
             <!--show admin link if user is admin-->
-            <?php if (isset($_SESSION['id'])) : ?>
+            <?php if (isset($_SESSION['id']) && $_SESSION['role'] > 4) : ?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo URLROOT; ?>/plannings/admin">Mode Administrateur</a>
                 </li>

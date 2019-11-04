@@ -97,8 +97,11 @@ class Plannings extends Controller{
     public function admin(){
 
         if (isset($_SESSION['id']) && $_SESSION['role'] > 4){
+
+            $plannings = $this->planningModel->getAllUsersPlannings($_COOKIE["nextWeekDate"]);
+
             $data = [
-                'plannings' => '',
+                'plannings' => $plannings,
             ];
 
             $this->view('plannings/admin', $data);
@@ -178,6 +181,34 @@ class Plannings extends Controller{
             }
         } else {
             redirect('plannings');
+        }
+    }
+
+    public function deny($id_planning){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+            if ($this->planningModel->denyPlanning($id_planning)){
+                flashError('planning_message', 'Le planning a été refusé!');
+                redirect('plannings/admin');
+            }else{
+                die("error deny");
+            }
+        } else {
+            redirect('plannings/admin');
+        }
+    }
+
+    public function accept($id_planning){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+            if ($this->planningModel->acceptPlanning($id_planning)){
+                flash('planning_message', 'Le planning a été accepté!');
+                redirect('plannings/admin');
+            }else{
+                die("error accept");
+            }
+        } else {
+            redirect('plannings/admin');
         }
     }
 

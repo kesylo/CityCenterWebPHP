@@ -5,7 +5,7 @@
 <div class="row mt-5">
     <div class="col-md-9 mx-auto">
 
-        <div class="card shadow mb-4">
+        <div class="card shadow mb-4 border-bottom-success">
             <div class="card-header py-3">
                 <h1 class="m-0 font-weight-bold text-primary text-center">Ajouter un planning</h1>
             </div>

@@ -13,13 +13,13 @@ flash("planning_message");
 
 <div class="row">
 
-    <div id="col" class="col-md-2 my-auto">
+    <div id="col" class="mr-2 my-auto">
         <span style="font-weight:bold">
             Semaine du:
         </span>
     </div>
 
-    <div class="col-md-3 container-fluid ml-0">
+    <div class="mr-5 ml-0">
         <div class="input-group date" id="dateWeekDash" data-target-input="nearest">
             <input type="text" name="week" class="form-control datetimepicker-input" data-target="#dateWeekDash" />
             <div class="input-group-append" data-target="#dateWeekDash" data-toggle="datetimepicker">
@@ -29,6 +29,14 @@ flash("planning_message");
             </div>
         </div>
     </div>
+
+    <!--checkbox Waiting plannings-->
+    <div class="my-auto pull-right">
+        <span style="font-weight:bold">
+            <input type="checkbox" id="waitingCheck"> En attente
+        </span>
+    </div>
+
 
 </div>
 

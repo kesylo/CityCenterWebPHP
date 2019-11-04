@@ -18,29 +18,33 @@
 
 <div class="row">
 
-    <div id="col" class="col-md-2 my-auto">
-        <span style="font-weight:bold">
-            Semaine du:
-        </span>
-    </div>
+    <div class="d-inline-block col-md-6">
 
-    <div class="col-md-3 container-fluid ml-0">
-        <div class="input-group date" id="dateWeekDash" data-target-input="nearest">
-            <input type="text" name="week" class="form-control datetimepicker-input" data-target="#dateWeekDash" />
-            <div class="input-group-append" data-target="#dateWeekDash" data-toggle="datetimepicker">
-                <div class="input-group-text">
-                    <i class="fa fa-calendar"></i>
+        <div id="col" class="d-inline-block mr-2 ml-0 my-auto">
+            <span style="font-weight:bold">
+                Semaine du:
+            </span>
+        </div>
+
+        <div class="mr-2 ml-0 d-inline-block" >
+            <div class="input-group date" id="dateWeekDash" data-target-input="nearest">
+                <input type="text" name="week" class="form-control datetimepicker-input" data-target="#dateWeekDash" />
+                <div class="input-group-append" data-target="#dateWeekDash" data-toggle="datetimepicker">
+                    <div class="input-group-text">
+                        <i class="fa fa-calendar"></i>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 
-    <div class="col-md-7">
+    <div class="d-inline-block col-md-6">
         <a href="<?php echo URLROOT; ?>/plannings/add" class="btn btn-success pull-right">
             <i class="fa fa-plus"></i> Ajouter
         </a>
-
     </div>
+
 </div>
 
 <hr class="my-4">

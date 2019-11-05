@@ -8,6 +8,9 @@ date_default_timezone_set("Europe/Paris");
 mb_internal_encoding("UTF-8");
 
 flash("planning_message");
+
+
+
 ?>
 
 
@@ -30,12 +33,17 @@ flash("planning_message");
         </div>
     </div>
 
-    <!--checkbox Waiting plannings-->
-    <div class="my-auto pull-right">
-        <span style="font-weight:bold">
-            <input type="checkbox" id="waitingCheck"> En attente
-        </span>
+    <div class="radio-group text-center mt-2">
+        <label class="radio">
+            <input type="radio" id="radiowaiting1" name="radioWaiting" checked value="Oui"> Tout
+            <span></span>
+        </label>
+        <label class="radio">
+            <input type="radio" id="radiowaiting2" name="radioWaiting" value="Non"> En attente
+            <span></span>
+        </label>
     </div>
+
 
 
 </div>

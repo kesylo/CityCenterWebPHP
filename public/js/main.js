@@ -1,3 +1,21 @@
+$(document).ready(function(){
+    document.cookie = "waiting" + "=" + "all";
+});
+
+function cbSubmit() {
+    document.getElementById("cbForm").submit();
+}
+
+$('input[name="radioWaiting"]').change(function(){
+    if($('#radiowaiting1').prop('checked')){
+        document.cookie = "waiting" + "=" + "all";
+        reload();
+    }
+    if($('#radiowaiting2').prop('checked')){
+        document.cookie = "waiting" + "=" + "waiting";
+        reload();
+    }
+});
 
 $(function () {
     $('#dateWeek').datetimepicker({
@@ -33,6 +51,10 @@ $(function () {
         reload();
     });
 
+
+
+
+
 });
 
 
@@ -66,5 +88,6 @@ function getNextWeekDate(){
 
 $(window).bind('beforeunload',function(){
     createCookieDate(getNextWeekDate());
+
 });
 

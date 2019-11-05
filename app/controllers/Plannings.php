@@ -96,6 +96,9 @@ class Plannings extends Controller{
 
     public function admin(){
 
+        //if ($_SESSION['waiting'] == 'all'){
+        //}
+
         if (isset($_SESSION['id']) && $_SESSION['role'] > 4){
 
             $plannings = $this->planningModel->getAllUsersPlannings($_COOKIE["nextWeekDate"]);
@@ -128,6 +131,8 @@ class Plannings extends Controller{
             redirect('plannings/dashboard');
             flashError('planning_message', "Désolé vous ne pouvez pas passer en mode administrateur!");
         }
+
+
 
 
     }

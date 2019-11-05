@@ -70,6 +70,7 @@ class Planning{
         return $row;
     }
 
+
     public function updatePlanning($data){
         $this->db->query('UPDATE planning SET week = :workweek, callRedirect = :callRedirect, date = :workdate, startTime = :startTime, endTime = :endTime, status = :workstatus 
                             WHERE id_planning = :id_planning');

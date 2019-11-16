@@ -2,8 +2,8 @@
 
 // DB params
 define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', 'azerty');
+define('DB_USER', 'userloic');
+define('DB_PASS', 'Ph03n1x.lo1c');
 define('DB_NAME', 'cityappdberp');
 
 // App root constant

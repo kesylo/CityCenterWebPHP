@@ -10,7 +10,7 @@ define('DB_NAME', 'cityappdberp');
 define('APPROOT', dirname(dirname(__FILE__)));
 
 // url root
-define('URLROOT', 'http://localhost/CityCenter/public');
+define('URLROOT', 'http://localhost/CityCenter');
 
 // site name
 define('SITENAME', 'City Apartments');

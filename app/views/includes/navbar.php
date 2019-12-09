@@ -17,6 +17,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo URLROOT; ?>/plannings/admin">Mode Administrateur</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo URLROOT; ?>/plannings/dashboard">Mode Utilisateur</a>
+                </li>
             <?php endif; ?>
         </ul>
 

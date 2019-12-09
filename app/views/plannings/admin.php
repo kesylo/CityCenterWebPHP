@@ -44,8 +44,6 @@ flash("planning_message");
         </label>
     </div>
 
-
-
 </div>
 
 <hr class="my-4">

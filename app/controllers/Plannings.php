@@ -1,5 +1,10 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+require 'vendor/autoload.php';
+
 class Plannings extends Controller{
 
 
@@ -227,6 +232,36 @@ class Plannings extends Controller{
 
             if ($this->planningModel->acceptPlanning($id_planning)){
                 flash('planning_message', 'Le planning a été accepté!');
+
+                $mail = new PHPMailer(true);
+                try {
+                    //Server settings
+                    //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                    $mail->isSMTP();                                            // Send using SMTP
+                    $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+                    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                    $mail->Username   = 'test4cash.1@gmail.com';                     // SMTP username
+                    $mail->Password   = 'Azerty.1994';                               // SMTP password
+                    $mail->SMTPSecure = 'ssl';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+                    $mail->Port       = 465;                                    // TCP port to connect to
+
+                    //Recipients
+                    $mail->setFrom('test4cash.1@gmail.com', 'City Center Planner');
+                    $mail->addAddress('keming.loic@yahoo.com');     // Add a recipient
+
+                    // Content
+                    $mail->isHTML(true);                                  // Set email format to HTML
+                    $mail->Subject = 'Here is the subject';
+                    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+                    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                    $mail->send();
+                    echo 'Message has been sent';
+                } catch (Exception $e) {
+                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                }
+
+
                 redirect('plannings/admin');
             }else{
                 die("error accept");

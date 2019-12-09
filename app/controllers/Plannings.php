@@ -236,7 +236,17 @@ class Plannings extends Controller{
             if ($this->planningModel->acceptPlanning($id_planning)){
                 flash('planning_message', 'Le planning a été accepté! Un email a été envoyé a ' . $email);
 
+                // get the planning details to send via mail
+                $planning = $this->planningModel->getPlanningById($id_planning);
+
                 //region Email
+                    $subject = utf8_decode('Planning du ' . $planning->date . ' accepté!');
+                    $body = utf8_decode(  'Semaine du: ' . $planning->week .
+                                                ' <br> Heure de début: ' . $planning->startTime .
+                                                ' <br> Heure de fin: ' . $planning->endTime .
+                                                ' <br> Rédirection des appels: ' . $planning->callRedirect .
+                                                ' <br> Status: ' . $planning->status);
+
                     $mail = new PHPMailer(true);
                     try {
                         //Server settings
@@ -255,9 +265,9 @@ class Plannings extends Controller{
 
                         // Content
                         $mail->isHTML(true);                                  // Set email format to HTML
-                        $mail->Subject = 'Here is the subject';
-                        $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-                        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                        $mail->Subject = $subject;
+                        $mail->Body    = $body;
+                        $mail->AltBody = $body;
 
                         $mail->send();
                         echo 'Message has been sent';

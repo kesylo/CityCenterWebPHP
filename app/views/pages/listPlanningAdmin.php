@@ -6,6 +6,8 @@
 if (sizeof($data['plannings']) > 0) :
     foreach ($data['plannings'] as $planning) : ?>
 
+
+
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary d-inline"><?php echo fullDate($planning->date); ?></h6>
@@ -61,7 +63,7 @@ if (sizeof($data['plannings']) > 0) :
                         </form>
 
                         <!--Confirm-->
-                        <form action="<?php echo URLROOT; ?>/plannings/accept/<?php echo $planning->id_planning; ?>" method="post" onclick="return confirm('Accepter ce planning ?')">
+                        <form action="<?php echo URLROOT; ?>/plannings/accept/<?php echo $planning->id_planning; ?>/<?php echo $data['emails'][$planning->id_user]; ?>" method="post" onclick="return confirm('Accepter ce planning ?')">
                             <button type="submit" class="btn btn-success pull-right ml-2" >
                                 <i class="fa fa-check"></i>
                             </button>

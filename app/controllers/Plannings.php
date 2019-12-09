@@ -111,6 +111,7 @@ class Plannings extends Controller{
             $ids = array();
             $users = array();
             $names = array();
+            $emails = array();
 
             // store all user ids who created a planning
             foreach ($plannings as $key=>$pl){
@@ -124,11 +125,13 @@ class Plannings extends Controller{
             foreach ($uniqueIds as $key=>$id){
                 $users[$uniqueIds[$key]] = $this->planningModel->getUserById($uniqueIds[$key]);
                 $names[$uniqueIds[$key]] = $users[$uniqueIds[$key]]->firstName . ' ' . $users[$uniqueIds[$key]]->lastName;
+                $emails[$uniqueIds[$key]] = $users[$uniqueIds[$key]]->email;
             }
 
             $data = [
                 'plannings' => $plannings,
                 'unique' => $names,
+                'emails' => $emails,
             ];
 
             $this->view('plannings/admin', $data);
@@ -227,40 +230,41 @@ class Plannings extends Controller{
         }
     }
 
-    public function accept($id_planning){
+    public function accept($id_planning, $email){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             if ($this->planningModel->acceptPlanning($id_planning)){
-                flash('planning_message', 'Le planning a été accepté!');
+                flash('planning_message', 'Le planning a été accepté! Un email a été envoyé a ' . $email);
 
-                $mail = new PHPMailer(true);
-                try {
-                    //Server settings
-                    //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
-                    $mail->isSMTP();                                            // Send using SMTP
-                    $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-                    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                    $mail->Username   = 'test4cash.1@gmail.com';                     // SMTP username
-                    $mail->Password   = 'Azerty.1994';                               // SMTP password
-                    $mail->SMTPSecure = 'ssl';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-                    $mail->Port       = 465;                                    // TCP port to connect to
+                //region Email
+                    $mail = new PHPMailer(true);
+                    try {
+                        //Server settings
+                        //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                        $mail->isSMTP();                                            // Send using SMTP
+                        $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+                        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                        $mail->Username   = 'test4cash.1@gmail.com';                     // SMTP username
+                        $mail->Password   = 'Azerty.1994';                               // SMTP password
+                        $mail->SMTPSecure = 'ssl';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+                        $mail->Port       = 465;                                    // TCP port to connect to
 
-                    //Recipients
-                    $mail->setFrom('test4cash.1@gmail.com', 'City Center Planner');
-                    $mail->addAddress('keming.loic@yahoo.com');     // Add a recipient
+                        //Recipients
+                        $mail->setFrom('test4cash.1@gmail.com', 'City Center Planner');
+                        $mail->addAddress($email);     // Add a recipient
 
-                    // Content
-                    $mail->isHTML(true);                                  // Set email format to HTML
-                    $mail->Subject = 'Here is the subject';
-                    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-                    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                        // Content
+                        $mail->isHTML(true);                                  // Set email format to HTML
+                        $mail->Subject = 'Here is the subject';
+                        $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+                        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-                    $mail->send();
-                    echo 'Message has been sent';
-                } catch (Exception $e) {
-                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                }
-
+                        $mail->send();
+                        echo 'Message has been sent';
+                    } catch (Exception $e) {
+                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    }
+                //endregion*/
 
                 redirect('plannings/admin');
             }else{

@@ -65,9 +65,7 @@ $(function () {
     $("#dateWeek").on("change.datetimepicker", function (e) {
         $('#dateDisp').datetimepicker('minDate', e.date);
     });
-    $("#dateDisp").on("change.datetimepicker", function (e) {
-        $('#dateWeek').datetimepicker('maxDate', e.date);
-    });
+
 
 
 });

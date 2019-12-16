@@ -13,6 +13,10 @@ flash("planning_message");
 
 ?>
 
+<div class="jumbotron text-center" style="background: linear-gradient(to right, #cb356b, #bd3f32);">
+    <h1 class="display-4" style="color: white">Mode Admin</h1>
+    <p class="lead" style="color: white">Vous pouvez accepter, refuser ou modifier un planning. un email sera envoyé à l'utilisateur une fois qu'une de ces actions sera effectuée.  </p>
+</div>
 
 <div class="row">
 

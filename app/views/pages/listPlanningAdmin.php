@@ -1,6 +1,6 @@
 <?php /** @var TYPE_NAME $data */
 
-
+include APPROOT . "/views/session.php";
 
 
 if (sizeof($data['plannings']) > 0) :
@@ -61,6 +61,14 @@ if (sizeof($data['plannings']) > 0) :
                                 <i class="fa fa-times"></i>
                             </button>
                         </form>
+
+                        <!--edit-->
+                        <a href="<?php echo URLROOT; ?>/plannings/edit/<?php echo $planning->id_planning; ?> " class="btn btn-primary pull-right ml-2">
+                            <i class="fa fa-edit"></i>
+                            <!--change global var to know where we nav from-->
+                            <?php $_SESSION['edit_on_admin'] = true; ?>
+                        </a>
+
 
                         <!--Confirm-->
                         <form action="<?php echo URLROOT; ?>/plannings/accept/<?php echo $planning->id_planning; ?>/<?php echo $data['emails'][$planning->id_user]; ?>" method="post" onclick="return confirm('Accepter ce planning ?')">

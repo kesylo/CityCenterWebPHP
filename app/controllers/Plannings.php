@@ -1,9 +1,9 @@
 <?php
 
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
+include APPROOT . "/views/session.php";
 
 class Plannings extends Controller{
 
@@ -67,7 +67,12 @@ class Plannings extends Controller{
                 if ($this->planningModel->updatePlanning($data)){
                     // show flash message
                     flash('planning_message', "Votre planning a été Modifié!");
-                    redirect('plannings/dashboard');
+                    if ($_SESSION['edit_on_admin'] == true){
+                        redirect('plannings/admin');
+                    }else{
+                        redirect('plannings/dashboard');
+                    }
+
                 }else{
                     die('errr');
                 }

@@ -72,6 +72,7 @@ if (sizeof($data['plannings']) > 0) :
                             }else{
                                 echo '';
                             }
+                            $_SESSION['edit_on_admin'] = false;
                         ?>"><i class="fa fa-edit"></i>  </a>
 
                     </div>

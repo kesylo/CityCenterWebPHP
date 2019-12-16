@@ -32,5 +32,6 @@ define('APPROOT', dirname(dirname(__FILE__)));
 // site name
 define('SITENAME', 'City Apartments');
 
+
 // app version
 define('APPVERSION', '1.0.0');

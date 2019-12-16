@@ -12,7 +12,7 @@
 
 
 <div class="jumbotron text-center gradient">
-    <h1 class="display-4">City Planner</h1>
+    <h1 class="display-4">Mode Utilisateur</h1>
     <p class="lead">Cet outil vous permet d'ajouter, modifier ou supprimer vos plannings au fils du temps. </p>
 </div>
 

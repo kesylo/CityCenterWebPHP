@@ -221,11 +221,51 @@ class Plannings extends Controller{
         }
     }
 
-    public function deny($id_planning){
+    public function deny($id_planning, $email){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             if ($this->planningModel->denyPlanning($id_planning)){
-                flashError('planning_message', 'Le planning a été refusé!');
+                flashError('planning_message', 'Le planning a été refusé! Un email a été envoyé a ' . $email);
+
+                // get the planning details to send via mail
+                $planning = $this->planningModel->getPlanningById($id_planning);
+
+                //region Email
+                $subject = utf8_decode('Planning du ' . $planning->date . ' refusé!');
+                $body = utf8_decode(  'Semaine du: ' . $planning->week .
+                    ' <br> Heure de début: ' . $planning->startTime .
+                    ' <br> Heure de fin: ' . $planning->endTime .
+                    ' <br> Rédirection des appels: ' . $planning->callRedirect .
+                    ' <br> Status: ' . $planning->status);
+
+                $mail = new PHPMailer(true);
+                try {
+                    $mail->isSMTP();                                            // Send using SMTP
+                    $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+                    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                    $mail->Username   = 'test4cash.1@gmail.com';                     // SMTP username
+                    $mail->Password   = 'Azerty.1994';                               // SMTP password
+                    $mail->SMTPSecure = 'ssl';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+                    $mail->Port       = 465;                                    // TCP port to connect to
+
+                    //Recipients
+                    $mail->setFrom('test4cash.1@gmail.com', 'City Center Planner');
+                    $mail->addAddress($email);     // Add a recipient
+
+                    // Content
+                    $mail->isHTML(true);                                  // Set email format to HTML
+                    $mail->Subject = $subject;
+                    $mail->Body    = $body;
+                    $mail->AltBody = $body;
+
+                    $mail->send();
+                    echo 'Message has been sent';
+                } catch (Exception $e) {
+                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                }
+                //endregion*/
+
+
                 redirect('plannings/admin');
             }else{
                 die("error deny");
@@ -254,8 +294,6 @@ class Plannings extends Controller{
 
                     $mail = new PHPMailer(true);
                     try {
-                        //Server settings
-                        //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
                         $mail->isSMTP();                                            // Send using SMTP
                         $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
                         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication

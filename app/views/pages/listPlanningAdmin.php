@@ -56,7 +56,7 @@ if (sizeof($data['plannings']) > 0) :
                     <div class="col-md-4">
 
                         <!--Deny-->
-                        <form action="<?php echo URLROOT; ?>/plannings/deny/<?php echo $planning->id_planning; ?>" method="post" onclick="return confirm('Refuser ce planning ?')">
+                        <form action="<?php echo URLROOT; ?>/plannings/deny/<?php echo $planning->id_planning; ?>/<?php echo $data['emails'][$planning->id_user]; ?>" method="post" onclick="return confirm('Refuser ce planning ?')">
                             <button type="submit" class="btn btn-danger pull-right ml-2" >
                                 <i class="fa fa-times"></i>
                             </button>

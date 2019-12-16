@@ -29,6 +29,7 @@
                             <hr>
 
                             Date :
+
                             <div class="input-group date" id="dateDisp" data-target-input="nearest">
                                 <input type="text" name="date" class="form-control datetimepicker-input <?php echo (!empty($data['date_err'])) ? 'is-invalid' : ''; ?>" data-target="#dateDisp" value="<?php echo $data['date']; ?>"/>
                                 <div class="input-group-append" data-target="#dateDisp" data-toggle="datetimepicker">
@@ -51,6 +52,13 @@
                                     <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
                                 </div>
                             </div>
+
+
+
+
+
+
+
                         </div>
 
 

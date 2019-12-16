@@ -17,32 +17,25 @@ $('input[name="radioWaiting"]').change(function(){
     }
 });
 
+
+
+
+
+
 $(function () {
-    $('#dateWeek').datetimepicker({
-        format: 'DD-MM-YYYY',
-        daysOfWeekDisabled:[0,2,3,4,5,6],
-    });
 
     $('#timeStart').datetimepicker({
         format: 'HH:mm',
-
     });
 
     $('#timeEnd').datetimepicker({
         format: 'HH:mm',
     });
 
-    $('#dateDisp').datetimepicker({
-        format: 'DD-MM-YYYY',
-        useCurrent: false,
-        defaultDate: new Date(),
-    });
-
     $('#dateWeekDash').datetimepicker({
         format: 'DD-MM-YYYY',
         daysOfWeekDisabled:[0,2,3,4,5,6],
     });
-
 
     $('#dateWeekDash').on("change.datetimepicker", function (e) {
         strDate = moment(e.date).format('DD-MM-YYYY');
@@ -52,10 +45,33 @@ $(function () {
     });
 
 
+});
 
+
+
+
+
+$(function () {
+
+    $('#dateWeek').datetimepicker({
+        format: 'DD-MM-YYYY',
+        daysOfWeekDisabled:[0,2,3,4,5,6],
+    });
+    $('#dateDisp').datetimepicker({
+        format: 'DD-MM-YYYY',
+        useCurrent: false,
+    });
+
+    $("#dateWeek").on("change.datetimepicker", function (e) {
+        $('#dateDisp').datetimepicker('minDate', e.date);
+    });
+    $("#dateDisp").on("change.datetimepicker", function (e) {
+        $('#dateWeek').datetimepicker('maxDate', e.date);
+    });
 
 
 });
+
 
 
 function createCookieDate(strDate) {

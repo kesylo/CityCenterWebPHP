@@ -4,7 +4,7 @@
 ?>
 
 <div class="row">
-    <div class="col-md-9 mx-auto">
+    <div class="col-md-9 mx-auto py-lg-5 py-md-5">
         <div class="card shadow mb-4 border-bottom-success">
             <div class="card-header py-3">
                 <h1 class="m-0 font-weight-bold text-primary text-center">Modifier un planning</h1>

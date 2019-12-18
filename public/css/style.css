@@ -1,12 +1,4 @@
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: red;
-    color: white;
-    text-align: center;
-}
+
 
 .radio{
     font-size: 16px;
@@ -55,7 +47,5 @@
 .radio input[type="radio"]:checked ~ span:after{
     transform: translate(-50%, -50%) scale(1);
 }
-
-
 
 

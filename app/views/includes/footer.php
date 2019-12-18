@@ -1,9 +1,10 @@
 
 </div>
 
-<footer class="footer gradient py-3">
-    <div class="container text-center">
-        <span>City Center Apartments ERP &copy; 2019 Brusselscitycenterapartments.com</span>
+<footer class="page-footer ">
+    <!-- Copyright -->
+    <div class="footer-copyright text-center">© 2019 Copyright:
+        <a href="https://mdbootstrap.com/education/bootstrap/"> Brusselscitycenterapartments.com</a>
     </div>
 </footer>
 

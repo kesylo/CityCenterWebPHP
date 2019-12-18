@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark portfolio-navbar gradient py-2 mb-3">
+<nav class="navbar navbar-expand-lg navbar-dark  portfolio-navbar gradient py-2 mb-3 shadow-sm">
     <a class="navbar-brand" href="<?php echo URLROOT; ?>"><?php echo strtoupper(SITENAME); ?></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -7,10 +7,6 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
         <ul class="navbar-nav mr-auto">
-
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">A propos <span class="sr-only">(current)</span></a>
-            </li>
 
             <!--show admin link if user is admin-->
             <?php if (isset($_SESSION['id']) && $_SESSION['role'] > 4) : ?>

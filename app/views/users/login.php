@@ -3,10 +3,10 @@
 
 
 <div class="row justify-content-center">
-    <div class="col-lg-6">
-        <div class="card o-hidden border-1 shadow-lg my-5">
-            <div class="row justify-content-center card-body p-0">
-                <div class="col-lg-6 pt-5">
+    <div class="col-lg-8">
+        <div class="card o-hidden border-1 shadow-lg my-lg-5">
+            <div class="row justify-content-center align-items-center card-body p-0">
+                <div class="col-lg-6 d-none d-sm-block">
                     <img src="<?php echo URLROOT; ?>/images/img1.png" class="img-fluid" alt="Responsive image">
                 </div>
 
@@ -44,7 +44,6 @@
         </div>
     </div>
 </div>
-
 
 <!--add footer-->
 <?php require APPROOT . '/views/includes/footer.php'; ?>

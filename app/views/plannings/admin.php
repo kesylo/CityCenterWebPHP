@@ -17,15 +17,15 @@ flash("planning_message");
     </div>
 </div>
 
-<div class="row">
+<div class="row justify-content-center">
 
-    <div id="col" class="mr-2 my-auto">
+    <div class="mr-2 my-auto">
         <span style="font-weight:bold">
             Semaine du:
         </span>
     </div>
 
-    <div class="mr-5 ml-0">
+    <div class="mr-5">
         <div class="input-group date" id="dateWeekDash" data-target-input="nearest">
             <input type="text" name="week" class="form-control datetimepicker-input" data-target="#dateWeekDash" />
             <div class="input-group-append" data-target="#dateWeekDash" data-toggle="datetimepicker">
@@ -49,10 +49,14 @@ flash("planning_message");
 
 </div>
 
-<hr class="my-4">
+<div>
+    <hr >
+</div>
 
-<div id="card-reload">
-    <?php require APPROOT . '/views/pages/listPlanningAdmin.php'; ?>
+<div class="row">
+    <div id="card-reload" class="col-12">
+        <?php require APPROOT . '/views/pages/listPlanningAdmin.php'; ?>
+    </div>
 </div>
 
 <!--add footer-->

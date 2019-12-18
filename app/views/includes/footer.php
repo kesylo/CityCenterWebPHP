@@ -4,7 +4,7 @@
 <footer class="page-footer ">
     <!-- Copyright -->
     <div class="footer-copyright text-center">© 2019 Copyright:
-        <a href="https://mdbootstrap.com/education/bootstrap/"> Brusselscitycenterapartments.com</a>
+        <a href="https://Brusselscitycenterapartments.com"> Brusselscitycenterapartments</a>
     </div>
 </footer>
 

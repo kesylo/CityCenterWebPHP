@@ -26,10 +26,14 @@ $(function () {
 
     $('#timeStart').datetimepicker({
         format: 'HH:mm',
+        stepping: 25,
+        forceMinuteStep: true,
     });
 
     $('#timeEnd').datetimepicker({
         format: 'HH:mm',
+        stepping: 25,
+        forceMinuteStep: true,
     });
 
     $('#dateWeekDash').datetimepicker({

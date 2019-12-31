@@ -21,7 +21,9 @@
                             Semaine du :
                             <div class="input-group date" id="dateWeek" data-target-input="nearest">
                                 <input type="text" name="week" class="form-control datetimepicker-input"
-                                       data-target="#dateWeek" value="<?php echo $data['week']; ?>"/>
+                                       data-target="#dateWeek" value="<?php echo $data['week']; ?>"
+                                       onkeydown="return false;"
+                                />
                                 <div class="input-group-append" data-target="#dateWeek" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
@@ -30,11 +32,12 @@
                             <hr>
 
                             Date :
-
                             <div class="input-group date" id="dateDisp" data-target-input="nearest">
                                 <input type="text" name="date"
                                        class="form-control datetimepicker-input <?php echo (!empty($data['date_err'])) ? 'is-invalid' : ''; ?>"
-                                       data-target="#dateDisp" value="<?php echo $data['date']; ?>"/>
+                                       data-target="#dateDisp" value="<?php echo $data['date']; ?>"
+                                       onkeydown="return false;"
+                                />
                                 <div class="input-group-append" data-target="#dateDisp" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
@@ -44,7 +47,9 @@
                             <div class="input-group date" id="timeStart" data-target-input="nearest">
                                 <input type="text" name="startTime" data-target="#timeStart"
                                        class="form-control datetimepicker-input <?php echo (!empty($data['timeStart_err'])) ? 'is-invalid' : ''; ?>"
-                                       value="<?php echo $data['startTime']; ?>"/>
+                                       value="<?php echo $data['startTime']; ?>"
+                                       onkeydown="return false;"
+                                />
                                 <div class="input-group-append" data-target="#timeStart" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
                                 </div>
@@ -53,8 +58,10 @@
                             Heure de fin:
                             <div class="input-group date" id="timeEnd" data-target-input="nearest">
                                 <input type="text" name="endTime" data-target="#timeEnd"
-                                       class="form-control datetimepicker-input"
-                                       value="<?php echo $data['endTime']; ?>" disabled/>
+                                       class="form-control datetimepicker-input <?php echo (!empty($data['timeEnd_err'])) ? 'is-invalid' : ''; ?>"
+                                       value="<?php echo $data['endTime']; ?>"
+                                       onkeydown="return false;"
+                                />
                                 <div class="input-group-append" data-target="#timeEnd" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
                                 </div>

@@ -17,7 +17,7 @@
 </div>
 
 
-<div class="row">
+<div class="row justify-content-center">
     <div class="col">
         <span style="font-weight:bold">
                 Semaine du:
@@ -26,7 +26,7 @@
 
     <div class="w-100"></div>
 
-    <div class="col-7 col-sm-7 col-md-4 col-lg-3">
+    <div class="col-12 col-md-4 col-lg-3 mb-3">
         <div class="input-group date" id="dateWeekDash" data-target-input="nearest">
             <input type="text" name="week" class="form-control datetimepicker-input" data-target="#dateWeekDash" />
             <div class="input-group-append" data-target="#dateWeekDash" data-toggle="datetimepicker">
@@ -37,9 +37,13 @@
         </div>
     </div>
 
-    <div class="col-5 col-sm-5 col-md-8 col-lg-9">
+    <div class="col-12 col-md-8 col-lg-9">
+        <a href="<?php echo URLROOT; ?>/plannings/addExtra" class="btn btn-dark pull-right ml-2">
+            <i class="fa fa-plus"></i> Ajouter un extra
+        </a>
+
         <a href="<?php echo URLROOT; ?>/plannings/add" class="btn btn-success pull-right">
-            <i class="fa fa-plus"></i> Ajouter
+            <i class="fa fa-plus"></i> Ajouter un planning
         </a>
     </div>
 

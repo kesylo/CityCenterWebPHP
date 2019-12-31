@@ -5,8 +5,21 @@ if (sizeof($data['plannings']) > 0) :
 
 
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary"><?php echo fullDate($planning->date); ?></h6>
+            <div class="card-header py-3
+                <?php
+                    if ($planning->endTime == ''){
+                        echo 'redGradient';
+                    }
+                ?> ">
+                <h6 class="m-0 font-weight-bold
+                    <?php
+                        if ($planning->endTime == ''){
+                            echo 'text-white';
+                        }else{
+                            echo 'text-primary';
+                        }
+                    ?>"> <?php echo fullDate($planning->date); ?>
+                </h6>
             </div>
             <div class="card-body">
 
@@ -65,7 +78,17 @@ if (sizeof($data['plannings']) > 0) :
                         </form>
 
                         <!--edit-->
-                        <a href="<?php echo URLROOT; ?>/plannings/edit/<?php echo $planning->id_planning; ?>" class="btn btn-primary pull-right ml-2
+                        <a href="
+                        <?php
+
+                            if ($planning->endTime == ''){
+                                echo URLROOT; ?>/plannings/editExtra/<?php echo $planning->id_planning;
+                            }else{
+                                echo URLROOT; ?>/plannings/edit/<?php echo $planning->id_planning;
+                            }
+                            $_SESSION['edit_on_admin'] = false;
+
+                        ?> " class="btn btn-primary pull-right ml-2
                         <?php
                             if ($planning->status == 'Accepté' || $planning->status == 'Refusé'){
                                 echo 'disabled';

@@ -52,6 +52,27 @@ class Planning{
         }
     }
 
+    public function addExtra ($data){
+        $this->db->query('INSERT INTO planning (id_user, week, date, startTime, endTime, status, callRedirect)
+                             VALUES (:id, :weekday, :workdate, :startTime, :endTime, :requeststatus, :callRedirect )');
+
+        // bind values
+        $this->db->bind(':id', $data['id']);
+        $this->db->bind(':weekday', $data['week']);
+        $this->db->bind(':workdate', $data['date']);
+        $this->db->bind(':startTime', $data['startTime']);
+        $this->db->bind(':endTime', $data['endTime']);
+        $this->db->bind(':requeststatus', $data['status']);
+        $this->db->bind(':callRedirect', $data['callRedirect']);
+
+        // run
+        if ($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function getPlanningById ($idPlanning){
         $this->db->query('SELECT * FROM planning WHERE id_planning = :id_planning');
         $this->db->bind(':id_planning', $idPlanning);

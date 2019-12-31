@@ -11,7 +11,7 @@ flash("planning_message");
 ?>
 
 <div class="row">
-    <div class="jumbotron text-center col-12" style="background: linear-gradient(to right, #cb356b, #bd3f32);">
+    <div class="jumbotron text-center col-12 redGradient">
         <h1 class="display-4" style="color: white">Mode Admin</h1>
         <p class="lead" style="color: white">Vous pouvez accepter, refuser ou modifier un planning. un email sera envoyé à l'utilisateur une fois qu'une de ces actions sera effectuée.  </p>
     </div>

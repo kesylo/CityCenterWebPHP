@@ -104,6 +104,79 @@ class Plannings extends Controller{
         }
     }
 
+    public function editExtra($id_planning){
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+
+            $data = [
+                'id' => $_SESSION['id'],
+                'id_planning' => $id_planning,
+                'week' => trim($_POST['week']),
+                'date' => trim($_POST['date']),
+                'startTime' => trim($_POST['startTime']),
+                'endTime' => trim($_POST['endTime']),
+                'status' => 'Accepté',
+                'callRedirect' => trim($_POST['callRedirect']),
+                'timeStart_err' => '',
+                'timeEnd_err' => '',
+                'date_err' => '',
+            ];
+
+            // validate
+            if (empty($data['startTime'])){
+                $data['timeStart_err'] = 'Entrez une heure de debut';
+            }
+            if (empty($data['endTime'])){
+                $data['timeEnd_err'] = 'Entrez une heure de fin';
+            }
+            if (empty($data['date'])){
+                $data['date_err'] = 'Entrez une date';
+            }
+
+            if (empty($data['timeStart_err']) && empty($data['timeEnd_err']) && empty($data['date_err'])){
+                // validated
+                if ($this->planningModel->updatePlanning($data)){
+                    // show flash message
+                    flash('planning_message', "Votre Extra a été Cloturé!");
+                    if ($_SESSION['edit_on_admin'] == true){
+                        redirect('plannings/admin');
+                    }else{
+                        redirect('plannings/dashboard');
+                    }
+
+                }else{
+                    die('errr');
+                }
+            }else{
+                $this->view('plannings/editExtra', $data);
+            }
+
+
+        }else{
+            // fectch planning
+            $planning = $this->planningModel->getPlanningById($id_planning);
+
+            if ($planning->id_user != $_SESSION['id']){
+                redirect('plannings');
+            }
+
+            $data = [
+                'id_planning' => $id_planning,
+                'week' => $planning->week,
+                'date' => $planning->date,
+                'startTime' => $planning->startTime,
+                'endTime' => $planning->endTime,
+                'status' => $planning->status,
+                'callRedirect' => $planning->callRedirect,
+                'id_user' => $planning->id_user,
+            ];
+
+            $this->view('plannings/editExtra', $data);
+        }
+    }
+
     public function admin(){
 
         //if ($_SESSION['waiting'] == 'all'){
@@ -207,17 +280,79 @@ class Plannings extends Controller{
         }
     }
 
+    public function addExtra(){
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            // covert dates to french
+            /*$week = UStoFRDate(trim($_POST['week']));
+            $date = UStoFRDate(trim($_POST['date']));*/
+
+            $data = [
+                'id' => $_SESSION['id'],
+                'week' => trim($_POST['week']),
+                'date' => trim($_POST['date']),
+                'startTime' => trim($_POST['startTime']),
+                'endTime' => '',
+                'status' => 'En attente',
+                'callRedirect' => trim($_POST['callRedirect']),
+                'timeStart_err' => '',
+                'timeEnd_err' => '',
+                'date_err' => '',
+            ];
+
+            // validate
+            if (empty($data['startTime'])){
+                $data['timeStart_err'] = 'Entrez une heure de debut';
+            }
+            if (empty($data['date'])){
+                $data['date_err'] = 'Entrez une date';
+            }
+
+            if (empty($data['timeStart_err']) && empty($data['timeEnd_err']) && empty($data['date_err'])){
+                // validated
+                if ($this->planningModel->addExtra($data)){
+                    // show flash message
+                    flash('planning_message', "Votre Extra a été ajouté!");
+                    redirect('plannings/dashboard');
+                }else{
+                    die('errr');
+                }
+            }else{
+                $this->view('plannings/addExtra', $data);
+            }
+
+
+        }else{
+            $data = [
+                'week' => '',
+                'date' => '',
+            ];
+
+            $this->view('plannings/addExtra', $data);
+        }
+    }
+
     public function delete($id_planning){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             if ($this->planningModel->deletePlanning($id_planning)){
                 flash('post_message', 'Votre planning a été supprimé!');
-                redirect('plannings');
+                if ($_SESSION['edit_on_admin'] == true){
+                    redirect('plannings/admin');
+                }else{
+                    redirect('plannings/dashboard');
+                }
             }else{
                 die("error deleting");
             }
         } else {
-            redirect('plannings');
+            if ($_SESSION['edit_on_admin'] == true){
+                redirect('plannings/admin');
+            }else{
+                redirect('plannings/dashboard');
+            }
         }
     }
 

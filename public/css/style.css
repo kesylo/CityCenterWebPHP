@@ -30,6 +30,10 @@
     cursor: pointer;
 }
 
+.redGradient{
+    background: linear-gradient(to right, #cb356b, #bd3f32);
+}
+
 .radio span:after{
     content: "";
     height: 8px;

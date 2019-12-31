@@ -20,9 +20,9 @@
                         <form action="<?php echo URLROOT; ?>/users/login" method="post">
 
                             <div class="form-group">
-                                <label for="email">Email: <sup>*</sup></label>
-                                <input type="email" name="email" class="form-control <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['email']; ?>">
-                                <span class="invalid-feedback"><?php echo $data['email_err']; ?></span>
+                                <label for="pseudo">pseudo: <sup>*</sup></label>
+                                <input type="text" name="pseudo" class="form-control <?php echo (!empty($data['pseudo_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['pseudo']; ?>">
+                                <span class="invalid-feedback"><?php echo $data['pseudo_err']; ?></span>
                             </div>
 
                             <div class="form-group">

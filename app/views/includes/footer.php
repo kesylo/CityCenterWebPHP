@@ -1,9 +1,9 @@
 
 </div>
 
-<footer class="page-footer ">
+<footer>
     <!-- Copyright -->
-    <div class="footer-copyright text-center">© 2019 Copyright:
+    <div class="footer-copyright text-center font-weight-bold">© 2019 Copyright :
         <a href="https://Brusselscitycenterapartments.com"> Brusselscitycenterapartments</a>
     </div>
 </footer>

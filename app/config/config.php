@@ -2,8 +2,8 @@
 
 // Deployment Settings
 
-/*
-define('DB_HOST', '192.168.0.123:3306');
+
+/*define('DB_HOST', '192.168.0.123:3306');
 define('DB_USER', 'root');
 define('DB_PASS', 'ZKZ7ajZxLMn3');
 define('DB_NAME', 'cityappdberp');

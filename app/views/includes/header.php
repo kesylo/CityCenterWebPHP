@@ -26,4 +26,4 @@
 <!--Add navbar php file to header-->
 <?php require APPROOT . '/views/includes/navbar.php'; ?>
 
-<div class="container-fluid">
+<div class="container">

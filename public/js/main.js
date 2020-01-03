@@ -5,6 +5,7 @@ $(document).ready(function() { // init all fields here
 
     createCookie("previewDate", nextWeekdayDate(1), 10);
     createCookie("filter", "all", 10);
+    createCookie("edit_on_admin", true, 10);
 
     //endregion
 

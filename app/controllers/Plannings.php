@@ -429,20 +429,20 @@ class Plannings extends Controller{
 
                     $mail = new PHPMailer(true);
                     try {
-                        $mail->isSMTP();                                            // Send using SMTP
-                        $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-                        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                        $mail->Username   = 'test4cash.1@gmail.com';                     // SMTP username
-                        $mail->Password   = 'Azerty.1994';                               // SMTP password
-                        $mail->SMTPSecure = 'ssl';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-                        $mail->Port       = 465;                                    // TCP port to connect to
+                        //$mail->isSMTP();  // do not use this on some hosting servers. eg: SiteGroung and hostinger
+                        $mail->Host       = 'smtp.gmail.com';
+                        $mail->SMTPAuth   = true;
+                        $mail->Username   = 'test4cash.1@gmail.com';
+                        $mail->Password   = 'Azerty.1994';
+                        $mail->SMTPSecure = 'ssl';
+                        $mail->Port       = 465;
 
                         //Recipients
                         $mail->setFrom('test4cash.1@gmail.com', 'City Center Planner');
                         $mail->addAddress($email);     // Add a recipient
 
                         // Content
-                        $mail->isHTML(true);                                  // Set email format to HTML
+                        $mail->isHTML(true);
                         $mail->Subject = $subject;
                         $mail->Body    = $body;
                         $mail->AltBody = $body;

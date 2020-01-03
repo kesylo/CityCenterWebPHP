@@ -55,21 +55,9 @@
                                 </div>
                             </div>
 
-                            Heure de fin:
-                            <div class="input-group date" id="timeEnd" data-target-input="nearest">
-                                <input type="text" name="endTime" data-target="#timeEnd"
-                                       class="form-control datetimepicker-input <?php echo (!empty($data['timeEnd_err'])) ? 'is-invalid' : ''; ?>"
-                                       value="<?php echo $data['endTime']; ?>"
-                                       onkeydown="return false;"
-                                />
-                                <div class="input-group-append" data-target="#timeEnd" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
-                                </div>
-                            </div>
-
-
                         </div>
 
+                        <p class="text-center"> L'heure de fin est renseignée à la fin de votre shift.</p>
 
                         <p class="text-center"> Redirection des appels:</p>
                         <div class="radio-group text-center mt-2">
@@ -88,6 +76,7 @@
                         <div class="text-center">
                             <a href="<?php echo URLROOT; ?>/plannings/dashboard"
                                class="btn btn-secondary mr-5">Retour</a>
+
                             <input type="submit" value="Ajouter" class="btn btn-primary">
                         </div>
 

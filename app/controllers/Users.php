@@ -17,6 +17,7 @@ class Users extends Controller {
         $_SESSION['firstName'] = $user->firstName;
         $_SESSION['lastName'] = $user->lastName;
         $_SESSION['role'] = $user->role;
+        $_SESSION['previewDate'] = $this->getNextWeekDate();
 
         if ($user->role > 4){
             redirect('plannings/admin');
@@ -24,6 +25,12 @@ class Users extends Controller {
             redirect('plannings/dashboard');
         }
 
+    }
+
+    public function getNextWeekDate(){
+        $date = date("DD-MM-YYYY");
+        $finalDate = strtotime(date("DD-MM-YYYY", strtotime($date)));
+        return $finalDate;
     }
 
     public function logout(){
@@ -34,6 +41,7 @@ class Users extends Controller {
         unset($_SESSION['firstName']);
         unset($_SESSION['lastName']);
         unset($_SESSION['role']);
+        unset($_SESSION['previewDate']);
 
         session_destroy();
 

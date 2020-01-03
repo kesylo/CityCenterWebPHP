@@ -34,7 +34,7 @@
                             <hr class="my-4">
 
                             <div class="text-center">
-                                <input type="submit" value="Connexion" class="btn btn-success">
+                                <input type="submit" value="Connexion" class="btn btn-success" >
                             </div>
                         </form>
 

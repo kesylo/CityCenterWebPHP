@@ -25,6 +25,12 @@ flash("planning_message");
         </span>
     </div>
 
+
+
+    <!--<a href="<?php /*echo URLROOT; */?>/pages/calendar" class="btn btn-dark pull-right ml-2">
+        <i class="fa fa-plus"></i> cal
+    </a>-->
+
     <div class="mr-5">
         <div class="input-group date" id="dateWeekDashAdmin" data-target-input="nearest">
             <input type="text" name="week" class="form-control datetimepicker-input" data-target="#dateWeekDashAdmin" />

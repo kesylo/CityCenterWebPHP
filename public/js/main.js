@@ -14,12 +14,12 @@ $(document).ready(function() { // init all fields here
     $('#dateWeekAdd').datetimepicker({
         format: 'DD-MM-YYYY',
         daysOfWeekDisabled:[0,2,3,4,5,6],
-        date: moment().add(1, 'weeks').startOf('isoWeek'),
+        date: nextWeekdayDate(1),
     });
 
     $('#dateDayAvailableAdd').datetimepicker({
         format: 'DD-MM-YYYY',
-        minDate: moment().add(1, 'weeks').startOf('isoWeek'),
+        minDate: nextWeekdayDate(1),
     });
 
     $("#dateWeekAdd").on("change.datetimepicker", function (e) {
@@ -45,12 +45,12 @@ $(document).ready(function() { // init all fields here
     $('#dateWeekAddExtra').datetimepicker({
         format: 'DD-MM-YYYY',
         daysOfWeekDisabled:[0,2,3,4,5,6],
-        date: moment().add(1, 'weeks').startOf('isoWeek'),
+        date: nextWeekdayDate(1),
     });
 
     $('#dateDayAvailableAddExtra').datetimepicker({
         format: 'DD-MM-YYYY',
-        minDate: moment().add(1, 'weeks').startOf('isoWeek'),
+        minDate: nextWeekdayDate(1),
     });
 
     $("#dateWeekAddExtra").on("change.datetimepicker", function (e) {
@@ -63,11 +63,11 @@ $(document).ready(function() { // init all fields here
     $('#dateWeekDash').datetimepicker({
         format: 'DD-MM-YYYY',
         daysOfWeekDisabled:[0,2,3,4,5,6],
-        date: moment().add(1, 'weeks').startOf('isoWeek'),
+        date: nextWeekdayDate(1),
     });
 
     $('#dateWeekDash').on("change.datetimepicker", function (e) {
-        createCookie("previewDate", moment(e.date).format('DD-MM-YYYY'), 10);
+        createCookie("previewDate", nextWeekdayDate(1), 10);
         reload();
     });
     //endregion
@@ -77,11 +77,11 @@ $(document).ready(function() { // init all fields here
     $('#dateWeekDashAdmin').datetimepicker({
         format: 'DD-MM-YYYY',
         daysOfWeekDisabled:[0,2,3,4,5,6],
-        date: moment().add(1, 'weeks').startOf('isoWeek'),
+        date: nextWeekdayDate(1),
     });
 
     $('#dateWeekDashAdmin').on("change.datetimepicker", function (e) {
-        createCookie("previewDate", moment(e.date).format('DD-MM-YYYY'), 10);
+        createCookie("previewDate", nextWeekdayDate(1), 10);
         reload();
     });
 

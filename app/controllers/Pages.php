@@ -30,13 +30,13 @@ class Pages extends Controller {        // default controller
         $this->view('pages/index', $data);
     }
 
-    public function about(){
+    public function calendar(){
         $data = [
             'title' => 'A propos'
         ];
 
         // load the about page
-        $this->view('pages/about', $data);
+        $this->view('pages/calendar', $data);
     }
 
 

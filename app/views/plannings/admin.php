@@ -32,9 +32,9 @@ flash("planning_message");
     </a>-->
 
     <div class="mr-5">
-        <div class="input-group date" id="dateWeekDashAdmin" data-target-input="nearest">
-            <input type="text" name="week" class="form-control datetimepicker-input" data-target="#dateWeekDashAdmin" />
-            <div class="input-group-append" data-target="#dateWeekDashAdmin" data-toggle="datetimepicker">
+        <div class="input-group date" id="dateWeekDash" data-target-input="nearest">
+            <input type="text" name="week" class="form-control datetimepicker-input" data-target="#dateWeekDash" />
+            <div class="input-group-append" data-target="#dateWeekDash" data-toggle="datetimepicker">
                 <div class="input-group-text">
                     <i class="fa fa-calendar"></i>
                 </div>

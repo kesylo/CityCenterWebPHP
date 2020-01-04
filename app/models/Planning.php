@@ -21,16 +21,6 @@ class Planning{
         return $results;
     }
 
-    public function getWaitingUsersPlannings($week){
-        $this->db->query('SELECT * FROM planning WHERE week = :nextWeek and status = :cStatus');
-        $this->db->bind(':nextWeek', $week);
-        $this->db->bind(':cStatus', "En attente");
-
-        $results = $this->db->resultSet();
-
-        return $results;
-    }
-
     public function getUserPlannings($idUser, $week){
         $this->db->query('SELECT * FROM planning WHERE id_user = :id_user and week = :nextWeek');
         $this->db->bind(':id_user', $idUser);

@@ -3,6 +3,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
+include APPROOT . "/views/session.php";
 
 class Plannings extends Controller{
 
@@ -21,7 +22,7 @@ class Plannings extends Controller{
     }
 
     public function index(){
-        $plannings = $this->planningModel->getUserPlannings($_SESSION['id'], $_COOKIE["previewDate"]);
+        $plannings = $this->planningModel->getUserPlannings($_SESSION['id'], $_COOKIE["nextWeekDate"]);
 
         $data = [
             'plannings' => $plannings,
@@ -178,16 +179,12 @@ class Plannings extends Controller{
 
     public function admin(){
 
+        //if ($_SESSION['waiting'] == 'all'){
+        //}
+
         if (isset($_SESSION['id']) && $_SESSION['role'] > 4){
 
-            if ($_COOKIE['filter'] == "waiting"){
-                $plannings = $this->planningModel->getWaitingUsersPlannings($_COOKIE["previewDate"]);
-            }else{
-                $plannings = $this->planningModel->getAllUsersPlannings($_COOKIE["previewDate"]);
-            }
-
-            // set global var
-            setcookie("filter", "all", 10, "/");
+            $plannings = $this->planningModel->getAllUsersPlannings($_COOKIE["nextWeekDate"]);
 
             $ids = array();
             $users = array();

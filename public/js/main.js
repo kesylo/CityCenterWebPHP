@@ -1,30 +1,28 @@
+$(document).ready(function(){
+    document.cookie = "waiting" + "=" + "all";
+});
 
-$(document).ready(function() { // init all fields here
+function cbSubmit() {
+    document.getElementById("cbForm").submit();
+}
 
-    //region App Globals
+$('input[name="radioWaiting"]').change(function(){
+    if($('#radiowaiting1').prop('checked')){
+        document.cookie = "waiting" + "=" + "all";
+        reload();
+    }
+    if($('#radiowaiting2').prop('checked')){
+        document.cookie = "waiting" + "=" + "waiting";
+        reload();
+    }
+});
 
-    createCookie("previewDate", nextWeekdayDate(1), 10);
-    createCookie("filter", "all", 10);
-    createCookie("edit_on_admin", true, 10);
 
-    //endregion
 
-    //region Add
 
-    $('#dateWeekAdd').datetimepicker({
-        format: 'DD-MM-YYYY',
-        daysOfWeekDisabled:[0,2,3,4,5,6],
-        date: nextWeekdayDate(1),
-    });
 
-    $('#dateDayAvailableAdd').datetimepicker({
-        format: 'DD-MM-YYYY',
-        minDate: nextWeekdayDate(1),
-    });
 
-    $("#dateWeekAdd").on("change.datetimepicker", function (e) {
-        $('#dateDayAvailableAdd').datetimepicker('minDate', e.date);
-    });
+$(function () {
 
     $('#timeStart').datetimepicker({
         format: 'HH:mm',
@@ -38,103 +36,75 @@ $(document).ready(function() { // init all fields here
         forceMinuteStep: true,
     });
 
-    //endregion
-
-    //region AddExtra
-
-    $('#dateWeekAddExtra').datetimepicker({
-        format: 'DD-MM-YYYY',
-        daysOfWeekDisabled:[0,2,3,4,5,6],
-        date: nextWeekdayDate(1),
-    });
-
-    $('#dateDayAvailableAddExtra').datetimepicker({
-        format: 'DD-MM-YYYY',
-        minDate: nextWeekdayDate(1),
-    });
-
-    $("#dateWeekAddExtra").on("change.datetimepicker", function (e) {
-        $('#dateDayAvailableAddExtra').datetimepicker('minDate', e.date);
-    });
-
-    //endregion
-
-    //region DashBoard
     $('#dateWeekDash').datetimepicker({
         format: 'DD-MM-YYYY',
         daysOfWeekDisabled:[0,2,3,4,5,6],
-        date: nextWeekdayDate(1),
     });
 
     $('#dateWeekDash').on("change.datetimepicker", function (e) {
-        createCookie("previewDate", nextWeekdayDate(1), 10);
-        reload();
-    });
-    //endregion
+        strDate = moment(e.date).format('DD-MM-YYYY');
 
-    //region DashBoard Admin
-
-    $('#dateWeekDashAdmin').datetimepicker({
-        format: 'DD-MM-YYYY',
-        daysOfWeekDisabled:[0,2,3,4,5,6],
-        date: nextWeekdayDate(1),
-    });
-
-    $('#dateWeekDashAdmin').on("change.datetimepicker", function (e) {
-        createCookie("previewDate", nextWeekdayDate(1), 10);
+        createCookieDate(strDate);
         reload();
     });
 
-    $('input[name="radioWaiting"]').change(function(){
-
-        if($('#radiowaiting1').prop('checked')){
-            createCookie("filter", "all", 10);
-            reload();
-        }
-
-        if($('#radiowaiting2').prop('checked')){
-            createCookie("filter", "waiting", 10);
-            reload();
-        }
-    });
-
-    //endregion
 
 });
 
 
 
-function nextWeekdayDate(day_in_week) {
-    let date = new Date();
-    let ret = new Date(date||new Date());
-    let momentJSDate = ret.setDate(ret.getDate() + (day_in_week - 1 - ret.getDay() + 7) % 7 + 1);
-    let stringDate = moment(momentJSDate).format('DD-MM-YYYY');
-    return stringDate;
+
+
+$(function () {
+
+    $('#dateWeek').datetimepicker({
+        format: 'DD-MM-YYYY',
+        daysOfWeekDisabled:[0,2,3,4,5,6],
+    });
+    $('#dateDisp').datetimepicker({
+        format: 'DD-MM-YYYY',
+        useCurrent: false,
+    });
+
+    $("#dateWeek").on("change.datetimepicker", function (e) {
+        $('#dateDisp').datetimepicker('minDate', e.date);
+    });
+
+
+
+});
+
+
+
+function createCookieDate(strDate) {
+    document.cookie = "nextWeekDate" + "=" + strDate;
 }
 
 function reload(){
     $( "#card-reload" ).load( " #card-reload" );
 }
 
+function getNextWeekDate(){
+    let d = new Date();
+    d.setDate(d.getDate() + (1 + 7 - d.getDay()) % 7);
+
+
+    let dd = d.getDate();
+    let mm = d.getMonth() + 1;
+
+    let yyyy = d.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+    let today = dd + '-' + mm + '-' + yyyy;
+
+    return today;
+}
+
 $(window).bind('beforeunload',function(){
     createCookieDate(getNextWeekDate());
 
 });
-
-// Function to create the cookie
-function createCookie(name, value, days) {
-    var expires;
-
-    if (days) {
-        const date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toGMTString();
-    }
-    else {
-        expires = "";
-    }
-
-    document.cookie = escape(name) + "=" +
-        escape(value) + expires + "; path=/";
-}
-

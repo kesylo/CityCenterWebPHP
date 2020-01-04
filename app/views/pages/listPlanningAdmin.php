@@ -1,5 +1,5 @@
 <?php /** @var TYPE_NAME $data */
-
+include APPROOT . "/views/session.php";
 if (sizeof($data['plannings']) > 0) :
     foreach ($data['plannings'] as $planning) : ?>
 

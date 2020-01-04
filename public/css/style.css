@@ -13,7 +13,6 @@ header,
     background-size: cover;
 }
 
-/*
 .radio{
     font-size: 16px;
     font-weight: 500;
@@ -43,13 +42,12 @@ header,
     top: 0;
     cursor: pointer;
 }
-*/
 
 .redGradient{
     background: linear-gradient(to right, #cb356b, #bd3f32);
 }
 
-/*.radio span:after{
+.radio span:after{
     content: "";
     height: 8px;
     width: 8px;
@@ -65,4 +63,4 @@ header,
 
 .radio input[type="radio"]:checked ~ span:after{
     transform: translate(-50%, -50%) scale(1);
-}*/
+}

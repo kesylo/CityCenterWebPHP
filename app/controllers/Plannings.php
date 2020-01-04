@@ -375,7 +375,7 @@ class Plannings extends Controller{
 
                 $mail = new PHPMailer(true);
                 try {
-                    $mail->isSMTP();                                            // Send using SMTP
+                    //$mail->isSMTP();                                            // Send using SMTP
                     $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
                     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
                     $mail->Username   = 'test4cash.1@gmail.com';                     // SMTP username
@@ -394,7 +394,6 @@ class Plannings extends Controller{
                     $mail->AltBody = $body;
 
                     $mail->send();
-                    echo 'Message has been sent';
                 } catch (Exception $e) {
                     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 }
@@ -448,7 +447,6 @@ class Plannings extends Controller{
                         $mail->AltBody = $body;
 
                         $mail->send();
-                        echo 'Message has been sent';
                     } catch (Exception $e) {
                         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                     }

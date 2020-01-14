@@ -39,6 +39,9 @@ $(function () {
     $('#dateWeekDash').datetimepicker({
         format: 'DD-MM-YYYY',
         daysOfWeekDisabled:[0,2,3,4,5,6],
+        locale:  moment.locale('fr', {
+            week: { dow: 1 }
+        }),
     });
 
     $('#dateWeekDash').on("change.datetimepicker", function (e) {
@@ -60,10 +63,17 @@ $(function () {
     $('#dateWeek').datetimepicker({
         format: 'DD-MM-YYYY',
         daysOfWeekDisabled:[0,2,3,4,5,6],
+        locale:  moment.locale('fr', {
+            week: { dow: 1 }
+        }),
     });
+
     $('#dateDisp').datetimepicker({
         format: 'DD-MM-YYYY',
         useCurrent: false,
+        locale:  moment.locale('fr', {
+            week: { dow: 1 }
+        }),
     });
 
     $("#dateWeek").on("change.datetimepicker", function (e) {

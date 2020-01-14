@@ -179,10 +179,7 @@ class Plannings extends Controller{
 
     public function admin(){
 
-        //if ($_SESSION['waiting'] == 'all'){
-        //}
-
-        if (isset($_SESSION['id']) && $_SESSION['role'] > 4){
+        if (isset($_SESSION['id']) && $_SESSION['role'] > 3){
 
             $plannings = $this->planningModel->getAllUsersPlannings($_COOKIE["nextWeekDate"]);
 

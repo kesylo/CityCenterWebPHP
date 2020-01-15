@@ -19,41 +19,36 @@ flash("planning_message");
 
 <div class="row justify-content-center">
 
-    <div class="mr-2 my-auto">
+
+
+    <div class="radio-group text-center mt-2">
+
+    </div>
+
+</div>
+
+<div class="row justify-content-center align-items-center">
+
+    <div class="col-sm col-md-4">
+        <div class="mr-2 my-auto">
         <span style="font-weight:bold">
             Semaine du:
         </span>
-    </div>
+        </div>
 
-
-
-    <!--<a href="<?php /*echo URLROOT; */?>/pages/calendar" class="btn btn-dark pull-right ml-2">
-        <i class="fa fa-plus"></i> cal
-    </a>-->
-
-    <div class="mr-5">
-        <div class="input-group date" id="dateWeekDash" data-target-input="nearest">
-            <input type="text" name="week" class="form-control datetimepicker-input" data-target="#dateWeekDash" />
-            <div class="input-group-append" data-target="#dateWeekDash" data-toggle="datetimepicker">
-                <div class="input-group-text">
-                    <i class="fa fa-calendar"></i>
+        <div class="mr-5">
+            <div class="input-group date" id="dateWeekDash" data-target-input="nearest">
+                <input type="text" name="week" class="form-control datetimepicker-input" data-target="#dateWeekDash" />
+                <div class="input-group-append" data-target="#dateWeekDash" data-toggle="datetimepicker">
+                    <div class="input-group-text">
+                        <i class="fa fa-calendar"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="radio-group text-center mt-2">
-        <label class="radio">
-            <input type="radio" id="radiowaiting1" name="radioWaiting" checked value="Oui"> Tout
-            <span></span>
-        </label>
-        <label class="radio">
-            <input type="radio" id="radiowaiting2" name="radioWaiting" value="Non"> En attente
-            <span></span>
-        </label>
-    </div>
-
 </div>
+
 
 <div>
     <hr >
@@ -61,6 +56,13 @@ flash("planning_message");
 
 <div class="row">
     <div id="card-reload" class="col-12">
+
+        <?php
+/*        $d = strtotime($_COOKIE["nextWeekDate"]);
+        $date = date('d-m-Y', $d);
+        */?><!--
+        <h1 class="display-4"><?php /*echo date('F', strtotime($date )); */?></h1>-->
+
         <?php require APPROOT . '/views/pages/listPlanningAdmin.php'; ?>
     </div>
 </div>

@@ -1,103 +1,174 @@
-<?php /** @var TYPE_NAME $data */
-include APPROOT . "/views/session.php";
-if (sizeof($data['plannings']) > 0) :
-    foreach ($data['plannings'] as $planning) : ?>
+<?php
+function displayUserPlanning($id, $data, $choice)
+{
+    //region Variables
+    $values = array();
+
+    $monday = "Mon";
+    $tuesday = "Tue";
+    $wednesday = "Wed";
+    $thursday = "Thu";
+    $friday = "Fri";
+    $saturday = "Sat";
+    $sunday = "Sun";
+
+    //endregion
+
+    foreach ($data['plannings'] as $index => $planning) {
+
+        if ($planning->id_user == $id) {
+            if ($planning->week == $_COOKIE["nextWeekDate"]) {
+
+                $date = $planning->date;
+                $nameOfDay = date('D', strtotime($date));
+
+                //region choices
+
+                if ($choice == $monday) {
+                    if ($nameOfDay == $monday) {
+                        array_push($values, $planning->startTime . " - " . $planning->endTime);
+                    }
+                }
+
+                if ($choice == $tuesday) {
+                    if ($nameOfDay == $tuesday) {
+                        array_push($values, "TUE");
+                    }
+                }
+
+                if ($choice == $wednesday) {
+                    if ($nameOfDay == $wednesday) {
+                        array_push($values, "WED");
+                    }
+                }
+
+                //endregion
+
+            }
+        }
+    }
+
+    return $values;
+}
+
+?>
 
 
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary d-inline"><?php echo fullDate($planning->date); ?></h6>
-                <h6 class="m-0 font-weight-bold pull-right d-inline"><?php echo $data['unique'][$planning->id_user]; ?></h6>
-            </div>
-            <div class="card-body">
+<div class="card" style="max-height: 600px; overflow: auto; display: block;">
+    <div class="table-responsive" >
+        <table class="table table-bordered table-hover ">
+            <thead class="thead-dark">
+            <?php
+            $d = strtotime($_COOKIE["nextWeekDate"]);
+            $date = date('d-m-Y', $d);
+            ?>
+            <tr>
+                <th scope="col" style="width: 15%">Noms</th>
+                <th scope="col" style="width: 5%">Dépt</th>
+                <th scope="col" style="width: 10%">
+                    Lundi
+                    <?php echo date('d', strtotime($date . ' +0 day')); ?>
+                </th>
+                <th scope="col" style="width: 10%">
+                    Mardi
+                    <?php echo date('d', strtotime($date . ' +1 day')); ?>
+                </th>
+                <th scope="col" style="width: 10%">
+                    Mercredi
+                    <?php echo date('d', strtotime($date . ' +2 day')); ?>
+                </th>
+                <th scope="col" style="width: 10%">
+                    Jeudi
+                    <?php echo date('d', strtotime($date . ' +3 day')); ?>
+                </th>
+                <th scope="col" style="width: 10%">
+                    Vendredi
+                    <?php echo date('d', strtotime($date . ' +4 day')); ?>
+                </th>
+                <th scope="col" style="width: 10%">
+                    Samedi
+                    <?php echo date('d', strtotime($date . ' +5 day')); ?>
+                </th>
+                <th scope="col" style="width: 10%">
+                    Dimache
+                    <?php echo date('d', strtotime($date . ' +6 day')); ?>
+                </th>
+            </tr>
+            </thead>
 
-                <div class="row mb-2 ">
-                    <div class="col-md-4">
+            <tbody>
 
-                        <span style="font-weight:bold">
-                            Plage horaire:
-                        </span>
-                        <span style="font-weight:normal">
-                                <?php echo $planning->startTime . ' - ' . $planning->endTime ?>
-                        </span>
+                <?php
+                foreach ($data['users'] as $user) : ?>
 
-                        <br>
+                    <tr>
+                        <!-- Show users names-->
+                        <th class="pr-0 align-middle" scope="row">
+                            <?php echo strtoupper($user->firstName[0]) . ". "
+                                . ucfirst(mb_strtolower($user->lastName, 'UTF-8')) ?>
+                        </th>
 
-                        <span style="font-weight:bold">
-                                Rédirection:
-                        </span>
-                        <span style="font-weight:normal">
-                                <?php echo $planning->callRedirect ?>
-                        </span>
-
-                    </div>
-
-                    <div class="col-md-4">
-                        <p class=" text-center" style="font-weight:bold">
-                            Status:
-                            <span style="font-weight:normal">
-                                <?php
-                                if ($planning->status == 'Accepté') {
-                                    echo '<b class="text-success">Accepté</b>';
-                                } elseif ($planning->status == 'Refusé') {
-                                    echo '<b class="text-danger">Refusé</b>';
-                                } else {
-                                    echo '<b>En attente</b>';
+                        <!-- Show users dept-->
+                        <td class="align-middle pr-0">
+                            <?php
+                            $words = explode(" ", $user->dept);
+                            $dept = "";
+                            if (count($words) == 2) {
+                                foreach ($words as $w) {
+                                    // show first Letter of each word
+                                    $dept .= $w[0];
                                 }
-                                ?>
-                            </span>
-                        </p>
-                    </div>
+                            } else {
+                                foreach ($words as $w) {
+                                    // show the 2 first letters of the word
+                                    $dept .= $w[0];
+                                    $dept .= strtoupper($w[1]);
+                                }
+                            }
+                            echo $dept;
+                            ?>
+                        </td>
 
-                    <div class="col-md-4">
+                        <!-- Show users plannings Monday -->
+                        <td class="align-middle pr-0">
+                            <?php
+                            $days = displayUserPlanning($user->id, $data, "Mon");
+                            foreach ($days as $d) {
+                                echo $d . "<br>";
+                            }
+                            ?>
+                        </td>
 
-                        <!--Deny-->
-                        <form action="<?php echo URLROOT; ?>/plannings/deny/<?php echo $planning->id_planning; ?>/<?php echo $data['emails'][$planning->id_user]; ?>"
-                              method="post" onclick="return confirm('Refuser ce planning ?')">
-                            <button type="submit" class="btn btn-warning pull-right ml-2">
-                                <i class="fa fa-times"></i>
-                            </button>
-                        </form>
+                        <!-- Show users plannings Tuesday -->
+                        <td>
+                            <?php
+                            $days = displayUserPlanning($user->id, $data, "Tue");
+                            foreach ($days as $d) {
+                                echo $d . "<br>";
+                            }
+                            ?>
+                        </td>
 
-                        <!--edit-->
-                        <a href="<?php echo URLROOT; ?>/plannings/edit/<?php echo $planning->id_planning; ?> "
-                           class="btn btn-primary pull-right ml-2">
-                            <i class="fa fa-edit"></i>
-                            <!--change global var to know where we nav from-->
-                            <?php $_COOKIE['edit_on_admin'] = true; ?>
-                        </a>
+                        <!-- Show users plannings Wednesday -->
+                        <td>
+                            <?php
+                            $days = displayUserPlanning($user->id, $data, "Wed");
+                            foreach ($days as $d) {
+                                echo $d . "<br>";
+                            }
+                            ?>
+                        </td>
 
+                        <td>fdgdg</td>
+                        <td>fdgdg</td>
+                        <td>fdgdg</td>
+                        <td>fdgdg</td>
+                    </tr>
 
-                        <!--Confirm-->
-                        <form action="<?php echo URLROOT; ?>/plannings/accept/<?php echo $planning->id_planning; ?>/<?php echo $data['emails'][$planning->id_user]; ?>"
-                              method="post" onclick="return confirm('Accepter ce planning ?')">
-                            <button type="submit" class="btn btn-success pull-right ml-2">
-                                <i class="fa fa-check"></i>
-                            </button>
-                        </form>
+                <?php endforeach; ?>
 
-
-                        <!--Delete-->
-                        <form action="<?php echo URLROOT; ?>/plannings/delete/<?php echo $planning->id_planning; ?>"
-                              method="post" onclick="return confirm('Voulez-vous supprimer ce planning ?')">
-                            <button type="submit" class="btn btn-danger pull-right ml-2">
-                                <i class="fa fa-trash"></i>
-                                <!--change global var to know where we nav from-->
-                                <?php $_SESSION['edit_on_admin'] = true; ?>
-                            </button>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    <?php endforeach; ?>
-
-<?php else: ?>
-    <div class="text-center mb-3">
-        <h1>Pas de données pour cette semaine !</h1>
-        <img src="<?php echo URLROOT; ?>/images/img1.png" class="img-fluid" alt="Responsive image" width="700">
+            </tbody>
+        </table>
     </div>
+</div>
 
-<?php endif; ?>

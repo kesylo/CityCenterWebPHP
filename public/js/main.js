@@ -118,3 +118,4 @@ $(window).bind('beforeunload',function(){
     createCookieDate(getNextWeekDate());
 
 });
+

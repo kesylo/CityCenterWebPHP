@@ -91,6 +91,12 @@ class Planning{
         return $row;
     }
 
+    public function getAllActiveUsers(){
+        $this->db->query('SELECT * FROM employees WHERE outService IS NULL');
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
 
     public function updatePlanning($data){
         $this->db->query('UPDATE planning SET week = :workweek, callRedirect = :callRedirect, date = :workdate, startTime = :startTime, endTime = :endTime, status = :workstatus 

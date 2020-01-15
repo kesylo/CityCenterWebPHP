@@ -6,19 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title> <?php echo SITENAME; ?> </title>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/bootstrap.min.css">
+    <!-- Personal css -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/style.css">
 
-
-    <!--datePicker-->
-    <link rel="stylesheet" type="text/css" href="<?php echo URLROOT; ?>/css/jquery-ui.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
-    <link href="<?php echo URLROOT; ?>/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Theme -->
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/bootstrap.min.css">
+    <!--<link href="<?php /*echo URLROOT; */?>/css/all.min.css" rel="stylesheet" type="text/css">-->
     <link href="<?php echo URLROOT; ?>/css/sb-admin-2.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/ionicons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+
+    <!-- Favicon -->
+    <link href="<?php echo URLROOT; ?>/images/favicon.png" rel="icon" type="image/png">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/vendor/nucleo/css/nucleo.css" type="text/css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+
+    <!-- Page plugins -->
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/vendor/fullcalendar/dist/fullcalendar.min.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/vendor/sweetalert2/dist/sweetalert2.min.css">
+
+    <!-- Argon CSS -->
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/argon.css" type="text/css">
 
 </head>
 

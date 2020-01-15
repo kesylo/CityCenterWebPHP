@@ -1,174 +1,96 @@
-<?php
-function displayUserPlanning($id, $data, $choice)
-{
-    //region Variables
-    $values = array();
-
-    $monday = "Mon";
-    $tuesday = "Tue";
-    $wednesday = "Wed";
-    $thursday = "Thu";
-    $friday = "Fri";
-    $saturday = "Sat";
-    $sunday = "Sun";
-
-    //endregion
-
-    foreach ($data['plannings'] as $index => $planning) {
-
-        if ($planning->id_user == $id) {
-            if ($planning->week == $_COOKIE["nextWeekDate"]) {
-
-                $date = $planning->date;
-                $nameOfDay = date('D', strtotime($date));
-
-                //region choices
-
-                if ($choice == $monday) {
-                    if ($nameOfDay == $monday) {
-                        array_push($values, $planning->startTime . " - " . $planning->endTime);
-                    }
-                }
-
-                if ($choice == $tuesday) {
-                    if ($nameOfDay == $tuesday) {
-                        array_push($values, "TUE");
-                    }
-                }
-
-                if ($choice == $wednesday) {
-                    if ($nameOfDay == $wednesday) {
-                        array_push($values, "WED");
-                    }
-                }
-
-                //endregion
-
-            }
-        }
-    }
-
-    return $values;
-}
-
-?>
-
-
-<div class="card" style="max-height: 600px; overflow: auto; display: block;">
-    <div class="table-responsive" >
-        <table class="table table-bordered table-hover ">
-            <thead class="thead-dark">
-            <?php
-            $d = strtotime($_COOKIE["nextWeekDate"]);
-            $date = date('d-m-Y', $d);
-            ?>
-            <tr>
-                <th scope="col" style="width: 15%">Noms</th>
-                <th scope="col" style="width: 5%">Dépt</th>
-                <th scope="col" style="width: 10%">
-                    Lundi
-                    <?php echo date('d', strtotime($date . ' +0 day')); ?>
-                </th>
-                <th scope="col" style="width: 10%">
-                    Mardi
-                    <?php echo date('d', strtotime($date . ' +1 day')); ?>
-                </th>
-                <th scope="col" style="width: 10%">
-                    Mercredi
-                    <?php echo date('d', strtotime($date . ' +2 day')); ?>
-                </th>
-                <th scope="col" style="width: 10%">
-                    Jeudi
-                    <?php echo date('d', strtotime($date . ' +3 day')); ?>
-                </th>
-                <th scope="col" style="width: 10%">
-                    Vendredi
-                    <?php echo date('d', strtotime($date . ' +4 day')); ?>
-                </th>
-                <th scope="col" style="width: 10%">
-                    Samedi
-                    <?php echo date('d', strtotime($date . ' +5 day')); ?>
-                </th>
-                <th scope="col" style="width: 10%">
-                    Dimache
-                    <?php echo date('d', strtotime($date . ' +6 day')); ?>
-                </th>
-            </tr>
-            </thead>
-
-            <tbody>
-
-                <?php
-                foreach ($data['users'] as $user) : ?>
-
-                    <tr>
-                        <!-- Show users names-->
-                        <th class="pr-0 align-middle" scope="row">
-                            <?php echo strtoupper($user->firstName[0]) . ". "
-                                . ucfirst(mb_strtolower($user->lastName, 'UTF-8')) ?>
-                        </th>
-
-                        <!-- Show users dept-->
-                        <td class="align-middle pr-0">
-                            <?php
-                            $words = explode(" ", $user->dept);
-                            $dept = "";
-                            if (count($words) == 2) {
-                                foreach ($words as $w) {
-                                    // show first Letter of each word
-                                    $dept .= $w[0];
-                                }
-                            } else {
-                                foreach ($words as $w) {
-                                    // show the 2 first letters of the word
-                                    $dept .= $w[0];
-                                    $dept .= strtoupper($w[1]);
-                                }
-                            }
-                            echo $dept;
-                            ?>
-                        </td>
-
-                        <!-- Show users plannings Monday -->
-                        <td class="align-middle pr-0">
-                            <?php
-                            $days = displayUserPlanning($user->id, $data, "Mon");
-                            foreach ($days as $d) {
-                                echo $d . "<br>";
-                            }
-                            ?>
-                        </td>
-
-                        <!-- Show users plannings Tuesday -->
-                        <td>
-                            <?php
-                            $days = displayUserPlanning($user->id, $data, "Tue");
-                            foreach ($days as $d) {
-                                echo $d . "<br>";
-                            }
-                            ?>
-                        </td>
-
-                        <!-- Show users plannings Wednesday -->
-                        <td>
-                            <?php
-                            $days = displayUserPlanning($user->id, $data, "Wed");
-                            foreach ($days as $d) {
-                                echo $d . "<br>";
-                            }
-                            ?>
-                        </td>
-
-                        <td>fdgdg</td>
-                        <td>fdgdg</td>
-                        <td>fdgdg</td>
-                        <td>fdgdg</td>
-                    </tr>
-
-                <?php endforeach; ?>
-
-            </tbody>
-        </table>
+<div class="row">
+    <div class="col">
+        <!-- Fullcalendar -->
+        <div class="card card-calendar">
+            <!-- Card header -->
+            <div class="card-header">
+                <!-- Title -->
+                <h5 class="h3 mb-0">Calendar</h5>
+            </div>
+            <!-- Card body -->
+            <div class="card-body p-0">
+                <div class="calendar" data-toggle="calendar" id="calendar"></div>
+            </div>
+        </div>
+        <!-- Modal - Add new event -->
+        <!--* Modal header *-->
+        <!--* Modal body *-->
+        <!--* Modal footer *-->
+        <!--* Modal init *-->
+        <div class="modal fade" id="new-event" tabindex="-1" role="dialog" aria-labelledby="new-event-label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-secondary" role="document">
+                <div class="modal-content">
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form class="new-event--form">
+                            <div class="form-group">
+                                <label class="form-control-label">Event title</label>
+                                <input type="text" class="form-control form-control-alternative new-event--title" placeholder="Event Title">
+                            </div>
+                            <div class="form-group mb-0">
+                                <label class="form-control-label d-block mb-3">Status color</label>
+                                <div class="btn-group btn-group-toggle btn-group-colors event-tag" data-toggle="buttons">
+                                    <label class="btn bg-info active"><input type="radio" name="event-tag" value="bg-info" autocomplete="off" checked></label>
+                                    <label class="btn bg-warning"><input type="radio" name="event-tag" value="bg-warning" autocomplete="off"></label>
+                                    <label class="btn bg-danger"><input type="radio" name="event-tag" value="bg-danger" autocomplete="off"></label>
+                                    <label class="btn bg-success"><input type="radio" name="event-tag" value="bg-success" autocomplete="off"></label>
+                                    <label class="btn bg-default"><input type="radio" name="event-tag" value="bg-default" autocomplete="off"></label>
+                                    <label class="btn bg-primary"><input type="radio" name="event-tag" value="bg-primary" autocomplete="off"></label>
+                                </div>
+                            </div>
+                            <input type="hidden" class="new-event--start" />
+                            <input type="hidden" class="new-event--end" />
+                        </form>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary new-event--add">Add event</button>
+                        <button type="button" class="btn btn-link ml-auto" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal - Edit event -->
+        <!--* Modal body *-->
+        <!--* Modal footer *-->
+        <!--* Modal init *-->
+        <div class="modal fade" id="edit-event" tabindex="-1" role="dialog" aria-labelledby="edit-event-label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-secondary" role="document">
+                <div class="modal-content">
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form class="edit-event--form">
+                            <div class="form-group">
+                                <label class="form-control-label">Event title</label>
+                                <input type="text" class="form-control form-control-alternative edit-event--title" placeholder="Event Title">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label d-block mb-3">Status color</label>
+                                <div class="btn-group btn-group-toggle btn-group-colors event-tag mb-0" data-toggle="buttons">
+                                    <label class="btn bg-info active"><input type="radio" name="event-tag" value="bg-info" autocomplete="off" checked></label>
+                                    <label class="btn bg-warning"><input type="radio" name="event-tag" value="bg-warning" autocomplete="off"></label>
+                                    <label class="btn bg-danger"><input type="radio" name="event-tag" value="bg-danger" autocomplete="off"></label>
+                                    <label class="btn bg-success"><input type="radio" name="event-tag" value="bg-success" autocomplete="off"></label>
+                                    <label class="btn bg-default"><input type="radio" name="event-tag" value="bg-default" autocomplete="off"></label>
+                                    <label class="btn bg-primary"><input type="radio" name="event-tag" value="bg-primary" autocomplete="off"></label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Description</label>
+                                <textarea class="form-control form-control-alternative edit-event--description textarea-autosize" placeholder="Event Desctiption"></textarea>
+                                <i class="form-group--bar"></i>
+                            </div>
+                            <input type="hidden" class="edit-event--id">
+                        </form>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-calendar="update">Update</button>
+                        <button class="btn btn-danger" data-calendar="delete">Delete</button>
+                        <button class="btn btn-link ml-auto" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-

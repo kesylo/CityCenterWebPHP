@@ -1,10 +1,4 @@
-$(document).ready(function(){
-    document.cookie = "waiting" + "=" + "all";
-});
 
-function cbSubmit() {
-    document.getElementById("cbForm").submit();
-}
 
 $('input[name="radioWaiting"]').change(function(){
     if($('#radiowaiting1').prop('checked')){
@@ -22,7 +16,7 @@ $('input[name="radioWaiting"]').change(function(){
 
 
 
-$(function () {
+/*$(function () {
 
     $('#timeStart').datetimepicker({
         format: 'HH:mm',
@@ -52,13 +46,13 @@ $(function () {
     });
 
 
-});
+});*/
 
 
 
 
 
-$(function () {
+/*$(function () {
 
     $('#dateWeek').datetimepicker({
         format: 'DD-MM-YYYY',
@@ -82,7 +76,7 @@ $(function () {
 
 
 
-});
+});*/
 
 
 

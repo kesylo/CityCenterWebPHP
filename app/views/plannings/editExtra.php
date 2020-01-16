@@ -86,13 +86,7 @@
 
 
                         <div class="text-center">
-                            <a href="<?php
-                                        if ($_SESSION['edit_on_admin'] == true){
-                                            echo URLROOT . "/plannings/admin";
-                                        }else{
-                                            echo URLROOT . "/plannings/dashboard";
-                                        }
-                                    ?>" class="btn btn-secondary mr-5">Retour</a>
+                            <a href="<?php echo URLROOT . "/plannings/dashboard";?>" class="btn btn-secondary mr-5">Retour</a>
 
                             <input type="submit" value="Cloturer" class="btn btn-primary">
                         </div>

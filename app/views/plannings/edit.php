@@ -11,7 +11,7 @@
             </div>
             <div class="card-body">
                 <div class="col-md-7 mx-auto">
-                    <form action="<?php echo URLROOT; ?>/plannings/edit/<?php echo $data['id_planning']; ?>" method="post">
+                    <form action="<?php echo URLROOT; ?>/plannings/edit/<?php echo $data['id_planning']; ?>/<?php echo ($data['admin'] == 1 ?  1 : 0) ; ?>" method="post">
 
 
                         <div class="form-group">
@@ -87,7 +87,7 @@
 
                         <div class="text-center">
                             <a href="<?php
-                                        if ($_SESSION['edit_on_admin'] == true){
+                                        if ($data['admin'] == 1){
                                             echo URLROOT . "/plannings/admin";
                                         }else{
                                             echo URLROOT . "/plannings/dashboard";

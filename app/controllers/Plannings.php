@@ -31,13 +31,10 @@ class Plannings extends Controller{
         $this->view('plannings/dashboard', $data);
     }
 
-    public function edit($id_planning){
-
-        setcookie('edit_on_admin', true, time() + (8640 * 30), "/");
+    public function edit($id_planning, $admin){
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
 
             $data = [
                 'id' => $_SESSION['id'],
@@ -69,7 +66,7 @@ class Plannings extends Controller{
                 if ($this->planningModel->updatePlanning($data)){
                     // show flash message
                     flash('planning_message', "Votre planning a été Modifié!");
-                    if ($_COOKIE['edit_on_admin'] == true){
+                    if ($admin == 1){
                         redirect('plannings/admin');
                     }else{
                         redirect('plannings/dashboard');
@@ -100,6 +97,7 @@ class Plannings extends Controller{
                 'status' => $planning->status,
                 'callRedirect' => $planning->callRedirect,
                 'id_user' => $planning->id_user,
+                'admin' => $admin,
             ];
 
             $this->view('plannings/edit', $data);
@@ -142,14 +140,10 @@ class Plannings extends Controller{
                 if ($this->planningModel->updatePlanning($data)){
                     // show flash message
                     flash('planning_message', "Votre Extra a été Cloturé!");
-                    if ($_SESSION['edit_on_admin'] == true){
-                        redirect('plannings/admin');
-                    }else{
-                        redirect('plannings/dashboard');
-                    }
+                    redirect('plannings/dashboard');
 
                 }else{
-                    die('errr');
+                    die('err');
                 }
             }else{
                 $this->view('plannings/editExtra', $data);
@@ -184,7 +178,7 @@ class Plannings extends Controller{
         //if ($_SESSION['waiting'] == 'all'){
         //}
 
-        if (isset($_SESSION['id']) && $_SESSION['role'] > 4){
+        if (isset($_SESSION['id']) && $_SESSION['role'] > 3){
 
             $plannings = $this->planningModel->getAllUsersPlannings($_COOKIE["nextWeekDate"]);
 
@@ -336,14 +330,13 @@ class Plannings extends Controller{
         }
     }
 
-    public function delete($id_planning){
-        setcookie('edit_on_admin', true, time() + (8640 * 30), "/");
+    public function delete($id_planning, $admin){
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             if ($this->planningModel->deletePlanning($id_planning)){
                 flash('post_message', 'Votre planning a été supprimé!');
-                if ($_COOKIE['edit_on_admin'] == true){
+                if ($admin == 1){
                     redirect('plannings/admin');
                 }else{
                     redirect('plannings/dashboard');
@@ -352,7 +345,7 @@ class Plannings extends Controller{
                 die("error deleting");
             }
         } else {
-            if ($_COOKIE['edit_on_admin'] == true){
+            if ($admin == 1){
                 redirect('plannings/admin');
             }else{
                 redirect('plannings/dashboard');

@@ -18,7 +18,7 @@ class Users extends Controller {
         $_SESSION['lastName'] = $user->lastName;
         $_SESSION['role'] = $user->role;
 
-        if ($user->role > 4){
+        if ($user->role > 3){
             redirect('plannings/admin');
         }else{
             redirect('plannings/dashboard');

@@ -3,7 +3,6 @@
 if (sizeof($data['plannings']) > 0) :
     foreach ($data['plannings'] as $planning) : ?>
 
-
         <div class="card shadow mb-4">
             <div class="card-header py-3
                 <?php
@@ -64,7 +63,7 @@ if (sizeof($data['plannings']) > 0) :
                     <div class="col-md-4">
 
                         <!--Delete-->
-                        <form action="<?php echo URLROOT; ?>/plannings/delete/<?php echo $planning->id_planning; ?>" method="post" onclick="return confirm('Voulez-vous supprimer ce planning ?')">
+                        <form action="<?php echo URLROOT; ?>/plannings/delete/<?php echo $planning->id_planning; ?>/0" method="post" onclick="return confirm('Voulez-vous supprimer ce planning ?')">
                             <button type="submit" class="btn btn-danger pull-right ml-2"
                                 <?php
                                     if ($planning->status == 'Accepté' || $planning->status == 'Refusé'){
@@ -78,25 +77,21 @@ if (sizeof($data['plannings']) > 0) :
                         </form>
 
                         <!--edit-->
-                        <a href="
-                        <?php
+                        <form action="
 
+                        <?php
                             if ($planning->endTime == ''){
-                                echo URLROOT; ?>/plannings/editExtra/<?php echo $planning->id_planning;
+                                echo URLROOT . "/plannings/editExtra/" . $planning->id_planning;
                             }else{
-                                echo URLROOT; ?>/plannings/edit/<?php echo $planning->id_planning;
+                                echo URLROOT . "/plannings/edit/" . $planning->id_planning . "/0";
                             }
-                            $_SESSION['edit_on_admin'] = false;
+                            ?>
+                        ">
+                            <button type="submit" class="btn btn-primary pull-right ml-2">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </form>
 
-                        ?> " class="btn btn-primary pull-right ml-2
-                        <?php
-                            if ($planning->status == 'Accepté' || $planning->status == 'Refusé'){
-                                echo 'disabled';
-                            }else{
-                                echo '';
-                            }
-                            $_SESSION['edit_on_admin'] = false;
-                        ?>"><i class="fa fa-edit"></i>  </a>
 
                     </div>
                 </div>

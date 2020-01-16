@@ -32,6 +32,19 @@
     <!-- Argon CSS -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/css/argon.css" type="text/css">
 
+    <!-- Jquery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+    <script src="<?php echo URLROOT; ?>/assets/vendor/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script src="<?php echo URLROOT; ?>/assets/vendor/fullcalendar/dist/locale/fr.js"></script>
+
+
+
+
+
+
 </head>
 
 <body>

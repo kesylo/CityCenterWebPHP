@@ -20,16 +20,15 @@
 <div class="row">
     <div id="card-reload" class="col-12">
 
-        <?php
-/*        $d = strtotime($_COOKIE["nextWeekDate"]);
-        $date = date('d-m-Y', $d);
-        */?><!--
-        <h1 class="display-4"><?php /*echo date('F', strtotime($date )); */?></h1>-->
+
 
         <?php require APPROOT . '/views/pages/listPlanningAdmin.php'; ?>
     </div>
 
+
     <!--add footer-->
     <?php require APPROOT . '/views/includes/footer.php'; ?>
+
 </div>
+
 

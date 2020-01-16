@@ -30,29 +30,23 @@
 
 
 
-<!-- Jquery-->
-<script src="<?php echo URLROOT; ?>/js/jquery.min.js"></script>
-<script src="<?php echo URLROOT; ?>/js/jquery-ui.min.js"></script>
-<script src="<?php echo URLROOT; ?>/js/jquery-3.4.1.min.js"></script>
-<script src="<?php echo URLROOT; ?>/js/jquery.easing.min.js"></script>
+<!-- My scripts -->
+<script src="<?php echo URLROOT; ?>/js/main.js"></script>
 
 <!-- Argon Scripts -->
 <!-- Core -->
-<script src="<?php echo URLROOT; ?>/assets/vendor/jquery/dist/jquery.min.js"></script>
 <script src="<?php echo URLROOT; ?>/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo URLROOT; ?>/assets/vendor/js-cookie/js.cookie.js"></script>
 <script src="<?php echo URLROOT; ?>/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
 <script src="<?php echo URLROOT; ?>/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
 
 <!-- Optional JS -->
-<script src="<?php echo URLROOT; ?>/assets/vendor/moment/min/moment.min.js"></script>
-<script src="<?php echo URLROOT; ?>/assets/vendor/fullcalendar/dist/fullcalendar.min.js"></script>
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>-->
 <script src="<?php echo URLROOT; ?>/assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 
 <!-- Argon JS -->
-<script src="<?php echo URLROOT; ?>/assets/js/argon.js?v=1.1.0"></script>
-
-
+<script src="<?php echo URLROOT; ?>/assets/js/argon.js"></script>
 
 </body>
 

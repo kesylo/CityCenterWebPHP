@@ -33,6 +33,8 @@ class Plannings extends Controller{
 
     public function edit($id_planning){
 
+        setcookie('edit_on_admin', true, time() + (8640 * 30), "/");
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -67,14 +69,14 @@ class Plannings extends Controller{
                 if ($this->planningModel->updatePlanning($data)){
                     // show flash message
                     flash('planning_message', "Votre planning a été Modifié!");
-                    if ($_SESSION['edit_on_admin'] == true){
+                    if ($_COOKIE['edit_on_admin'] == true){
                         redirect('plannings/admin');
                     }else{
                         redirect('plannings/dashboard');
                     }
 
                 }else{
-                    die('errr');
+                    die('err');
                 }
             }else{
                 $this->view('plannings/edit', $data);
@@ -335,11 +337,13 @@ class Plannings extends Controller{
     }
 
     public function delete($id_planning){
+        setcookie('edit_on_admin', true, time() + (8640 * 30), "/");
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             if ($this->planningModel->deletePlanning($id_planning)){
                 flash('post_message', 'Votre planning a été supprimé!');
-                if ($_SESSION['edit_on_admin'] == true){
+                if ($_COOKIE['edit_on_admin'] == true){
                     redirect('plannings/admin');
                 }else{
                     redirect('plannings/dashboard');
@@ -348,7 +352,7 @@ class Plannings extends Controller{
                 die("error deleting");
             }
         } else {
-            if ($_SESSION['edit_on_admin'] == true){
+            if ($_COOKIE['edit_on_admin'] == true){
                 redirect('plannings/admin');
             }else{
                 redirect('plannings/dashboard');

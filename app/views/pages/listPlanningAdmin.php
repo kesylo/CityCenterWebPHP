@@ -1,5 +1,7 @@
 <?php /** @var TYPE_NAME $data */
 include APPROOT . "/views/session.php";
+
+
 if (sizeof($data['plannings']) > 0) :
     foreach ($data['plannings'] as $planning) : ?>
 
@@ -63,8 +65,6 @@ if (sizeof($data['plannings']) > 0) :
                         <a href="<?php echo URLROOT; ?>/plannings/edit/<?php echo $planning->id_planning; ?> "
                            class="btn btn-primary pull-right ml-2">
                             <i class="fa fa-edit"></i>
-                            <!--change global var to know where we nav from-->
-                            <?php $_SESSION['edit_on_admin'] = true; ?>
                         </a>
 
 
@@ -82,8 +82,6 @@ if (sizeof($data['plannings']) > 0) :
                               method="post" onclick="return confirm('Voulez-vous supprimer ce planning ?')">
                             <button type="submit" class="btn btn-danger pull-right ml-2">
                                 <i class="fa fa-trash"></i>
-                                <!--change global var to know where we nav from-->
-                                <?php $_SESSION['edit_on_admin'] = true; ?>
                             </button>
                         </form>
 

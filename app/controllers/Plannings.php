@@ -31,11 +31,10 @@ class Plannings extends Controller{
         $this->view('plannings/dashboard', $data);
     }
 
-    public function edit($id_planning){
+    public function edit($id_planning, $admin){
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
 
             $data = [
                 'id' => $_SESSION['id'],
@@ -67,14 +66,14 @@ class Plannings extends Controller{
                 if ($this->planningModel->updatePlanning($data)){
                     // show flash message
                     flash('planning_message', "Votre planning a été Modifié!");
-                    if ($_COOKIE['edit_on_admin'] == true){
+                    if ($admin == 1){
                         redirect('plannings/admin');
                     }else{
                         redirect('plannings/dashboard');
                     }
 
                 }else{
-                    die('errr');
+                    die('err');
                 }
             }else{
                 $this->view('plannings/edit', $data);
@@ -85,9 +84,9 @@ class Plannings extends Controller{
             // fectch planning
             $planning = $this->planningModel->getPlanningById($id_planning);
 
-            if ($planning->id_user != $_SESSION['id']){
+            /*if ($planning->id_user != $_SESSION['id']){
                 redirect('plannings');
-            }
+            }*/
 
             $data = [
                 'id_planning' => $id_planning,
@@ -98,6 +97,7 @@ class Plannings extends Controller{
                 'status' => $planning->status,
                 'callRedirect' => $planning->callRedirect,
                 'id_user' => $planning->id_user,
+                'admin' => $admin,
             ];
 
             $this->view('plannings/edit', $data);
@@ -140,14 +140,10 @@ class Plannings extends Controller{
                 if ($this->planningModel->updatePlanning($data)){
                     // show flash message
                     flash('planning_message', "Votre Extra a été Cloturé!");
-                    if ($_SESSION['edit_on_admin'] == true){
-                        redirect('plannings/admin');
-                    }else{
-                        redirect('plannings/dashboard');
-                    }
+                    redirect('plannings/dashboard');
 
                 }else{
-                    die('errr');
+                    die('err');
                 }
             }else{
                 $this->view('plannings/editExtra', $data);
@@ -179,13 +175,17 @@ class Plannings extends Controller{
 
     public function admin(){
 
+        //if ($_SESSION['waiting'] == 'all'){
+        //}
+
         if (isset($_SESSION['id']) && $_SESSION['role'] > 3){
 
             $plannings = $this->planningModel->getAllUsersPlannings($_COOKIE["nextWeekDate"]);
-            $usersList = $this->planningModel->getAllActiveUsers();
 
-            /*$ids = array();
+            $ids = array();
             $users = array();
+            $names = array();
+            $emails = array();
 
             // store all user ids who created a planning
             foreach ($plannings as $key=>$pl){
@@ -193,16 +193,19 @@ class Plannings extends Controller{
             }
 
             // remove duplicates
-            //$uniqueIds = array_unique($ids);
+            $uniqueIds = array_unique($ids);
 
             // trim names only and store
-            foreach ($usersList as $key=>$id){
-                $names[$key] = $usersList[$key]->firstName . ' ' . $usersList[$key]->lastName;
-            }*/
+            foreach ($uniqueIds as $key=>$id){
+                $users[$uniqueIds[$key]] = $this->planningModel->getUserById($uniqueIds[$key]);
+                $names[$uniqueIds[$key]] = $users[$uniqueIds[$key]]->firstName . ' ' . $users[$uniqueIds[$key]]->lastName;
+                $emails[$uniqueIds[$key]] = $users[$uniqueIds[$key]]->email;
+            }
 
             $data = [
                 'plannings' => $plannings,
-                'users' => $usersList,
+                'unique' => $names,
+                'emails' => $emails,
             ];
 
             $this->view('plannings/admin', $data);
@@ -327,12 +330,13 @@ class Plannings extends Controller{
         }
     }
 
-    public function delete($id_planning){
+    public function delete($id_planning, $admin){
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             if ($this->planningModel->deletePlanning($id_planning)){
                 flash('post_message', 'Votre planning a été supprimé!');
-                if ($_SESSION['edit_on_admin'] == true){
+                if ($admin == 1){
                     redirect('plannings/admin');
                 }else{
                     redirect('plannings/dashboard');
@@ -341,7 +345,7 @@ class Plannings extends Controller{
                 die("error deleting");
             }
         } else {
-            if ($_SESSION['edit_on_admin'] == true){
+            if ($admin == 1){
                 redirect('plannings/admin');
             }else{
                 redirect('plannings/dashboard');

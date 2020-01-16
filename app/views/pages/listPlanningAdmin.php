@@ -19,20 +19,13 @@ for ($x = 1; $x <= 3; $x++) {
 <!--endregion-->
 
 <!--region Calendar-->
-<div class="container">
+<div class="">
     <div class="header header-dark bg-primary pb-6 content__title content__title--calendar">
         <div class="container-fluid">
             <div class="header-body">
                 <div class="row align-items-center py-4">
                     <div class="col-lg-6">
                         <h6 class="fullcalendar-title h2 text-white d-inline-block mb-0">Full calendar</h6>
-                        <nav aria-label="breadcrumb" class="d-none d-lg-inline-block ml-lg-4">
-                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Calendar</li>
-                            </ol>
-                        </nav>
                     </div>
                     <div class="col-lg-6 mt-3 mt-lg-0 text-lg-right">
                         <a href="#" class="fullcalendar-btn-prev btn btn-sm btn-neutral">
@@ -41,16 +34,17 @@ for ($x = 1; $x <= 3; $x++) {
                         <a href="#" class="fullcalendar-btn-next btn btn-sm btn-neutral">
                             <i class="fas fa-angle-right"></i>
                         </a>
-                        <a href="#" class="btn btn-sm btn-neutral" data-calendar-view="month">Month</a>
-                        <a href="#" class="btn btn-sm btn-neutral" data-calendar-view="basicWeek">Week</a>
-                        <a href="#" class="btn btn-sm btn-neutral" data-calendar-view="basicDay">Day</a>
+                        <a href="#" class="btn btn-sm btn-neutral" data-calendar-view="month">Mois</a>
+                        <a href="#" class="btn btn-sm btn-neutral" data-calendar-view="basicWeek">Semaines</a>
+                        <a href="#" class="btn btn-sm btn-neutral d-none d-sm-inline" data-calendar-view="basicDay">Jour</a>
+                        <a href="#" class="btn btn-sm btn-neutral" data-calendar-view="today">Ajourd'hui</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Page content -->
-    <div class="container-fluid mt--6">
+    <div class="mt--6">
         <div class="row">
             <div class="col">
                 <!-- Fullcalendar -->
@@ -58,7 +52,7 @@ for ($x = 1; $x <= 3; $x++) {
                     <!-- Card header -->
                     <div class="card-header">
                         <!-- Title -->
-                        <h5 class="h3 mb-0">Calendar</h5>
+                        <h5 class="h3 mb-0">Disponibilités</h5>
                     </div>
                     <!-- Card body -->
                     <div class="card-body p-0">
@@ -147,32 +141,6 @@ for ($x = 1; $x <= 3; $x++) {
                 </div>
             </div>
         </div>
-        <!-- Footer -->
-        <footer class="footer pt-0">
-            <div class="row align-items-center justify-content-lg-between">
-                <div class="col-lg-6">
-                    <div class="copyright text-center text-lg-left text-muted">
-                        &copy; 2019 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com/license" class="nav-link" target="_blank">License</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </footer>
     </div>
 </div>
 <!--endregion-->

@@ -9,7 +9,7 @@
 ?>
 
 <!-- Jumbotron -->
-<div class="jumbotron text-center col-12 redGradient">
+<div class="jumbotron text-center redGradient">
     <h1 class="display-2" style="color: white">Mode Admin</h1>
     <p class="lead" style="color: white">Vous pouvez accepter, refuser ou modifier un planning.
         Un email sera envoyé à l'utilisateur une fois qu'une de ces actions sera effectuée.</p>

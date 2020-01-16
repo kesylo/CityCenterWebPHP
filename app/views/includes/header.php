@@ -11,15 +11,11 @@
 
     <!-- Theme -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/bootstrap.min.css">
-    <!--<link href="<?php /*echo URLROOT; */?>/css/all.min.css" rel="stylesheet" type="text/css">-->
     <link href="<?php echo URLROOT; ?>/css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/ionicons.min.css">
 
     <!-- Favicon -->
     <link href="<?php echo URLROOT; ?>/images/favicon.png" rel="icon" type="image/png">
-
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 
     <!-- Icons -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/assets/vendor/nucleo/css/nucleo.css" type="text/css">
@@ -39,11 +35,6 @@
 
     <script src="<?php echo URLROOT; ?>/assets/vendor/fullcalendar/dist/fullcalendar.min.js"></script>
     <script src="<?php echo URLROOT; ?>/assets/vendor/fullcalendar/dist/locale/fr.js"></script>
-
-
-
-
-
 
 </head>
 

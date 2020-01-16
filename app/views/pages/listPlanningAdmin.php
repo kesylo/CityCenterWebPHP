@@ -64,7 +64,7 @@ if (sizeof($data['plannings']) > 0) :
                            class="btn btn-primary pull-right ml-2">
                             <i class="fa fa-edit"></i>
                             <!--change global var to know where we nav from-->
-                            <?php $_COOKIE['edit_on_admin'] = true; ?>
+                            <?php $_SESSION['edit_on_admin'] = true; ?>
                         </a>
 
 

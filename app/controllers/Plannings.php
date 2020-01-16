@@ -67,7 +67,7 @@ class Plannings extends Controller{
                 if ($this->planningModel->updatePlanning($data)){
                     // show flash message
                     flash('planning_message', "Votre planning a été Modifié!");
-                    if ($_COOKIE['edit_on_admin'] == true){
+                    if ($_SESSION['edit_on_admin'] == true){
                         redirect('plannings/admin');
                     }else{
                         redirect('plannings/dashboard');
@@ -85,9 +85,9 @@ class Plannings extends Controller{
             // fectch planning
             $planning = $this->planningModel->getPlanningById($id_planning);
 
-            if ($planning->id_user != $_SESSION['id']){
+            /*if ($planning->id_user != $_SESSION['id']){
                 redirect('plannings');
-            }
+            }*/
 
             $data = [
                 'id_planning' => $id_planning,

@@ -72,6 +72,20 @@ $(function () {
 
 
 
+    /* For bulk add */
+    $('#dateWeekBulk').datetimepicker({
+        format: 'DD-MM-YYYY',
+        daysOfWeekDisabled:[0,2,3,4,5,6],
+    });
+    $('#dateDispBulk').datetimepicker({
+        format: 'DD-MM-YYYY',
+        useCurrent: false,
+    });
+    $("#dateWeekBulk").on("change.datetimepicker", function (e) {
+        $('#dateDispBulk').datetimepicker('minDate', e.date,);
+        $('#dateDispBulk').datetimepicker('date', moment(e.date, 'DD-MM-YYYY'));
+    });
+
 });
 
 

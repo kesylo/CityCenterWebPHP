@@ -41,6 +41,7 @@ class User
         }
     }
 
+
     /*public function login($email, $password){
         $this->db->query('SELECT * FROM employees WHERE email = :email and password = :password');
         $this->db->bind(':email', $email);

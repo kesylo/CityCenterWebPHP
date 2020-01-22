@@ -6,6 +6,7 @@ require 'vendor/autoload.php';
 include APPROOT . "/views/session.php";
 
 class Plannings extends Controller{
+    private $planningModel;
 
 
     /**
@@ -214,9 +215,6 @@ class Plannings extends Controller{
             flashError('planning_message', "Désolé vous ne pouvez pas passer en mode administrateur!");
         }
 
-
-
-
     }
 
     public function add(){
@@ -275,6 +273,55 @@ class Plannings extends Controller{
             $this->view('plannings/add', $data);
         }
     }
+
+    public function bulkAdd(){
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'id' => $_SESSION['id'],
+                'week' => trim($_POST['week']),
+                'date' => trim($_POST['date']),
+                'startTime' => trim($_POST['startTime']),
+                'endTime' => '',
+                'status' => 'En attente',
+                'callRedirect' => trim($_POST['callRedirect']),
+                'timeStart_err' => '',
+                'timeEnd_err' => '',
+                'date_err' => '',
+            ];
+
+            // validate
+            if (empty($data['startTime'])){
+                $data['timeStart_err'] = 'Entrez une heure de debut';
+            }
+            if (empty($data['date'])){
+                $data['date_err'] = 'Entrez une date';
+            }
+
+            if (empty($data['timeStart_err']) && empty($data['timeEnd_err']) && empty($data['date_err'])){
+                // validated
+                if ($this->planningModel->bulkAdd($data)){
+                    // show flash message
+                    flash('planning_message', "Votre Extra a été ajouté!");
+                    redirect('plannings/dashboard');
+                }else{
+                    die('errr');
+                }
+            }else{
+                $this->view('plannings/bulkAdd', $data);
+            }
+
+
+        }else{
+
+            $users = $this->planningModel->getUserNameAndID();
+
+            $this->view('plannings/bulkAdd', $users);
+        }
+    }
+
 
     public function addExtra(){
 

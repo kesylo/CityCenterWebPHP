@@ -42,16 +42,10 @@ flash("planning_message");
         </div>
     </div>
 
-    <div class="radio-group text-center mt-2">
-        <label class="radio">
-            <input type="radio" id="radiowaiting1" name="radioWaiting" checked value="Oui"> Tout
-            <span></span>
-        </label>
-        <label class="radio">
-            <input type="radio" id="radiowaiting2" name="radioWaiting" value="Non"> En attente
-            <span></span>
-        </label>
-    </div>
+    <!-- Add bulk planning btn -->
+    <a href="<?php echo URLROOT; ?>/plannings/bulkAdd" class="btn btn-dark pull-right mt-3 mt-md-0 ">
+        <i class="fa fa-plus"></i> Ajouter plusieurs disponibilités
+    </a>
 
 </div>
 

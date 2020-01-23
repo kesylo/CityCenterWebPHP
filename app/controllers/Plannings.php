@@ -276,16 +276,18 @@ class Plannings extends Controller{
 
     public function bulkAdd(){
 
+        $users = $this->planningModel->getUserNameAndID();
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'id' => $_SESSION['id'],
+                'names' => trim($_POST['idBulk']),
                 'week' => trim($_POST['week']),
                 'date' => trim($_POST['date']),
                 'startTime' => trim($_POST['startTime']),
-                'endTime' => '',
-                'status' => 'En attente',
+                'endTime' => trim($_POST['endTime']),
+                'status' => 'Accepté',
                 'callRedirect' => trim($_POST['callRedirect']),
                 'timeStart_err' => '',
                 'timeEnd_err' => '',
@@ -296,29 +298,46 @@ class Plannings extends Controller{
             if (empty($data['startTime'])){
                 $data['timeStart_err'] = 'Entrez une heure de debut';
             }
+            if (empty($data['endTime'])){
+                $data['timeEnd_err'] = 'Entrez une heure de fin';
+            }
             if (empty($data['date'])){
                 $data['date_err'] = 'Entrez une date';
             }
 
             if (empty($data['timeStart_err']) && empty($data['timeEnd_err']) && empty($data['date_err'])){
+
+                // get ID by name
+                $selectText = $data['names'];
+                foreach ($users as $user) {
+
+                    if (preg_match("/$user->firstName/", $selectText) == true ||
+                        preg_match("/$user->lastName/", $selectText) == true)
+                    {
+                        //echo ($user->id);
+                        $data['names'] = $user->id;
+                    }
+                }
+
                 // validated
                 if ($this->planningModel->bulkAdd($data)){
                     // show flash message
-                    flash('planning_message', "Votre Extra a été ajouté!");
-                    redirect('plannings/dashboard');
+                    flash('planning_message', "Votre disponibilité a été ajoutée!");
+                    redirect('plannings/bulkAdd');
                 }else{
                     die('errr');
                 }
             }else{
-                $this->view('plannings/bulkAdd', $data);
+                $this->viewBulk('plannings/bulkAdd', $data, $users);
             }
 
 
         }else{
-
-            $users = $this->planningModel->getUserNameAndID();
-
-            $this->view('plannings/bulkAdd', $users);
+            $data = [
+                'week' => '',
+                'date' => '',
+            ];
+            $this->viewBulk('plannings/bulkAdd', $data, $users);
         }
     }
 

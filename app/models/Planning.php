@@ -78,7 +78,7 @@ class Planning{
                              VALUES (:id, :weekday, :workdate, :startTime, :endTime, :requeststatus, :callRedirect )');
 
         // bind values
-        $this->db->bind(':id', $data['id']);
+        $this->db->bind(':id', $data['names']);
         $this->db->bind(':weekday', $data['week']);
         $this->db->bind(':workdate', $data['date']);
         $this->db->bind(':startTime', $data['startTime']);

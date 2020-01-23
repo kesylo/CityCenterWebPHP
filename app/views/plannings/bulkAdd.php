@@ -1,7 +1,8 @@
 <!--add header-->
-<?php require APPROOT . '/views/includes/header.php';
-print_r($users);
-sort($data);
+<?php
+require APPROOT . '/views/includes/header.php';
+flash("planning_message");
+sort($users);
 ?>
 
 
@@ -16,16 +17,18 @@ sort($data);
 
 
                 <div class="col-md-7 mx-auto">
-                    <form action="<?php echo URLROOT; ?>/plannings/add" method="post">
+                    <form action="<?php echo URLROOT; ?>/plannings/bulkAdd" method="post">
 
 
                         <div class="form-group">
 
                             Utilisateur :
                             <div class="input-group">
-                                <select class="form-control">
-                                    <?php foreach ($data as $user) : ?>
-                                        <option><?php echo $user->firstName . " " . $user->lastName ?></option>
+                                <select class="form-control" name="idBulk">
+                                    <?php foreach ($users as $user) : ?>
+                                        <option>
+                                            <?php echo $user->firstName . " " . $user->lastName ?>
+                                        </option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -33,7 +36,7 @@ sort($data);
                             <hr>
 
                             Semaine du :
-                            <div class="input-group date" id="dateWeekBulk" data-target-input="nearest">
+                            <div class="input-group" id="dateWeekBulk" data-target-input="nearest">
                                 <input type="text" name="week" class="form-control datetimepicker-input"
                                        data-target="#dateWeekBulk" value="<?php echo $data['week']; ?>"
                                        onkeydown="return false;"
@@ -44,7 +47,7 @@ sort($data);
                             </div>
 
                             Date :
-                            <div class="input-group date" id="dateDispBulk" data-target-input="nearest">
+                            <div class="input-group" id="dateDispBulk" data-target-input="nearest">
                                 <input type="text" name="date"
                                        class="form-control datetimepicker-input <?php echo (!empty($data['date_err'])) ? 'is-invalid' : ''; ?>"
                                        data-target="#dateDispBulk" value="<?php echo $data['date']; ?>"
@@ -56,7 +59,7 @@ sort($data);
                             </div>
 
                             Heure de début:
-                            <div class="input-group date" id="timeStart" data-target-input="nearest">
+                            <div class="input-group" id="timeStart" data-target-input="nearest">
                                 <input type="text" name="startTime" data-target="#timeStart"
                                        class="form-control datetimepicker-input <?php echo (!empty($data['timeStart_err'])) ? 'is-invalid' : ''; ?>"
                                        value="<?php echo $data['startTime']; ?>"
@@ -68,7 +71,7 @@ sort($data);
                             </div>
 
                             Heure de fin:
-                            <div class="input-group date" id="timeEnd" data-target-input="nearest">
+                            <div class="input-group" id="timeEnd" data-target-input="nearest">
                                 <input type="text" name="endTime" data-target="#timeEnd"
                                        class="form-control datetimepicker-input <?php echo (!empty($data['timeEnd_err'])) ? 'is-invalid' : ''; ?>"
                                        value="<?php echo $data['endTime']; ?>"
@@ -98,8 +101,9 @@ sort($data);
                         <hr>
 
                         <div class="text-center">
-                            <a href="<?php echo URLROOT; ?>/plannings/dashboard"
+                            <a href="<?php echo URLROOT; ?>/plannings/admin"
                                class="btn btn-secondary mr-5">Retour</a>
+
                             <input type="submit" value="Ajouter" class="btn btn-warning">
                         </div>
 

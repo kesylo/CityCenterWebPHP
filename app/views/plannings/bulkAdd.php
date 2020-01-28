@@ -36,24 +36,24 @@ sort($users);
                             <hr>
 
                             Semaine du :
-                            <div class="input-group" id="dateWeekBulk" data-target-input="nearest">
+                            <div class="input-group" id="weekDatePickerBulk" data-target-input="nearest">
                                 <input type="text" name="week" class="form-control datetimepicker-input"
-                                       data-target="#dateWeekBulk" value="<?php echo $data['week']; ?>"
+                                       data-target="#weekDatePickerBulk" value="<?php echo $data['week']; ?>"
                                        onkeydown="return false;"
                                 />
-                                <div class="input-group-append" data-target="#dateWeekBulk" data-toggle="datetimepicker">
+                                <div class="input-group-append" data-target="#weekDatePickerBulk" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
                             </div>
 
                             Date :
-                            <div class="input-group" id="dateDispBulk" data-target-input="nearest">
+                            <div class="input-group" id="dayDatePickerBulk" data-target-input="nearest">
                                 <input type="text" name="date"
                                        class="form-control datetimepicker-input <?php echo (!empty($data['date_err'])) ? 'is-invalid' : ''; ?>"
-                                       data-target="#dateDispBulk" value="<?php echo $data['date']; ?>"
+                                       data-target="#dayDatePickerBulk" value="<?php echo $data['date']; ?>"
                                        onkeydown="return false;"
                                 />
-                                <div class="input-group-append" data-target="#dateDispBulk" data-toggle="datetimepicker">
+                                <div class="input-group-append" data-target="#dayDatePickerBulk" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
                             </div>

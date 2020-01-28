@@ -16,9 +16,9 @@ define('URLROOT', 'https://aparthomes.be/public');*/
 // Development Settings
 
 define('DB_HOST', 'localhost');
-define('DB_USER', 'userloic');
-define('DB_PASS', 'Ph03n1x.lo1c');
-define('DB_NAME', 'cityappdberp');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_NAME', 'db2gy8y9y58had');
 
 // url root
 define('URLROOT', 'http://localhost/public');

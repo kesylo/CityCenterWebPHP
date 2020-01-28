@@ -27,9 +27,9 @@
     <div class="w-100"></div>
 
     <div class="col-12 col-md-4 col-lg-3 mb-3">
-        <div class="input-group date" id="dateWeekDash" data-target-input="nearest">
-            <input type="text" name="week" class="form-control datetimepicker-input" data-target="#dateWeekDash" />
-            <div class="input-group-append" data-target="#dateWeekDash" data-toggle="datetimepicker">
+        <div class="input-group date" id="weekDatePicker" data-target-input="nearest">
+            <input type="text" name="week" class="form-control datetimepicker-input" data-target="#weekDatePicker" />
+            <div class="input-group-append" data-target="#weekDatePicker" data-toggle="datetimepicker">
                 <div class="input-group-text">
                     <i class="fa fa-calendar"></i>
                 </div>

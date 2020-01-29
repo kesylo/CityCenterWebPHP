@@ -93,6 +93,7 @@ $(function () {
 
     $("#weekDatePickerBulk").on("change.datetimepicker", function (e) {
         let current = e.date.clone();
+        let current2 = e.date.clone();
 
         $('#dayDatePickerBulk').datetimepicker("destroy");
         $('#dayDatePickerBulk').datetimepicker({
@@ -106,6 +107,11 @@ $(function () {
                 week: { dow: 1 }
             }),
         });
+
+        // set globally
+        let strDate = moment(current2).format('DD-MM-YYYY');
+        createCookieDate(strDate);
+        reload();
     });
     //endregion
 

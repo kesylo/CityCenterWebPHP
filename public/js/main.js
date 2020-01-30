@@ -129,11 +129,21 @@ $(function () {
     });
     //endregion
 
+    // combobox change event
+    $('#dropDownBulk').change(function(){
+        //console.log("selected " + $("#dropDownBulk").prop('selectedIndex'));
+        createCookie("idSelectedUser", $("#dropDownBulk").prop('selectedIndex'));
+    });
+
 });
 
 
 function createCookieDate(strDate) {
     document.cookie = "nextWeekDate" + "=" + strDate;
+}
+
+function createCookie (varName, value) {
+    document.cookie = varName + "=" + value;
 }
 
 function reload(){
@@ -160,4 +170,5 @@ function getNextWeekDate(){
 
 $(window).bind('beforeunload',function(){
     createCookieDate(getNextWeekDate());
+    createCookie("idSelectedUser", $("#dropDownBulk").prop('selectedIndex'));
 });

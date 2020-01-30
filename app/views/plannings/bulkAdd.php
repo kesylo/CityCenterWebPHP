@@ -1,8 +1,11 @@
 <!--add header-->
 <?php
 require APPROOT . '/views/includes/header.php';
+require APPROOT . '/helpers/variables.php';
 flash("planning_message");
 sort($users);
+
+
 ?>
 
 
@@ -24,10 +27,10 @@ sort($users);
 
                             Utilisateur :
                             <div class="input-group">
-                                <select class="form-control" name="idBulk">
-                                    <?php foreach ($users as $user) : ?>
-                                        <option>
-                                            <?php echo $user->firstName . " " . $user->lastName ?>
+                                <select class="form-control" name="idBulk" id="dropDownBulk">
+                                    <?php foreach ($users as $key => $user) : ?>
+                                        <option <?php echo $_COOKIE["idSelectedUser"] == $key ? "selected" : "" ?>>
+                                            <?php echo $user->firstName . " " . $user->lastName?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
@@ -104,7 +107,11 @@ sort($users);
                             <a href="<?php echo URLROOT; ?>/plannings/admin"
                                class="btn btn-secondary mr-5">Retour</a>
 
-                            <input type="submit" value="Ajouter" class="btn btn-warning">
+                            <!--<input type="submit" value="Ajouter" class="btn btn-warning">-->
+
+                            <button type="submit" class="btn btn-warning">
+                                Ajouter
+                            </button>
                         </div>
 
                     </form>

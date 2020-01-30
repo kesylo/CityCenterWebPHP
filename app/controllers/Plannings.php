@@ -4,6 +4,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 include APPROOT . "/views/session.php";
+include APPROOT . "/helpers/variables.php";
 
 class Plannings extends Controller{
     private $planningModel;
@@ -287,7 +288,7 @@ class Plannings extends Controller{
                 'date' => trim($_POST['date']),
                 'startTime' => trim($_POST['startTime']),
                 'endTime' => trim($_POST['endTime']),
-                'status' => 'Accepté',
+                'status' => 'En attente',
                 'callRedirect' => trim($_POST['callRedirect']),
                 'timeStart_err' => '',
                 'timeEnd_err' => '',
@@ -322,8 +323,9 @@ class Plannings extends Controller{
                 // validated
                 if ($this->planningModel->bulkAdd($data)){
                     // show flash message
-                    flash('planning_message', "Votre disponibilité a été ajoutée!");
+                    flash('planning_message', "La disponibilité de " . strtoupper($selectText) . " a été ajoutée!");
                     redirect('plannings/bulkAdd');
+                    //$this->viewBulk('plannings/bulkAdd', $data, $users);
                 }else{
                     die('errr');
                 }

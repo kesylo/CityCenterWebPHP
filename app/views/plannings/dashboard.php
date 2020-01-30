@@ -43,7 +43,7 @@
         </a>
 
         <a href="<?php echo URLROOT; ?>/plannings/add" class="btn btn-success pull-right">
-            <i class="fa fa-plus"></i> Ajouter un planning
+            <i class="fa fa-plus"></i> Ajouter une disponibilité
         </a>
     </div>
 

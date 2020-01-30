@@ -1,3 +1,0 @@
-<?php
-
-    $selectedOption = 14;

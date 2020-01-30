@@ -1,7 +1,6 @@
 <!--add header-->
 <?php
 require APPROOT . '/views/includes/header.php';
-require APPROOT . '/helpers/variables.php';
 flash("planning_message");
 sort($users);
 

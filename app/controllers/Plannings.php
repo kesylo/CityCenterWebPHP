@@ -4,7 +4,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 include APPROOT . "/views/session.php";
-include APPROOT . "/helpers/variables.php";
 
 class Plannings extends Controller{
     private $planningModel;

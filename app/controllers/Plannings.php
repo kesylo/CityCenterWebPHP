@@ -287,6 +287,7 @@ class Plannings extends Controller{
                 'date' => trim($_POST['date']),
                 'startTime' => trim($_POST['startTime']),
                 'endTime' => trim($_POST['endTime']),
+                'details' => trim($_POST['details']),
                 'status' => 'En attente',
                 'callRedirect' => trim($_POST['callRedirect']),
                 'timeStart_err' => '',

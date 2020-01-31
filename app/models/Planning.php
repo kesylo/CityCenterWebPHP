@@ -74,8 +74,8 @@ class Planning{
     }
 
     public function bulkAdd ($data){
-        $this->db->query('INSERT INTO planning (id_user, week, date, startTime, endTime, status, callRedirect)
-                             VALUES (:id, :weekday, :workdate, :startTime, :endTime, :requeststatus, :callRedirect )');
+        $this->db->query('INSERT INTO planning (id_user, week, date, startTime, endTime, status, callRedirect, comment)
+                             VALUES (:id, :weekday, :workdate, :startTime, :endTime, :requeststatus, :callRedirect, :details )');
 
         // bind values
         $this->db->bind(':id', $data['names']);
@@ -85,6 +85,7 @@ class Planning{
         $this->db->bind(':endTime', $data['endTime']);
         $this->db->bind(':requeststatus', $data['status']);
         $this->db->bind(':callRedirect', $data['callRedirect']);
+        $this->db->bind(':details', $data['details']);
 
         // run
         if ($this->db->execute()){

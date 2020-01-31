@@ -84,6 +84,14 @@ sort($users);
                                 </div>
                             </div>
 
+                            Description:
+                            <div class="form-group" id="details" data-target-input="nearest">
+                                <textarea name="details" rows="3" class="form-control">
+
+                                </textarea>
+
+                            </div>
+
 
                         </div>
 

@@ -34,4 +34,4 @@ define('SITENAME', 'City Apartments');
 
 
 // app version
-define('APPVERSION', '1.0.0');
+define('APPVERSION', '3.1.0');

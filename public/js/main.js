@@ -118,13 +118,13 @@ $(function () {
     //region TimePickers
     $('#timeStart').datetimepicker({
         format: 'HH:mm',
-        stepping: 25,
+        stepping: 15,
         forceMinuteStep: true,
     });
 
     $('#timeEnd').datetimepicker({
         format: 'HH:mm',
-        stepping: 25,
+        stepping: 15,
         forceMinuteStep: true,
     });
     //endregion
@@ -134,6 +134,12 @@ $(function () {
         //console.log("selected " + $("#dropDownBulk").prop('selectedIndex'));
         createCookie("idSelectedUser", $("#dropDownBulk").prop('selectedIndex'));
     });
+
+    /*// cleave.js
+    new Cleave('.timePicker', {
+        time: true,
+        timePattern: ['h', 'm']
+    });*/
 
 });
 

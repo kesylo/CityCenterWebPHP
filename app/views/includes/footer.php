@@ -18,6 +18,7 @@
 <script src="<?php echo URLROOT; ?>/js/jquery-ui.min.js"></script>
 <script src="<?php echo URLROOT; ?>/js/jquery-3.4.1.min.js"></script>
 <script src="<?php echo URLROOT; ?>/js/main.js"></script>
+<!--<script src="<?php /*echo URLROOT; */?>/js/cleave.min.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo URLROOT; ?>/js/moment.js"></script>

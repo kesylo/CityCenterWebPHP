@@ -176,17 +176,13 @@ class Plannings extends Controller{
 
     public function admin(){
 
-        //if ($_SESSION['waiting'] == 'all'){
-        //}
-
         if (isset($_SESSION['id']) && $_SESSION['role'] > 3){
 
             $plannings = $this->planningModel->getAllUsersPlannings($_COOKIE["nextWeekDate"]);
+            $usersList = $this->planningModel->getAllActiveUsers();
 
-            $ids = array();
+            /*$ids = array();
             $users = array();
-            $names = array();
-            $emails = array();
 
             // store all user ids who created a planning
             foreach ($plannings as $key=>$pl){
@@ -194,19 +190,16 @@ class Plannings extends Controller{
             }
 
             // remove duplicates
-            $uniqueIds = array_unique($ids);
+            //$uniqueIds = array_unique($ids);
 
             // trim names only and store
-            foreach ($uniqueIds as $key=>$id){
-                $users[$uniqueIds[$key]] = $this->planningModel->getUserById($uniqueIds[$key]);
-                $names[$uniqueIds[$key]] = $users[$uniqueIds[$key]]->firstName . ' ' . $users[$uniqueIds[$key]]->lastName;
-                $emails[$uniqueIds[$key]] = $users[$uniqueIds[$key]]->email;
-            }
+            foreach ($usersList as $key=>$id){
+                $names[$key] = $usersList[$key]->firstName . ' ' . $usersList[$key]->lastName;
+            }*/
 
             $data = [
                 'plannings' => $plannings,
-                'unique' => $names,
-                'emails' => $emails,
+                'users' => $usersList,
             ];
 
             $this->view('plannings/admin', $data);
@@ -214,6 +207,7 @@ class Plannings extends Controller{
             redirect('plannings/dashboard');
             flashError('planning_message', "Désolé vous ne pouvez pas passer en mode administrateur!");
         }
+
 
     }
 

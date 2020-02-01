@@ -12,7 +12,7 @@ flash("planning_message");
 
 <div class="row">
     <div class="jumbotron text-center col-12 redGradient">
-        <h1 class="display-4" style="color: white">Mode Admin</h1>
+        <h1 class="display-6" style="color: white">Mode Admin</h1>
         <p class="lead" style="color: white">Vous pouvez accepter, refuser ou modifier un planning. un email sera envoyé à l'utilisateur une fois qu'une de ces actions sera effectuée.  </p>
     </div>
 </div>
@@ -44,14 +44,12 @@ flash("planning_message");
 
 </div>
 
-<div>
-    <hr >
-</div>
+<hr >
 
-<div class="row">
-    <div id="card-reload" class="col-12">
-        <?php require APPROOT . '/views/pages/listPlanningAdmin.php'; ?>
-    </div>
+
+
+<div id="card-reload">
+    <?php require APPROOT . '/views/pages/listPlanningAdmin.php'; ?>
 </div>
 
 <!--add footer-->

@@ -95,6 +95,13 @@ class Planning{
         }
     }
 
+    public function getAllActiveUsers(){
+        $this->db->query('SELECT * FROM employees WHERE outService IS NULL');
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
+
     public function getPlanningById ($idPlanning){
         $this->db->query('SELECT * FROM planning WHERE id_planning = :id_planning');
         $this->db->bind(':id_planning', $idPlanning);
@@ -120,6 +127,8 @@ class Planning{
 
         return $results;
     }
+
+
 
 
     public function updatePlanning($data){

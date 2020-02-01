@@ -129,6 +129,25 @@ $(function () {
     });
     //endregion
 
+    //region Admin Datepicker
+
+    $('#weekDatePickerAdmin').datetimepicker({
+        format: 'DD-MM-YYYY',
+        date : moment(moment().startOf('isoWeek').add(1, 'week'), 'DD-MM-YYYY'),
+        daysOfWeekDisabled:[0,2,3,4,5,6],
+        locale:  moment.locale('fr', {
+            week: { dow: 1 }
+        }),
+    });
+
+    $("#weekDatePickerAdmin").on("change.datetimepicker", function (e) {
+        // set globally
+        let strDate = moment(e.date).format('DD-MM-YYYY');
+        createCookieDate(strDate);
+        reload();
+    });
+    //endregion
+
     // combobox change event
     $('#dropDownBulk').change(function(){
         //console.log("selected " + $("#dropDownBulk").prop('selectedIndex'));

@@ -50,9 +50,9 @@ function displayUserPlanning($id, $data, $choice)
 
     return $values;
 }
-
 ?>
 
+<!-- table Heading -->
 <div class="card" style="max-height: 50px; overflow: auto; display: block;">
     <div class="table-responsive" >
         <table class="table table-bordered table-hover ">
@@ -100,9 +100,7 @@ function displayUserPlanning($id, $data, $choice)
 
 <div class="card" style="max-height: 600px; overflow: auto; display: block;">
     <div class="table-responsive" >
-        <table class="table table-bordered table-hover ">
-
-
+        <table class="table table-bordered">
             <tbody>
 
             <?php
@@ -140,10 +138,10 @@ function displayUserPlanning($id, $data, $choice)
                     <td class="align-middle" style="width: 11.14%">
                         <?php
                         $days = displayUserPlanning($user->id, $data, "Mon");
-                        foreach ($days as $d) {
-                            echo $d . "<br>";
-                        }
-                        ?>
+                        foreach ($days as $d) : ?>
+                            <a class="card-link" href=""><?php echo $d?></a>
+                            <br>
+                        <?php endforeach; ?>
                     </td>
 
                     <!-- Show users plannings Tuesday -->

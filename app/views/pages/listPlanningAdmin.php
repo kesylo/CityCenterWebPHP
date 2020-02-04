@@ -26,7 +26,13 @@ function displayUserPlanning($id, $data, $choice)
 
                 if ($choice == $monday) {
                     if ($nameOfDay == $monday) {
-                        array_push($values, $planning->startTime . " - " . $planning->endTime);
+                        $values = array(
+                                "mon" => array(
+                                        "time" => $planning->startTime . " - " . $planning->endTime,
+                                        "status" => $planning->status,
+                                        "id" => $planning->id_planning
+                                )
+                        );
                     }
                 }
 
@@ -139,7 +145,12 @@ function displayUserPlanning($id, $data, $choice)
                         <?php
                         $days = displayUserPlanning($user->id, $data, "Mon");
                         foreach ($days as $d) : ?>
-                            <a class="card-link" href=""><?php echo $d?></a>
+                            <a class="card-link <?php echo
+                                    $d["status"] == "Accepté" ? ("text-success") :
+                                    ($d["status"] == "Refusé" ? ("text-danger") : ("")) ?>"
+                                    href="<?php echo URLROOT; ?>/plannings/edit/<?php echo $d["id"]; ?>/1">
+                                <?php echo $d["time"]?>
+                            </a>
                             <br>
                         <?php endforeach; ?>
                     </td>

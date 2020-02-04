@@ -47,6 +47,10 @@ header,
     background: linear-gradient(to right, #cb356b, #bd3f32);
 }
 
+.infoGradient{
+    background: linear-gradient(to right, #4bb5cb, #488fbd);
+}
+
 .radio span:after{
     content: "";
     height: 8px;

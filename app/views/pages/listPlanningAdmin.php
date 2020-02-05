@@ -54,6 +54,7 @@ function displayUserPlanning($id, $data, $choice)
         }
     }
 
+
     return $values;
 }
 ?>
@@ -104,6 +105,8 @@ function displayUserPlanning($id, $data, $choice)
     </div>
 </div>
 
+
+
 <div class="card" style="max-height: 600px; overflow: auto; display: block;">
     <div class="table-responsive" >
         <table class="table table-bordered">
@@ -115,8 +118,12 @@ function displayUserPlanning($id, $data, $choice)
                 <tr>
                     <!-- Show users names-->
                     <th class="align-middle" scope="row" style="width: 15%">
-                        <?php echo strtoupper($user->firstName) . " "
-                            . ucfirst(mb_strtolower($user->lastName, 'UTF-8')) ?>
+                        <?php
+                            $name = strtoupper($user->firstName) . " "
+                            . ucfirst(mb_strtolower($user->lastName, 'UTF-8'));
+
+                            echo $name;
+                        ?>
                     </th>
 
                     <!-- Show users dept-->
@@ -145,13 +152,9 @@ function displayUserPlanning($id, $data, $choice)
                         <?php
                         $days = displayUserPlanning($user->id, $data, "Mon");
                         foreach ($days as $d) : ?>
-                            <a class="card-link <?php echo
-                                    $d["status"] == "Accepté" ? ("text-success") :
-                                    ($d["status"] == "Refusé" ? ("text-danger") : ("")) ?>"
-                                    href="<?php echo URLROOT; ?>/plannings/edit/<?php echo $d["id"]; ?>/1">
-                                <?php echo $d["time"]?>
-                            </a>
-                            <br>
+
+                            <?php require APPROOT . '/views/includes/modal.php'; ?>
+
                         <?php endforeach; ?>
                     </td>
 
@@ -187,4 +190,36 @@ function displayUserPlanning($id, $data, $choice)
         </table>
     </div>
 </div>
+
+
+
+
+
+<script>
+
+
+    /*$(document).ready(function(){
+
+        $(document).on('click', '.view_data', function()
+        {
+            // get data
+            let id_planning = $(this).attr('id');
+
+            console.log("fdsfd    " + id_planning);
+
+            // run query to find plannings from id
+            $.ajax({
+                url: "query.php",
+                method: "post",
+                data:{id_planning:id_planning}, // data to send
+                success:function (data) { // if success store data result
+                    // now print received data
+                    $('#planning_detail').html(data);
+                    $('#dataModal').modal("show");
+                }
+            });
+        });
+
+    });*/
+</script>
 

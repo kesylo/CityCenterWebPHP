@@ -11,12 +11,12 @@
 
 
 <!-- Bootstrap core JavaScript-->
-<script src="<?php echo URLROOT; ?>/js/jquery.min.js"></script>
+
+
 <script src="<?php echo URLROOT; ?>/js/bootstrap.bundle.min.js"></script>
-<script src="<?php echo URLROOT; ?>/js/jquery.easing.min.js"></script>
+
 <script src="<?php echo URLROOT; ?>/js/sb-admin-2.min.js"></script>
-<script src="<?php echo URLROOT; ?>/js/jquery-ui.min.js"></script>
-<script src="<?php echo URLROOT; ?>/js/jquery-3.4.1.min.js"></script>
+
 <script src="<?php echo URLROOT; ?>/js/main.js"></script>
 <!--<script src="<?php /*echo URLROOT; */?>/js/cleave.min.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>

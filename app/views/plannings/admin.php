@@ -44,7 +44,7 @@ flash("planning_message");
     </div>
 
     <div class="col-sm-7 col-md-5 col-lg-4 col-xl-3 text-center" >
-        <a href="<?php echo URLROOT; ?>/plannings/bulkAdd" class="btn btn-danger">
+        <a href="<?php echo URLROOT; ?>/plannings/bulkAdd" class="btn btn-info">
             <i class="fa fa-plus"></i> Plusieurs disponibilités
         </a>
     </div>

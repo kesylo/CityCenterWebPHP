@@ -304,10 +304,20 @@ class Plannings extends Controller{
 
                 // get ID by name
                 $selectText = $data['names'];
-                foreach ($users as $user) {
 
-                    if (preg_match("/$user->firstName/", $selectText) == true ||
-                        preg_match("/$user->lastName/", $selectText) == true)
+                foreach ($users as $user) {
+                    $fullName = $user->firstName ." ". $user->lastName;
+                    /*if (preg_match("/$fullName/", $selectText) == true)
+                    {
+                        //echo ($user->id);
+                        $data['names'] = $user->id;
+                    }*/
+
+                    similar_text($fullName, $selectText, $similarity);
+
+                    //echo nl2br("string " . $fullName . " and ". $selectText . " similarity is ". $similarity . "\n");
+
+                    if ($similarity >= 85)
                     {
                         //echo ($user->id);
                         $data['names'] = $user->id;
@@ -319,7 +329,6 @@ class Plannings extends Controller{
                     // show flash message
                     flash('planning_message', "La disponibilité de " . strtoupper($selectText) . " a été ajoutée!");
                     redirect('plannings/bulkAdd');
-                    //$this->viewBulk('plannings/bulkAdd', $data, $users);
                 }else{
                     die('errr');
                 }

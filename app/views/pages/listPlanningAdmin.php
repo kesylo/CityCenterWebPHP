@@ -190,36 +190,3 @@ function displayUserPlanning($id, $data, $choice)
         </table>
     </div>
 </div>
-
-
-
-
-
-<script>
-
-
-    /*$(document).ready(function(){
-
-        $(document).on('click', '.view_data', function()
-        {
-            // get data
-            let id_planning = $(this).attr('id');
-
-            console.log("fdsfd    " + id_planning);
-
-            // run query to find plannings from id
-            $.ajax({
-                url: "query.php",
-                method: "post",
-                data:{id_planning:id_planning}, // data to send
-                success:function (data) { // if success store data result
-                    // now print received data
-                    $('#planning_detail').html(data);
-                    $('#dataModal').modal("show");
-                }
-            });
-        });
-
-    });*/
-</script>
-

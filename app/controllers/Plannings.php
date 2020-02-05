@@ -245,13 +245,20 @@ class Plannings extends Controller{
             }
 
             if (empty($data['timeStart_err']) && empty($data['timeEnd_err']) && empty($data['date_err'])){
-                // validated
-                if ($this->planningModel->addPlanning($data)){
-                    // show flash message
-                    flash('planning_message', "Votre planning a été ajouté!");
-                    redirect('plannings/dashboard');
+                if (preg_match("/\d{2}\-\d{2}-\d{4}/",$data["week"]) &&
+                    preg_match("/\d{2}\-\d{2}-\d{4}/",$data["date"])){
+                    // validated
+                    if ($this->planningModel->addPlanning($data)){
+                        // show flash message
+                        flash('planning_message', "Votre planning a été ajouté!");
+                        redirect('plannings/dashboard');
+                    }else{
+                        die('errr');
+                    }
                 }else{
-                    die('errr');
+                    flashError('planning_message',
+                        "Erreur lors de l'ajout. Les dates entrées ne sont pas au bon format");
+                    redirect('plannings/dashboard');
                 }
             }else{
                 $this->view('plannings/add', $data);
@@ -352,10 +359,6 @@ class Plannings extends Controller{
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            // covert dates to french
-            /*$week = UStoFRDate(trim($_POST['week']));
-            $date = UStoFRDate(trim($_POST['date']));*/
-
             $data = [
                 'id' => $_SESSION['id'],
                 'week' => trim($_POST['week']),
@@ -378,13 +381,20 @@ class Plannings extends Controller{
             }
 
             if (empty($data['timeStart_err']) && empty($data['timeEnd_err']) && empty($data['date_err'])){
-                // validated
-                if ($this->planningModel->addExtra($data)){
-                    // show flash message
-                    flash('planning_message', "Votre Extra a été ajouté!");
-                    redirect('plannings/dashboard');
+                if (preg_match("/\d{2}\-\d{2}-\d{4}/",$data["week"]) &&
+                    preg_match("/\d{2}\-\d{2}-\d{4}/",$data["date"])){
+                    // validated
+                    if ($this->planningModel->addExtra($data)){
+                        // show flash message
+                        flash('planning_message', "Votre Extra a été ajouté!");
+                        redirect('plannings/dashboard');
+                    }else{
+                        die('errr');
+                    }
                 }else{
-                    die('errr');
+                    flashError('planning_message',
+                        "Erreur lors de l'ajout. Les dates entrées ne sont pas au bon format");
+                    redirect('plannings/dashboard');
                 }
             }else{
                 $this->view('plannings/addExtra', $data);

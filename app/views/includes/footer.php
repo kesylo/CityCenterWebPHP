@@ -3,7 +3,7 @@
 
 <footer>
     <!-- Copyright -->
-    <div class="footer-copyright text-center font-weight-bold">© 2019 Copyright :
+    <div class="footer-copyright text-center font-weight-bold">&copy; <?php echo date("Y"); ?> Copyright :
         <a href="https://Brusselscitycenterapartments.com"> Brusselscitycenterapartments</a>
     </div>
 </footer>

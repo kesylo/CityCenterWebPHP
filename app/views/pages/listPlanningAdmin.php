@@ -30,7 +30,8 @@ function displayUserPlanning($id, $data, $choice)
                                 "mon" => array(
                                         "time" => $planning->startTime . " - " . $planning->endTime,
                                         "status" => $planning->status,
-                                        "id" => $planning->id_planning
+                                        "id" => $planning->id_planning,
+                                        "date" => $planning->date,
                                 )
                         );
                     }
@@ -38,13 +39,80 @@ function displayUserPlanning($id, $data, $choice)
 
                 if ($choice == $tuesday) {
                     if ($nameOfDay == $tuesday) {
-                        array_push($values, "TUE");
+                        $values = array(
+                            "tue" => array(
+                                "time" => $planning->startTime . " - " . $planning->endTime,
+                                "status" => $planning->status,
+                                "id" => $planning->id_planning,
+                                "date" => $planning->date,
+                            )
+                        );
                     }
                 }
 
                 if ($choice == $wednesday) {
                     if ($nameOfDay == $wednesday) {
-                        array_push($values, "WED");
+                        $values = array(
+                            "wed" => array(
+                                "time" => $planning->startTime . " - " . $planning->endTime,
+                                "status" => $planning->status,
+                                "id" => $planning->id_planning,
+                                "date" => $planning->date,
+                            )
+                        );
+                    }
+                }
+
+
+                if ($choice == $thursday) {
+                    if ($nameOfDay == $thursday) {
+                        $values = array(
+                            "thu" => array(
+                                "time" => $planning->startTime . " - " . $planning->endTime,
+                                "status" => $planning->status,
+                                "id" => $planning->id_planning,
+                                "date" => $planning->date,
+                            )
+                        );
+                    }
+                }
+
+                if ($choice == $friday) {
+                    if ($nameOfDay == $friday) {
+                        $values = array(
+                            "fri" => array(
+                                "time" => $planning->startTime . " - " . $planning->endTime,
+                                "status" => $planning->status,
+                                "id" => $planning->id_planning,
+                                "date" => $planning->date,
+                            )
+                        );
+                    }
+                }
+
+                if ($choice == $saturday) {
+                    if ($nameOfDay == $saturday) {
+                        $values = array(
+                            "sat" => array(
+                                "time" => $planning->startTime . " - " . $planning->endTime,
+                                "status" => $planning->status,
+                                "id" => $planning->id_planning,
+                                "date" => $planning->date,
+                            )
+                        );
+                    }
+                }
+
+                if ($choice == $sunday) {
+                    if ($nameOfDay == $sunday) {
+                        $values = array(
+                            "sun" => array(
+                                "time" => $planning->startTime . " - " . $planning->endTime,
+                                "status" => $planning->status,
+                                "id" => $planning->id_planning,
+                                "date" => $planning->date,
+                            )
+                        );
                     }
                 }
 
@@ -162,26 +230,67 @@ function displayUserPlanning($id, $data, $choice)
                     <td class="align-middle" style="width: 11.14%">
                         <?php
                         $days = displayUserPlanning($user->id, $data, "Tue");
-                        foreach ($days as $d) {
-                            echo $d . "<br>";
-                        }
-                        ?>
+                        foreach ($days as $d) : ?>
+
+                            <?php require APPROOT . '/views/includes/modal.php'; ?>
+
+                        <?php endforeach; ?>
                     </td>
 
                     <!-- Show users plannings Wednesday -->
                     <td class="align-middle" style="width: 11.14%">
                         <?php
                         $days = displayUserPlanning($user->id, $data, "Wed");
-                        foreach ($days as $d) {
-                            echo $d . "<br>";
-                        }
-                        ?>
+                        foreach ($days as $d) : ?>
+
+                            <?php require APPROOT . '/views/includes/modal.php'; ?>
+
+                        <?php endforeach; ?>
                     </td>
 
-                    <td>fdgdg</td>
-                    <td>fdgdg</td>
-                    <td>fdgdg</td>
-                    <td>fdgdg</td>
+                    <!-- Show users plannings Thursday -->
+                    <td class="align-middle" style="width: 11.14%">
+                        <?php
+                        $days = displayUserPlanning($user->id, $data, "Thu");
+                        foreach ($days as $d) : ?>
+
+                            <?php require APPROOT . '/views/includes/modal.php'; ?>
+
+                        <?php endforeach; ?>
+                    </td>
+
+                    <!-- Show users plannings Friday -->
+                    <td class="align-middle" style="width: 11.14%">
+                        <?php
+                        $days = displayUserPlanning($user->id, $data, "Fri");
+                        foreach ($days as $d) : ?>
+
+                            <?php require APPROOT . '/views/includes/modal.php'; ?>
+
+                        <?php endforeach; ?>
+                    </td>
+
+                    <!-- Show users plannings Saturday -->
+                    <td class="align-middle" style="width: 11.14%">
+                        <?php
+                        $days = displayUserPlanning($user->id, $data, "Sat");
+                        foreach ($days as $d) : ?>
+
+                            <?php require APPROOT . '/views/includes/modal.php'; ?>
+
+                        <?php endforeach; ?>
+                    </td>
+
+                    <!-- Show users plannings Sunday -->
+                    <td class="align-middle" style="width: 11.14%">
+                        <?php
+                        $days = displayUserPlanning($user->id, $data, "Sun");
+                        foreach ($days as $d) : ?>
+
+                            <?php require APPROOT . '/views/includes/modal.php'; ?>
+
+                        <?php endforeach; ?>
+                    </td>
                 </tr>
 
             <?php endforeach; ?>

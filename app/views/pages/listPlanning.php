@@ -63,15 +63,10 @@ if (sizeof($data['plannings']) > 0) :
                     <div class="col-md-4">
 
                         <!--Delete-->
-                        <form action="<?php echo URLROOT; ?>/plannings/delete/<?php echo $planning->id_planning; ?>/0" method="post" onclick="return confirm('Voulez-vous supprimer ce planning ?')">
+                        <form action="<?php echo URLROOT; ?>/plannings/delete/<?php echo $planning->id_planning; ?>/0"
+                              method="post" onclick="return confirm('Voulez-vous supprimer ce planning ?')">
                             <button type="submit" class="btn btn-danger pull-right ml-2"
-                                <?php
-                                    if ($planning->status == 'Accepté' || $planning->status == 'Refusé'){
-                                        echo 'disabled';
-                                    }else{
-                                        echo '';
-                                    }
-                            ?>>
+                                <?php echo ($planning->status == "Accepté") ? "disabled='disabled'" : "" ?>>
                                 <i class="fa fa-trash"></i>
                             </button>
                         </form>
@@ -87,7 +82,8 @@ if (sizeof($data['plannings']) > 0) :
                             }
                             ?>
                         ">
-                            <button type="submit" class="btn btn-primary pull-right ml-2">
+                            <button type="submit" class="btn btn-primary pull-right ml-2"
+                                <?php echo ($planning->status == "Accepté") ? "disabled='disabled'" : "" ?>>
                                 <i class="fa fa-edit"></i>
                             </button>
                         </form>

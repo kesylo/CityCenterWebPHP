@@ -216,9 +216,6 @@ class Plannings extends Controller{
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            // covert dates to french
-            /*$week = UStoFRDate(trim($_POST['week']));
-            $date = UStoFRDate(trim($_POST['date']));*/
 
             $data = [
                 'id' => $_SESSION['id'],

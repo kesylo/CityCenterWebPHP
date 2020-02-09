@@ -15,13 +15,18 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">
-                    <?php echo $name?>
+                <h5 class="modal-title">
+                    <?php echo $name ?>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <h6 class="modal-title" style="font-weight:bold">
+                <?php
+                echo dateToFrench($d['date'] ,"l j F Y");
+                ?>
+            </h6>
             <div class="modal-body">
 
                 <p>Choisissez une action</p>
@@ -38,7 +43,8 @@
                     <!--Deny-->
                     <form action="<?php echo URLROOT; ?>/plannings/deny/<?php echo $d['id']; ?>/<?php echo $user->email; ?>"
                           method="post" onclick="return confirm('Refuser ce planning ?')">
-                        <button type="submit" class="btn btn-warning ml-2">
+                        <button type="submit" class="btn btn-danger ml-2"
+                            <?php echo ($d["status"] == "Refusé") ? "disabled='disabled'" : "" ?>>
                             <i class="fa fa-times"></i>
                             Refuser
                         </button>
@@ -47,7 +53,8 @@
                     <!--Confirm-->
                     <form action="<?php echo URLROOT; ?>/plannings/accept/<?php echo $d['id']; ?>/<?php echo $user->email; ?>"
                           method="post" onclick="return confirm('Accepter ce planning ?')">
-                        <button type="submit" class="btn btn-success ml-2">
+                        <button type="submit" class="btn btn-success ml-2"
+                            <?php echo ($d["status"] == "Accepté") ? "disabled='disabled'" : "" ?>>
                             <i class="fa fa-check"></i>
                             Accepter
                         </button>
@@ -57,7 +64,7 @@
                     <!--Delete-->
                     <form action="<?php echo URLROOT; ?>/plannings/delete/<?php echo $d['id']; ?>/1"
                           method="post" onclick="return confirm('Voulez-vous supprimer ce planning ?')">
-                        <button type="submit" class="btn btn-danger ml-2">
+                        <button type="submit" class="btn btn-dark ml-2">
                             <i class="fa fa-trash"></i>
                             Supprimer
                         </button>

@@ -34,7 +34,8 @@ flash("planning_message");
 
     <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3 text-center mb-2 mb-md-0" >
         <div class="input-group date" id="weekDatePickerAdmin" data-target-input="nearest">
-            <input type="text" name="week" class="form-control datetimepicker-input" data-target="#weekDatePickerAdmin"/>
+            <input type="text" name="week" class="form-control datetimepicker-input"
+                   data-target="#weekDatePickerAdmin"/>
             <div class="input-group-append" data-target="#weekDatePickerAdmin" data-toggle="datetimepicker">
                 <div class="input-group-text">
                     <i class="fa fa-calendar"></i>

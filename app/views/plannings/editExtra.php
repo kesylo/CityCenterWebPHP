@@ -30,7 +30,6 @@
                             <hr>
 
                             Date :
-
                             <div class="input-group date" id="dayDatePicker" data-target-input="nearest">
                                 <input type="text" name="date"
                                        class="form-control datetimepicker-input <?php echo (!empty($data['date_err'])) ? 'is-invalid' : ''; ?>"

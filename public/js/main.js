@@ -148,6 +148,7 @@ $(function () {
     });
     //endregion
 
+
     // combobox change event
     $('#dropDownBulk').change(function(){
         //console.log("selected " + $("#dropDownBulk").prop('selectedIndex'));

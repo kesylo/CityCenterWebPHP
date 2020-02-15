@@ -31,8 +31,41 @@ class Planning{
         return $results;
     }
 
+    public function getUserPlanningsEffective($idUser, $day){
+        $this->db->query('SELECT * FROM planning_effectif WHERE id_user = :id_user and date = :dayValue');
+        $this->db->bind(':id_user', $idUser);
+        $this->db->bind(':dayValue', $day);
+
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
+
+
+
     public function addPlanning ($data){
         $this->db->query('INSERT INTO planning (id_user, week, date, startTime, endTime, status, callRedirect)
+                             VALUES (:id, :weekday, :workdate, :startTime, :endTime, :requeststatus, :callRedirect )');
+
+        // bind values
+        $this->db->bind(':id', $data['id']);
+        $this->db->bind(':weekday', $data['week']);
+        $this->db->bind(':workdate', $data['date']);
+        $this->db->bind(':startTime', $data['startTime']);
+        $this->db->bind(':endTime', $data['endTime']);
+        $this->db->bind(':requeststatus', $data['status']);
+        $this->db->bind(':callRedirect', $data['callRedirect']);
+
+        // run
+        if ($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function addEffective ($data){
+        $this->db->query('INSERT INTO planning_effectif (id_user, week, date, startTime, endTime, status, callRedirect)
                              VALUES (:id, :weekday, :workdate, :startTime, :endTime, :requeststatus, :callRedirect )');
 
         // bind values

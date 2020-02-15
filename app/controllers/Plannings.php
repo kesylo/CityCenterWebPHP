@@ -24,9 +24,13 @@ class Plannings extends Controller{
 
     public function index(){
         $plannings = $this->planningModel->getUserPlannings($_SESSION['id'], $_COOKIE["nextWeekDate"]);
+        $day = date('d-m-Y', strtotime('today'));
+        $planningsEffective = $this->planningModel->
+                    getUserPlanningsEffective($_SESSION['id'], $day);
 
         $data = [
             'plannings' => $plannings,
+            'planningsEffective' => $planningsEffective,
         ];
 
         $this->view('plannings/dashboard', $data);
@@ -272,6 +276,69 @@ class Plannings extends Controller{
         }
     }
 
+    public function addEffective(){
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $week = date('d-m-Y', strtotime('monday this week'));
+            $day = date('d-m-Y', strtotime('today'));
+
+            $data = [
+                'id' => $_SESSION['id'],
+                'week' => $week,
+                'date' => $day,
+                'startTime' => trim($_POST['startTime']),
+                'endTime' => trim($_POST['endTime']),
+                'status' => 'En attente',
+                'callRedirect' => trim($_POST['callRedirect']),
+                'timeStart_err' => '',
+                'timeEnd_err' => '',
+                'date_err' => '',
+            ];
+
+            // validate
+            if (empty($data['startTime'])){
+                $data['timeStart_err'] = 'Entrez une heure de debut';
+            }
+            if (empty($data['endTime'])){
+                $data['timeEnd_err'] = 'Entrez une heure de fin';
+            }
+            if (empty($data['date'])){
+                $data['date_err'] = 'Entrez une date';
+            }
+
+            if (empty($data['timeStart_err']) && empty($data['timeEnd_err']) && empty($data['date_err'])){
+                if (preg_match("/\d{2}\-\d{2}-\d{4}/",$data["week"]) &&
+                    preg_match("/\d{2}\-\d{2}-\d{4}/",$data["date"])){
+                    // validated
+                    if ($this->planningModel->addEffective($data)){
+                        // show flash message
+                        flash('planning_message', "Heure éffective ajoutée!");
+                        redirect('plannings/dashboard');
+                    }else{
+                        die('errr');
+                    }
+                }else{
+                    flashError('planning_message',
+                        "Erreur lors de l'ajout. Les dates entrées ne sont pas au bon format");
+                    redirect('plannings/dashboard');
+                }
+            }else{
+                $this->view('plannings/addEffective', $data);
+            }
+
+
+        }else{
+            $data = [
+                'week' => '',
+                'date' => '',
+            ];
+
+            $this->view('plannings/addEffective', $data);
+        }
+    }
+
     public function bulkAdd(){
 
         $users = $this->planningModel->getUserNameAndID();
@@ -349,7 +416,6 @@ class Plannings extends Controller{
             $this->viewBulk('plannings/bulkAdd', $data, $users);
         }
     }
-
 
     public function addExtra(){
 

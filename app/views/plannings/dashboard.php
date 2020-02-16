@@ -60,29 +60,46 @@
 
 
 
-<hr class="my-4">
+<hr class="my-2">
 
 <div id="card-reload">
 
-    <?php if (sizeof($data['planningsEffective']) > 0) :
-    foreach ($data['planningsEffective'] as $planning) : ?>
-
-        <?php echo $planning; ?>
-
-    <?php endforeach; ?>
-
-    <?php else: ?>
-        <div class="text-center mb-3">
-            <h1>Pas de données pour cette semaine !</h1>
+    <div class="card">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home"
+                       role="tab" aria-controls="home" aria-selected="true">Disponibilités
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile"
+                       role="tab" aria-controls="profile" aria-selected="false">Heures Effectives
+                    </a>
+                </li>
+            </ul>
         </div>
-    <?php endif; ?>
+        <div class="tab-content">
+            <div class="tab-pane m-2 active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <!-- Content for first tab -->
+                <?php require APPROOT . '/views/pages/listPlanning.php'; ?>
+            </div>
 
-    <div class="w-100"></div>
+            <div class="tab-pane m-2" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <!-- Content for second tab -->
+                <?php require APPROOT . '/views/pages/listPlanningEffective.php'; ?>
+            </div>
+        </div>
+    </div>
 
-    <?php require APPROOT . '/views/pages/listPlanning.php'; ?>
 </div>
-
 
 
 <!--add footer-->
 <?php require APPROOT . '/views/includes/footer.php'; ?>
+
+<script>
+    $(function () {
+        $('#myTab li:last-child a').tab('show')
+    })
+</script>

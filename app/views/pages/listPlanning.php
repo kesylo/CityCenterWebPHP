@@ -3,7 +3,7 @@
 if (sizeof($data['plannings']) > 0) :
     foreach ($data['plannings'] as $planning) : ?>
 
-        <div class="card shadow mb-4">
+        <div class="card shadow mb-2">
             <div class="card-header py-3
                 <?php
                     if ($planning->endTime == ''){
@@ -15,14 +15,14 @@ if (sizeof($data['plannings']) > 0) :
                         if ($planning->endTime == ''){
                             echo 'text-white';
                         }else{
-                            echo 'text-primary';
+                            echo 'text-success';
                         }
                     ?>"> <?php echo fullDate($planning->date); ?>
                 </h6>
             </div>
             <div class="card-body">
 
-                <div class="row mb-2 ">
+                <div class="row">
                     <div class="col-md-4">
 
                         <span style="font-weight:bold">
@@ -94,12 +94,11 @@ if (sizeof($data['plannings']) > 0) :
             </div>
         </div>
 
-
     <?php endforeach; ?>
 
 <?php else: ?>
     <div class="text-center mb-3">
-        <h1>Pas de données pour cette semaine !</h1>
+        <h1>Pas de disponibilités pour cette semaine !</h1>
         <img src="<?php echo URLROOT; ?>/images/img1.png" class="img-fluid" alt="Responsive image" width="700">
     </div>
 

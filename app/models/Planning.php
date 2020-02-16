@@ -31,16 +31,15 @@ class Planning{
         return $results;
     }
 
-    public function getUserPlanningsEffective($idUser, $day){
-        $this->db->query('SELECT * FROM planning_effectif WHERE id_user = :id_user and date = :dayValue');
+    public function getUserPlanningsEffective($idUser, $week){
+        $this->db->query('SELECT * FROM planning_effectif WHERE id_user = :id_user and week = :nextWeek');
         $this->db->bind(':id_user', $idUser);
-        $this->db->bind(':dayValue', $day);
+        $this->db->bind(':nextWeek', $week);
 
         $results = $this->db->resultSet();
 
         return $results;
     }
-
 
 
     public function addPlanning ($data){
@@ -144,6 +143,15 @@ class Planning{
         return $row;
     }
 
+    public function getPlanningEffectiveById ($idPlanning){
+        $this->db->query('SELECT * FROM planning_effectif WHERE id_planning_effectif = :id_planning');
+        $this->db->bind(':id_planning', $idPlanning);
+
+        $row = $this->db->single();
+
+        return $row;
+    }
+
     public function getUserById($idUser){
         $this->db->query('SELECT * FROM employees WHERE id = :id_user');
         $this->db->bind(':id_user', $idUser);
@@ -185,8 +193,44 @@ class Planning{
         }
     }
 
+    public function updatePlanningEffective($data){
+        $this->db->query('UPDATE planning_effectif SET week = :workweek, callRedirect = :callRedirect, date = :workdate, startTime = :startTime, endTime = :endTime, status = :workstatus 
+                            WHERE id_planning_effectif = :id_planning');
+
+        // bind values
+        $this->db->bind(':id_planning', $data['id_planning']);
+        $this->db->bind(':workweek', $data['week']);
+        $this->db->bind(':workdate', $data['date']);
+        $this->db->bind(':startTime', $data['startTime']);
+        $this->db->bind(':endTime', $data['endTime']);
+        $this->db->bind(':workstatus', $data['status']);
+        $this->db->bind(':callRedirect', $data['callRedirect']);
+
+        // run
+        if ($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function deletePlanning($idPlanning){
         $this->db->query('DELETE FROM planning WHERE id_planning = :id_planning');
+
+        // bind values
+        $this->db->bind(':id_planning', $idPlanning);
+
+        // run
+        if ($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    public function deletePlanningEffective($idPlanning){
+        $this->db->query('DELETE FROM planning_effectif WHERE id_planning_effectif = :id_planning');
 
         // bind values
         $this->db->bind(':id_planning', $idPlanning);

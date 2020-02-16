@@ -14,16 +14,22 @@ $(function () {
 
     //region common DatePickers
     // Week date picker
+    let $dateVal = moment(moment().startOf('isoWeek'), 'DD-MM-YYYY');
+
     $('#weekDatePicker').datetimepicker({
         format: 'DD-MM-YYYY',
-        date : moment(moment().startOf('isoWeek'), 'DD-MM-YYYY'),
-        minDate : moment(moment().startOf('isoWeek'), 'DD-MM-YYYY'),
-        maxDate : moment(moment().startOf('isoWeek').add(3, 'week'), 'DD-MM-YYYY'),
+        date : $dateVal,
         daysOfWeekDisabled:[0,2,3,4,5,6],
         locale:  moment.locale('fr', {
             week: { dow: 1 }
         }),
     });
+
+
+    let strDate = moment($dateVal).format('DD-MM-YYYY');
+    createCookieDate(strDate);
+    reload();
+
 
     let min = moment(moment().startOf('isoWeek').add(1, 'week'), 'DD-MM-YYYY');
     let minCl = min.clone();

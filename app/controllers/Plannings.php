@@ -22,6 +22,11 @@ class Plannings extends Controller
 		$this->planningModel = $this->model('Planning');
 	}
 
+	public function cmp($a, $b)
+	{
+		return strcmp($a->firstName, $b->firstName);
+	}
+
 	public function index()
 	{
 		$plannings = $this->planningModel->getUserPlannings(
@@ -30,11 +35,51 @@ class Plannings extends Controller
 		);
 
 		// for table
-        $allPlannings = $this->planningModel->getAllUsersPlannings(
-            $_COOKIE["nextWeekDate"]
-        );
+		$allPlannings = $this->planningModel->getAllUsersPlannings(
+			$_COOKIE["nextWeekDate"]
+		);
 
-        $usersList = $this->planningModel->getAllActiveUsers();
+		$newList = $this->planningModel->getAllActiveUsers();
+
+		$bo = array();
+		$fo = array();
+		$hk = array();
+		$mt = array();
+
+		foreach ($newList as $user) {
+			if ($user->dept == "Back Office") {
+				array_push($bo, $user);
+			}
+			if ($user->dept == "House Keeping") {
+				array_push($hk, $user);
+			}
+			if ($user->dept == "Maintenance") {
+				array_push($mt, $user);
+			}
+			if ($user->dept == "Front Office") {
+				array_push($fo, $user);
+			}
+		}
+
+		usort($bo, array($this, "cmp"));
+		usort($hk, array($this, "cmp"));
+		usort($mt, array($this, "cmp"));
+		usort($fo, array($this, "cmp"));
+
+		$usersList = array();
+
+		foreach ($bo as $b) {
+			array_push($usersList, $b);
+		}
+		foreach ($hk as $b) {
+			array_push($usersList, $b);
+		}
+		foreach ($mt as $b) {
+			array_push($usersList, $b);
+		}
+		foreach ($fo as $b) {
+			array_push($usersList, $b);
+		}
 
 		$planningsEffective = $this->planningModel->getUserPlanningsEffective(
 			$_SESSION['id'],
@@ -43,9 +88,9 @@ class Plannings extends Controller
 
 		$data = [
 			'plannings' => $plannings,
-            '$allPlannings' => $allPlannings,
+			'$allPlannings' => $allPlannings,
 			'planningsEffective' => $planningsEffective,
-            'users' => $usersList
+			'users' => $usersList
 		];
 
 		$this->view('plannings/dashboard', $data);
@@ -270,23 +315,48 @@ class Plannings extends Controller
 			$plannings = $this->planningModel->getAllUsersPlannings(
 				$_COOKIE["nextWeekDate"]
 			);
-			$usersList = $this->planningModel->getAllActiveUsers();
 
-			/*$ids = array();
-            $users = array();
+			$newList = $this->planningModel->getAllActiveUsers();
 
-            // store all user ids who created a planning
-            foreach ($plannings as $key=>$pl){
-                $ids[$key] = $pl->id_user;
-            }
+			$bo = array();
+			$fo = array();
+			$hk = array();
+			$mt = array();
 
-            // remove duplicates
-            //$uniqueIds = array_unique($ids);
+			foreach ($newList as $user) {
+				if ($user->dept == "Back Office") {
+					array_push($bo, $user);
+				}
+				if ($user->dept == "House Keeping") {
+					array_push($hk, $user);
+				}
+				if ($user->dept == "Maintenance") {
+					array_push($mt, $user);
+				}
+				if ($user->dept == "Front Office") {
+					array_push($fo, $user);
+				}
+			}
 
-            // trim names only and store
-            foreach ($usersList as $key=>$id){
-                $names[$key] = $usersList[$key]->firstName . ' ' . $usersList[$key]->lastName;
-            }*/
+			usort($bo, array($this, "cmp"));
+			usort($hk, array($this, "cmp"));
+			usort($mt, array($this, "cmp"));
+			usort($fo, array($this, "cmp"));
+
+			$usersList = array();
+
+			foreach ($bo as $b) {
+				array_push($usersList, $b);
+			}
+			foreach ($hk as $b) {
+				array_push($usersList, $b);
+			}
+			foreach ($mt as $b) {
+				array_push($usersList, $b);
+			}
+			foreach ($fo as $b) {
+				array_push($usersList, $b);
+			}
 
 			$data = [
 				'plannings' => $plannings,
@@ -604,27 +674,27 @@ class Plannings extends Controller
 		}
 	}
 
-    public function deleteEffective($id_planning, $admin)
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if ($this->planningModel->deletePlanningEffective($id_planning)) {
-                flash('post_message', 'Heure éffective supprimée!');
-                if ($admin == 1) {
-                    redirect('plannings/admin');
-                } else {
-                    redirect('plannings/dashboard');
-                }
-            } else {
-                die("error deleting");
-            }
-        } else {
-            if ($admin == 1) {
-                redirect('plannings/admin');
-            } else {
-                redirect('plannings/dashboard');
-            }
-        }
-    }
+	public function deleteEffective($id_planning, $admin)
+	{
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			if ($this->planningModel->deletePlanningEffective($id_planning)) {
+				flash('post_message', 'Heure éffective supprimée!');
+				if ($admin == 1) {
+					redirect('plannings/admin');
+				} else {
+					redirect('plannings/dashboard');
+				}
+			} else {
+				die("error deleting");
+			}
+		} else {
+			if ($admin == 1) {
+				redirect('plannings/admin');
+			} else {
+				redirect('plannings/dashboard');
+			}
+		}
+	}
 
 	public function deny($id_planning, $email)
 	{

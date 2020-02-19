@@ -217,7 +217,7 @@ function displayUserPlanning($id, $data, $choice)
                         foreach ($days as $d): ?>
 
                             <?php require APPROOT .
-                            	'/views/includes/modal.php'; ?>
+                            	'/views/includes/modalAdmin.php'; ?>
 
                         <?php endforeach;
                         ?>
@@ -230,7 +230,7 @@ function displayUserPlanning($id, $data, $choice)
                         foreach ($days as $d): ?>
 
                             <?php require APPROOT .
-                            	'/views/includes/modal.php'; ?>
+                            	'/views/includes/modalAdmin.php'; ?>
 
                         <?php endforeach;
                         ?>
@@ -243,7 +243,7 @@ function displayUserPlanning($id, $data, $choice)
                         foreach ($days as $d): ?>
 
                             <?php require APPROOT .
-                            	'/views/includes/modal.php'; ?>
+                            	'/views/includes/modalAdmin.php'; ?>
 
                         <?php endforeach;
                         ?>
@@ -256,7 +256,7 @@ function displayUserPlanning($id, $data, $choice)
                         foreach ($days as $d): ?>
 
                             <?php require APPROOT .
-                            	'/views/includes/modal.php'; ?>
+                            	'/views/includes/modalAdmin.php'; ?>
 
                         <?php endforeach;
                         ?>
@@ -269,7 +269,7 @@ function displayUserPlanning($id, $data, $choice)
                         foreach ($days as $d): ?>
 
                             <?php require APPROOT .
-                            	'/views/includes/modal.php'; ?>
+                            	'/views/includes/modalAdmin.php'; ?>
 
                         <?php endforeach;
                         ?>
@@ -282,7 +282,7 @@ function displayUserPlanning($id, $data, $choice)
                         foreach ($days as $d): ?>
 
                             <?php require APPROOT .
-                            	'/views/includes/modal.php'; ?>
+                            	'/views/includes/modalAdmin.php'; ?>
 
                         <?php endforeach;
                         ?>
@@ -295,7 +295,7 @@ function displayUserPlanning($id, $data, $choice)
                         foreach ($days as $d): ?>
 
                             <?php require APPROOT .
-                            	'/views/includes/modal.php'; ?>
+                            	'/views/includes/modalAdmin.php'; ?>
 
                         <?php endforeach;
                         ?>

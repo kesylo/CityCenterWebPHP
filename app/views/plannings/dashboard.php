@@ -9,16 +9,15 @@
     flash("planning_message");
 ?>
 
-<div class="row">
-    <div class="jumbotron text-center col-12 gradient" >
-        <h1 class="display-4" style="color: white">Mode Utilisateur</h1>
-        <h1 class="display-6" style="color: white">Liste des disponibilités</h1>
-        <p class="lead" style="color: white">Cet outil vous permet d'ajouter, modifier ou supprimer vos plannings au fils du temps.</p>
+<div class="jumbotron text-center col-12 gradient">
+    <h1 class="display-6" style="color: white">Mode Utilisateur</h1>
+    <p class="lead" style="color: white">Cet outil vous permet d'ajouter, modifier ou supprimer vos plannings au fils du temps.</p>
 
-        <a href="<?php echo URLROOT; ?>/plannings/add" class="btn btn-dark">
-            <i class="fa fa-eye"></i> Voir vos heures éffectives
-        </a>
-    </div>
+    <h6 style="color: white">Légende:
+        <span class="badge badge-success">Accepté</span>
+        <span class="badge badge-primary">En attente</span>
+        <span class="badge badge-danger">Refusé</span>
+    </h6>
 </div>
 
 
@@ -67,27 +66,43 @@
     <div class="card">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home"
+                <li class="nav-item" id="test">
+                    <a class="nav-link <?php echo ($_COOKIE['selectedTab'] == 1) ? 'active' : ''; ?>"
+                       id="home-tab" data-toggle="tab" href="#home" onclick="tab1()"
                        role="tab" aria-controls="home" aria-selected="true">Disponibilités
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile"
+                    <a class="nav-link <?php echo ($_COOKIE['selectedTab'] == 2) ? 'active' : ''; ?>"
+                       id="profile-tab" data-toggle="tab" href="#profile" onclick="tab2()"
                        role="tab" aria-controls="profile" aria-selected="false">Heures Effectives
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <?php echo ($_COOKIE['selectedTab'] == 3) ? 'active' : ''; ?>"
+                       id="table-tab" data-toggle="tab" href="#table" onclick="tab3()"
+                       role="tab" aria-controls="table" aria-selected="false">Planning complet
                     </a>
                 </li>
             </ul>
         </div>
         <div class="tab-content">
-            <div class="tab-pane m-2 active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="tab-pane m-2 <?php echo ($_COOKIE['selectedTab'] == 1) ? 'active' : ''; ?>"
+                 id="home" role="tabpanel" aria-labelledby="home-tab">
                 <!-- Content for first tab -->
                 <?php require APPROOT . '/views/pages/listPlanning.php'; ?>
             </div>
 
-            <div class="tab-pane m-2" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="tab-pane m-2 <?php echo ($_COOKIE['selectedTab'] == 2) ? 'active' : ''; ?>"
+                 id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <!-- Content for second tab -->
                 <?php require APPROOT . '/views/pages/listPlanningEffective.php'; ?>
+            </div>
+
+            <div class="tab-pane m-2 <?php echo ($_COOKIE['selectedTab'] == 3) ? 'active' : ''; ?>"
+                 id="table" role="tabpanel" aria-labelledby="table-tab">
+                <!-- Content for third tab -->
+                <?php require APPROOT . '/views/plannings/planningViewDashboard.php'; ?>
             </div>
         </div>
     </div>
@@ -99,7 +114,23 @@
 <?php require APPROOT . '/views/includes/footer.php'; ?>
 
 <script>
-    $(function () {
-        $('#myTab li:last-child a').tab('show')
-    })
+    function tab1() {
+        document.cookie = "selectedTab" + "=" + 1;
+    }
+    function tab2() {
+        document.cookie = "selectedTab" + "=" + 2;
+    }
+    function tab3() {
+        document.cookie = "selectedTab" + "=" + 3;
+    }
+
+    /*$(document).ready(function() {
+        $('#myTab li:last-child a').tab('show');
+
+        $("#test").click(function() {
+            console.log('hjgbh');
+        });
+
+
+    });*/
 </script>

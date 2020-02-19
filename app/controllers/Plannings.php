@@ -28,6 +28,14 @@ class Plannings extends Controller
 			$_SESSION['id'],
 			$_COOKIE["nextWeekDate"]
 		);
+
+		// for table
+        $allPlannings = $this->planningModel->getAllUsersPlannings(
+            $_COOKIE["nextWeekDate"]
+        );
+
+        $usersList = $this->planningModel->getAllActiveUsers();
+
 		$planningsEffective = $this->planningModel->getUserPlanningsEffective(
 			$_SESSION['id'],
 			$_COOKIE["nextWeekDate"]
@@ -35,7 +43,9 @@ class Plannings extends Controller
 
 		$data = [
 			'plannings' => $plannings,
-			'planningsEffective' => $planningsEffective
+            '$allPlannings' => $allPlannings,
+			'planningsEffective' => $planningsEffective,
+            'users' => $usersList
 		];
 
 		$this->view('plannings/dashboard', $data);

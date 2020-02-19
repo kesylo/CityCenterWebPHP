@@ -14,7 +14,7 @@ function displayUserPlanning($id, $data, $choice)
 
 	//endregion
 
-	foreach ($data['plannings'] as $index => $planning) {
+	foreach ($data['$allPlannings'] as $index => $planning) {
 		if ($planning->id_user == $id) {
 			if ($planning->week == $_COOKIE["nextWeekDate"]) {
 				$date = $planning->date;
@@ -112,7 +112,6 @@ function displayUserPlanning($id, $data, $choice)
 						);
 					}
 				}
-
 				//endregion
 			}
 		}

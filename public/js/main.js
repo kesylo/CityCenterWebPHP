@@ -10,35 +10,49 @@ $('input[name="radioWaiting"]').change(function(){
     }
 });*/
 
-$(function() {
-	//region common DatePickers
-	// Week date picker
-	let $dateVal = moment(moment().startOf("isoWeek"), "DD-MM-YYYY");
+/*window.onload = function() {
+	const dateValue = getCookie("weekUser")
+	$("#weekUserMode").datetimepicker("date", moment("12-12-12", "DD-MM-YYYY"));
+};*/
 
-	$("#weekDatePicker").datetimepicker({
+$(function() {
+	//region User mode ---------------------------------------------------------------------------------------
+	//let $dateVal = moment(moment().startOf("isoWeek"), "DD-MM-YYYY");
+
+	$("#weekUserMode").datetimepicker({
 		format: "DD-MM-YYYY",
-		date: $dateVal,
 		daysOfWeekDisabled: [0, 2, 3, 4, 5, 6],
 		locale: moment.locale("fr", {
 			week: { dow: 1 }
 		})
 	});
 
-	let strDate = moment($dateVal).format("DD-MM-YYYY");
-	createCookieDate(strDate);
-	reload();
+	const dateValue = getCookie("weekUser");
+	$("#weekUserMode").datetimepicker("date", moment(dateValue, "DD-MM-YYYY"));
 
-	let min = moment(
-		moment()
-			.startOf("isoWeek")
-			.add(1, "week"),
-		"DD-MM-YYYY"
+	$("#weekUserMode").on("change.datetimepicker", function(e) {
+		let strDate = moment(e.date).format("DD-MM-YYYY");
+		setCookie("weekUser", strDate);
+		reload();
+	});
+
+	/*
+
+	$("#weekUserMode").datetimepicker(
+		"viewDate",
+		moment("12-12-2019", "DD-MM-YYYY")
 	);
-	let minCl = min.clone();
-	let max = minCl.add(6, "days");
 
-	// Day Datepicker
-	$("#dayDatePicker").datetimepicker({
+	$("#weekUserMode").on("change.datetimepicker", function(e) {
+		// set globally
+		let strDate = moment(e.date).format("DD-MM-YYYY");
+		/!*createCookie("weekUser", strDate);
+		reload();*!/
+	});*/
+
+	//endregion
+
+	/*$("#dayDatePicker").datetimepicker({
 		format: "DD-MM-YYYY",
 		date: moment(
 			moment()
@@ -51,121 +65,9 @@ $(function() {
 		locale: moment.locale("fr", {
 			week: { dow: 1 }
 		})
-	});
+	});*/
 
-	$("#weekDatePicker").on("change.datetimepicker", function(e) {
-		let current = e.date.clone();
-		let current2 = e.date.clone();
-
-		$("#dayDatePicker").datetimepicker("destroy");
-		$("#dayDatePicker").datetimepicker({
-			format: "DD-MM-YYYY",
-			ignoreReadonly: true,
-			minDate: current,
-			date: current,
-			maxDate: e.date.add(6, "day"),
-			autoClose: true,
-			locale: moment.locale("fr", {
-				week: { dow: 1 }
-			})
-		});
-
-		// set globally
-		let strDate = moment(current2).format("DD-MM-YYYY");
-		createCookieDate(strDate);
-		reload();
-	});
-
-	//endregion ---------------------------------------------------------------------------------------
-
-	//region Bulk add DatePickers
-	$("#weekDatePickerBulk").datetimepicker({
-		format: "DD-MM-YYYY",
-		date: moment(moment().startOf("isoWeek"), "DD-MM-YYYY"),
-		daysOfWeekDisabled: [0, 2, 3, 4, 5, 6],
-		locale: moment.locale("fr", {
-			week: { dow: 1 }
-		})
-	});
-
-	let min2 = moment(moment().startOf("isoWeek"), "DD-MM-YYYY");
-	let minCl2 = min2.clone();
-	let max2 = minCl2.add(6, "days");
-
-	// Day Datepicker
-	$("#dayDatePickerBulk").datetimepicker({
-		format: "DD-MM-YYYY",
-		date: moment(moment().startOf("isoWeek"), "DD-MM-YYYY"),
-		minDate: min2,
-		maxDate: max2,
-		locale: moment.locale("fr", {
-			week: { dow: 1 }
-		})
-	});
-
-	$("#weekDatePickerBulk").on("change.datetimepicker", function(e) {
-		let current = e.date.clone();
-		let current2 = e.date.clone();
-
-		$("#dayDatePickerBulk").datetimepicker("destroy");
-		$("#dayDatePickerBulk").datetimepicker({
-			format: "DD-MM-YYYY",
-			ignoreReadonly: true,
-			minDate: current,
-			date: current,
-			maxDate: e.date.add(6, "day"),
-			autoClose: true,
-			locale: moment.locale("fr", {
-				week: { dow: 1 }
-			})
-		});
-
-		// set globally
-		let strDate = moment(current2).format("DD-MM-YYYY");
-		createCookieDate(strDate);
-		reload();
-	});
-	//endregion
-
-	//region TimePickers
-	$("#timeStart").datetimepicker({
-		format: "HH:mm",
-		stepping: 15,
-		forceMinuteStep: true
-	});
-
-	$("#timeEnd").datetimepicker({
-		format: "HH:mm",
-		stepping: 15,
-		forceMinuteStep: true
-	});
-	//endregion
-
-	//region Admin Datepicker
-
-	$("#weekDatePickerAdmin").datetimepicker({
-		format: "DD-MM-YYYY",
-		date: moment(
-			moment()
-				.startOf("isoWeek")
-				.add(1, "week"),
-			"DD-MM-YYYY"
-		),
-		daysOfWeekDisabled: [0, 2, 3, 4, 5, 6],
-		locale: moment.locale("fr", {
-			week: { dow: 1 }
-		})
-	});
-
-	$("#weekDatePickerAdmin").on("change.datetimepicker", function(e) {
-		// set globally
-		let strDate = moment(e.date).format("DD-MM-YYYY");
-		createCookieDate(strDate);
-		reload();
-	});
-	//endregion
-
-	// combobox change event
+	// combobox change event ------------------------------------------------------------------------
 	$("#dropDownBulk").change(function() {
 		//console.log("selected " + $("#dropDownBulk").prop('selectedIndex'));
 		createCookie("idSelectedUser", $("#dropDownBulk").prop("selectedIndex"));
@@ -178,36 +80,34 @@ $(function() {
     });*/
 });
 
-function createCookieDate(strDate) {
-	document.cookie = "nextWeekDate" + "=" + strDate;
+//region Functions ------------------------------------------------------------------------
+function getCookie(cname) {
+	let name = cname + "=";
+	let ca = document.cookie.split(";");
+	for (let i = 0; i < ca.length; i++) {
+		let c = ca[i];
+		while (c.charAt(0) === " ") {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) === 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
+	return "";
 }
 
-function createCookie(varName, value) {
-	document.cookie = varName + "=" + value;
+function setCookie(cname, cvalue) {
+	let d = new Date();
+	d.setTime(d.getTime() + 86400 * 30);
+	let expires = "expires=" + d.toUTCString();
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
 function reload() {
 	$("#card-reload").load(" #card-reload");
 }
 
-function getNextWeekDate() {
-	let d = new Date();
-	d.setDate(d.getDate() + ((1 + 7 - d.getDay()) % 7));
-
-	let dd = d.getDate();
-	let mm = d.getMonth() + 1;
-
-	let yyyy = d.getFullYear();
-	if (dd < 10) {
-		dd = "0" + dd;
-	}
-	if (mm < 10) {
-		mm = "0" + mm;
-	}
-	return dd + "-" + mm + "-" + yyyy;
-}
-
 $(window).bind("beforeunload", function() {
-	//createCookieDate(getNextWeekDate());
-	createCookie("idSelectedUser", $("#dropDownBulk").prop("selectedIndex"));
+	//createCookie("idSelectedUser", $("#dropDownBulk").prop("selectedIndex"));
 });
+//endregion ------------------------------------------------------------------------

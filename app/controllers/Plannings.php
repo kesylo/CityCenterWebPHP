@@ -31,12 +31,12 @@ class Plannings extends Controller
 	{
 		$plannings = $this->planningModel->getUserPlannings(
 			$_SESSION['id'],
-			$_COOKIE["nextWeekDate"]
+			$_COOKIE["weekUser"]
 		);
 
 		// for table
 		$allPlannings = $this->planningModel->getAllUsersPlannings(
-			$_COOKIE["nextWeekDate"]
+			$_COOKIE["weekUser"]
 		);
 
 		$newList = $this->planningModel->getAllActiveUsers();
@@ -83,7 +83,7 @@ class Plannings extends Controller
 
 		$planningsEffective = $this->planningModel->getUserPlanningsEffective(
 			$_SESSION['id'],
-			$_COOKIE["nextWeekDate"]
+			$_COOKIE["weekUser"]
 		);
 
 		$data = [

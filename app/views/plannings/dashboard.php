@@ -1,13 +1,11 @@
 <!--add header-->
 <?php require APPROOT . '/views/includes/header.php'; ?>
 
-<?php
-    setlocale (LC_TIME, 'fr_FR','FRA');
-    date_default_timezone_set("Europe/Paris");
-    mb_internal_encoding("UTF-8");
+<?php /*setlocale(LC_TIME, 'fr_FR', 'FRA');
+date_default_timezone_set("Europe/Paris");
+mb_internal_encoding("UTF-8");*/
 
-    flash("planning_message");
-?>
+flash("planning_message"); ?>
 
 <div class="jumbotron text-center col-12 gradient">
     <h1 class="display-6" style="color: white">Mode Utilisateur</h1>
@@ -31,9 +29,10 @@
     <div class="w-100"></div>
 
     <div class="col-12 col-md-4 col-lg-3 mb-3">
-        <div class="input-group date" id="weekDatePicker" data-target-input="nearest">
-            <input type="text" name="week" class="form-control datetimepicker-input" data-target="#weekDatePicker" />
-            <div class="input-group-append" data-target="#weekDatePicker" data-toggle="datetimepicker">
+        <div class="input-group date" id="weekUserMode" data-target-input="nearest">
+            <input type="text" name="week" class="form-control datetimepicker-input" data-target="#weekUserMode"
+            value="12-12-2019"/>
+            <div class="input-group-append" data-target="#weekUserMode" data-toggle="datetimepicker">
                 <div class="input-group-text">
                     <i class="fa fa-calendar"></i>
                 </div>
@@ -42,9 +41,6 @@
     </div>
 
     <div class="col-12 col-md-8 col-lg-9">
-        <!--<a href="<?php /*echo URLROOT; */?>/plannings/addExtra" class="btn btn-dark pull-right ml-2">
-            <i class="fa fa-plus"></i> Ajouter un extra
-        </a>-->
 
         <a href="<?php echo URLROOT; ?>/plannings/add" class="btn btn-success pull-right ml-2">
             <i class="fa fa-plus"></i> Ajouter une disponibilité
@@ -67,19 +63,21 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item" id="test">
-                    <a class="nav-link <?php echo ($_COOKIE['selectedTab'] == 1) ? 'active' : ''; ?>"
+                    <a class="nav-link <?php echo isset($_COOKIE['selectedTab']) && $_COOKIE['selectedTab'] == 1
+                    	? 'active'
+                    	: ''; ?>"
                        id="home-tab" data-toggle="tab" href="#home" onclick="tab1()"
                        role="tab" aria-controls="home" aria-selected="true">Disponibilités
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php echo ($_COOKIE['selectedTab'] == 2) ? 'active' : ''; ?>"
+                    <a class="nav-link <?php echo $_COOKIE['selectedTab'] == 2 ? 'active' : ''; ?>"
                        id="profile-tab" data-toggle="tab" href="#profile" onclick="tab2()"
                        role="tab" aria-controls="profile" aria-selected="false">Heures Effectives
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php echo ($_COOKIE['selectedTab'] == 3) ? 'active' : ''; ?>"
+                    <a class="nav-link <?php echo $_COOKIE['selectedTab'] == 3 ? 'active' : ''; ?>"
                        id="table-tab" data-toggle="tab" href="#table" onclick="tab3()"
                        role="tab" aria-controls="table" aria-selected="false">Planning complet
                     </a>
@@ -87,19 +85,21 @@
             </ul>
         </div>
         <div class="tab-content">
-            <div class="tab-pane m-2 <?php echo ($_COOKIE['selectedTab'] == 1) ? 'active' : ''; ?>"
+            <div class="tab-pane m-2 <?php echo isset($_COOKIE['selectedTab']) && $_COOKIE['selectedTab'] == 1
+            	? 'active'
+            	: ''; ?>"
                  id="home" role="tabpanel" aria-labelledby="home-tab">
                 <!-- Content for first tab -->
                 <?php require APPROOT . '/views/pages/listPlanning.php'; ?>
             </div>
 
-            <div class="tab-pane m-2 <?php echo ($_COOKIE['selectedTab'] == 2) ? 'active' : ''; ?>"
+            <div class="tab-pane m-2 <?php echo $_COOKIE['selectedTab'] == 2 ? 'active' : ''; ?>"
                  id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <!-- Content for second tab -->
                 <?php require APPROOT . '/views/pages/listPlanningEffective.php'; ?>
             </div>
 
-            <div class="tab-pane m-2 <?php echo ($_COOKIE['selectedTab'] == 3) ? 'active' : ''; ?>"
+            <div class="tab-pane m-2 <?php echo $_COOKIE['selectedTab'] == 3 ? 'active' : ''; ?>"
                  id="table" role="tabpanel" aria-labelledby="table-tab">
                 <!-- Content for third tab -->
                 <?php require APPROOT . '/views/plannings/planningViewDashboard.php'; ?>
@@ -124,13 +124,4 @@
         document.cookie = "selectedTab" + "=" + 3;
     }
 
-    /*$(document).ready(function() {
-        $('#myTab li:last-child a').tab('show');
-
-        $("#test").click(function() {
-            console.log('hjgbh');
-        });
-
-
-    });*/
 </script>

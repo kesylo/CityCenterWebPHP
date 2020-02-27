@@ -1,24 +1,5 @@
-/*
-$('input[name="radioWaiting"]').change(function(){
-    if($('#radiowaiting1').prop('checked')){
-        document.cookie = "waiting" + "=" + "all";
-        reload();
-    }
-    if($('#radiowaiting2').prop('checked')){
-        document.cookie = "waiting" + "=" + "waiting";
-        reload();
-    }
-});*/
-
-/*window.onload = function() {
-	const dateValue = getCookie("weekUser")
-	$("#weekUserMode").datetimepicker("date", moment("12-12-12", "DD-MM-YYYY"));
-};*/
-
 $(function() {
 	//region User mode ---------------------------------------------------------------------------------------
-	//let $dateVal = moment(moment().startOf("isoWeek"), "DD-MM-YYYY");
-
 	$("#weekUserMode").datetimepicker({
 		format: "DD-MM-YYYY",
 		daysOfWeekDisabled: [0, 2, 3, 4, 5, 6],
@@ -35,52 +16,79 @@ $(function() {
 		setCookie("weekUser", strDate);
 		reload();
 	});
-
-	/*
-
-	$("#weekUserMode").datetimepicker(
-		"viewDate",
-		moment("12-12-2019", "DD-MM-YYYY")
-	);
-
-	$("#weekUserMode").on("change.datetimepicker", function(e) {
-		// set globally
-		let strDate = moment(e.date).format("DD-MM-YYYY");
-		/!*createCookie("weekUser", strDate);
-		reload();*!/
-	});*/
-
 	//endregion
 
-	/*$("#dayDatePicker").datetimepicker({
-		format: "DD-MM-YYYY",
-		date: moment(
-			moment()
-				.startOf("isoWeek")
-				.add(1, "week"),
-			"DD-MM-YYYY"
-		),
-		minDate: min,
-		maxDate: max,
-		locale: moment.locale("fr", {
+	//region Linked datePickers create -----------------------------------------------------------------------
+	$('#weekAdd').datetimepicker({
+		format: 'DD-MM-YYYY',
+		date : moment(moment().startOf('isoWeek'), 'DD-MM-YYYY'),
+		daysOfWeekDisabled:[0,2,3,4,5,6],
+		locale:  moment.locale('fr', {
 			week: { dow: 1 }
-		})
-	});*/
+		}),
+	});
+
+	const min = moment(moment().startOf('isoWeek'), 'DD-MM-YYYY');
+	const minCl = min.clone();
+	const max = minCl.add(6, 'days');
+
+	$('#dayAdd').datetimepicker({
+		format: 'DD-MM-YYYY',
+		date : moment(new Date(), 'DD-MM-YYYY'),
+		minDate: min,
+		maxDate : max,
+		locale:  moment.locale('fr', {
+			week: { dow: 1 }
+		}),
+	});
+
+	$("#weekAdd").on("change.datetimepicker", function (e) {
+		let current = e.date.clone();
+
+		$('#dayAdd').datetimepicker("destroy");
+		$('#dayAdd').datetimepicker({
+			format: 'DD-MM-YYYY',
+			ignoreReadonly: true,
+			minDate: current,
+			date : current,
+			maxDate: e.date.add(6, "day"),
+			autoClose: true,
+			locale:  moment.locale('fr', {
+				week: { dow: 1 }
+			}),
+		});
+	});
+	//endregion
+
+	//region TimePickers -------------------------------------------------------------------------------------
+
+	$('#timeStart').datetimepicker({
+		format: 'HH:mm',
+		stepping: 15,
+		forceMinuteStep: true,
+	});
+	$('#timeStart').datetimepicker('date', moment(getCurrentTime(), 'HH:mm') );
+
+	$('#timeEnd').datetimepicker({
+		format: 'HH:mm',
+		stepping: 15,
+		forceMinuteStep: true,
+	});
+	//endregion
 
 	// combobox change event ------------------------------------------------------------------------
 	$("#dropDownBulk").change(function() {
 		//console.log("selected " + $("#dropDownBulk").prop('selectedIndex'));
 		createCookie("idSelectedUser", $("#dropDownBulk").prop("selectedIndex"));
 	});
-
-	/*// cleave.js
-    new Cleave('.timePicker', {
-        time: true,
-        timePattern: ['h', 'm']
-    });*/
 });
 
 //region Functions ------------------------------------------------------------------------
+function getCurrentTime() {
+	const today = new Date();
+	return today.getHours() + ":" + today.getMinutes();
+}
+
 function getCookie(cname) {
 	let name = cname + "=";
 	let ca = document.cookie.split(";");

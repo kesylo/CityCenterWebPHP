@@ -61,7 +61,6 @@ $(function() {
 	//endregion
 
 	//region TimePickers -------------------------------------------------------------------------------------
-
 	$('#timeStart').datetimepicker({
 		format: 'HH:mm',
 		stepping: 15,

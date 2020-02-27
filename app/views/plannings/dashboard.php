@@ -1,11 +1,14 @@
 <!--add header-->
-<?php require APPROOT . '/views/includes/header.php'; ?>
-
-<?php /*setlocale(LC_TIME, 'fr_FR', 'FRA');
-date_default_timezone_set("Europe/Paris");
-mb_internal_encoding("UTF-8");*/
-
-flash("planning_message"); ?>
+<?php
+require APPROOT . '/views/includes/header.php';
+flash("planning_message");
+$fRun = '';
+if (!isset($_COOKIE['selectedTab'])) {
+	$fRun = 'active';
+} else {
+	$fRun = '';
+}
+?>
 
 <div class="jumbotron text-center col-12 gradient">
     <h1 class="display-6" style="color: white">Mode Utilisateur</h1>
@@ -63,9 +66,7 @@ flash("planning_message"); ?>
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item" id="test">
-                    <a class="nav-link <?php echo isset($_COOKIE['selectedTab']) && $_COOKIE['selectedTab'] == 1
-                    	? 'active'
-                    	: ''; ?>"
+                    <a class="nav-link <?php echo $fRun; ?> <?php echo $_COOKIE['selectedTab'] == 1 ? 'active' : ''; ?>"
                        id="home-tab" data-toggle="tab" href="#home" onclick="tab1()"
                        role="tab" aria-controls="home" aria-selected="true">Disponibilités
                     </a>
@@ -85,9 +86,7 @@ flash("planning_message"); ?>
             </ul>
         </div>
         <div class="tab-content">
-            <div class="tab-pane m-2 <?php echo isset($_COOKIE['selectedTab']) && $_COOKIE['selectedTab'] == 1
-            	? 'active'
-            	: ''; ?>"
+            <div class="tab-pane m-2 <?php echo $fRun; ?> <?php echo $_COOKIE['selectedTab'] == 1 ? 'active' : ''; ?>"
                  id="home" role="tabpanel" aria-labelledby="home-tab">
                 <!-- Content for first tab -->
                 <?php require APPROOT . '/views/pages/listPlanning.php'; ?>

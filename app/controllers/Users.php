@@ -127,8 +127,6 @@ class Users extends Controller
 			];
 
 
-
-
             // validate email
 			if (empty($data['pseudo'])) {
 				$data['pseudo'] = 'Entrez un pseudo valide.';

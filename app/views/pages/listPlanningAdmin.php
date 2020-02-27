@@ -16,7 +16,7 @@ function displayUserPlanning($id, $data, $choice)
 
 	foreach ($data['plannings'] as $index => $planning) {
 		if ($planning->id_user == $id) {
-			if ($planning->week == $_COOKIE["nextWeekDate"]) {
+			if ($planning->week == $_COOKIE["weekAdmin"]) {
 				$date = $planning->date;
 				$nameOfDay = date('D', strtotime($date));
 
@@ -112,7 +112,6 @@ function displayUserPlanning($id, $data, $choice)
 						);
 					}
 				}
-
 				//endregion
 			}
 		}
@@ -127,7 +126,7 @@ function displayUserPlanning($id, $data, $choice)
         <table class="table table-bordered table-hover ">
             <thead class="thead-dark">
             <?php
-            $d = strtotime($_COOKIE["nextWeekDate"]);
+            $d = strtotime($_COOKIE["weekAdmin"]);
             $date = date('d-m-Y', $d);
             ?>
             <tr>
@@ -180,10 +179,7 @@ function displayUserPlanning($id, $data, $choice)
                     <!-- Show users names-->
                     <th class="align-middle" scope="row" style="width: 15%">
                         <?php
-                        $name =
-                        	strtoupper($user->firstName) .
-                        	" " .
-                        	ucfirst(mb_strtolower($user->lastName, 'UTF-8'));
+                        $name = strtoupper($user->firstName) . " " . ucfirst(mb_strtolower($user->lastName, 'UTF-8'));
 
                         echo $name;
                         ?>
@@ -216,8 +212,7 @@ function displayUserPlanning($id, $data, $choice)
                         $days = displayUserPlanning($user->id, $data, "Mon");
                         foreach ($days as $d): ?>
 
-                            <?php require APPROOT .
-                            	'/views/includes/modalAdmin.php'; ?>
+                            <?php require APPROOT . '/views/includes/modalAdmin.php'; ?>
 
                         <?php endforeach;
                         ?>
@@ -229,8 +224,7 @@ function displayUserPlanning($id, $data, $choice)
                         $days = displayUserPlanning($user->id, $data, "Tue");
                         foreach ($days as $d): ?>
 
-                            <?php require APPROOT .
-                            	'/views/includes/modalAdmin.php'; ?>
+                            <?php require APPROOT . '/views/includes/modalAdmin.php'; ?>
 
                         <?php endforeach;
                         ?>
@@ -242,8 +236,7 @@ function displayUserPlanning($id, $data, $choice)
                         $days = displayUserPlanning($user->id, $data, "Wed");
                         foreach ($days as $d): ?>
 
-                            <?php require APPROOT .
-                            	'/views/includes/modalAdmin.php'; ?>
+                            <?php require APPROOT . '/views/includes/modalAdmin.php'; ?>
 
                         <?php endforeach;
                         ?>
@@ -255,8 +248,7 @@ function displayUserPlanning($id, $data, $choice)
                         $days = displayUserPlanning($user->id, $data, "Thu");
                         foreach ($days as $d): ?>
 
-                            <?php require APPROOT .
-                            	'/views/includes/modalAdmin.php'; ?>
+                            <?php require APPROOT . '/views/includes/modalAdmin.php'; ?>
 
                         <?php endforeach;
                         ?>
@@ -268,8 +260,7 @@ function displayUserPlanning($id, $data, $choice)
                         $days = displayUserPlanning($user->id, $data, "Fri");
                         foreach ($days as $d): ?>
 
-                            <?php require APPROOT .
-                            	'/views/includes/modalAdmin.php'; ?>
+                            <?php require APPROOT . '/views/includes/modalAdmin.php'; ?>
 
                         <?php endforeach;
                         ?>
@@ -281,8 +272,7 @@ function displayUserPlanning($id, $data, $choice)
                         $days = displayUserPlanning($user->id, $data, "Sat");
                         foreach ($days as $d): ?>
 
-                            <?php require APPROOT .
-                            	'/views/includes/modalAdmin.php'; ?>
+                            <?php require APPROOT . '/views/includes/modalAdmin.php'; ?>
 
                         <?php endforeach;
                         ?>
@@ -294,8 +284,7 @@ function displayUserPlanning($id, $data, $choice)
                         $days = displayUserPlanning($user->id, $data, "Sun");
                         foreach ($days as $d): ?>
 
-                            <?php require APPROOT .
-                            	'/views/includes/modalAdmin.php'; ?>
+                            <?php require APPROOT . '/views/includes/modalAdmin.php'; ?>
 
                         <?php endforeach;
                         ?>

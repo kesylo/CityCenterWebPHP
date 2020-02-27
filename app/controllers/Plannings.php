@@ -311,9 +311,10 @@ class Plannings extends Controller
 
 	public function admin()
 	{
+
 		if (isset($_SESSION['id']) && $_SESSION['role'] > 3) {
 			$plannings = $this->planningModel->getAllUsersPlannings(
-				$_COOKIE["nextWeekDate"]
+				$_COOKIE["weekAdmin"]
 			);
 
 			$newList = $this->planningModel->getAllActiveUsers();

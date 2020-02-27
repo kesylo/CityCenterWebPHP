@@ -20,8 +20,9 @@ class Users extends Controller
 		$_SESSION['role'] = $user->role;
 
 		// create Base cookies for dates
-		$monday = date('d-m-Y', strtotime('monday this week'));
-		setcookie("weekUser", $monday, time() + 86400 * 30, "/");
+		$currentDay = date('d-m-Y', strtotime('monday this week'));
+		setcookie("weekUser", $currentDay, time() + 86400 * 30, "/");
+		setcookie("weekAdmin", $currentDay, time() + 86400 * 30, "/");
 
 		if ($user->role > 3) {
 			redirect('plannings/admin');
@@ -45,6 +46,7 @@ class Users extends Controller
 		//destroy cookies
 		setcookie("weekUser", "", time() + 86400 * 30, "/");
 		setcookie("selectedTab", "", time() + 86400 * 30, "/");
+		setcookie("weekAdmin", "", time() + 86400 * 30, "/");
 
 		redirect('users/login');
 	}

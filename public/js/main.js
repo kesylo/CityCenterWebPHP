@@ -12,7 +12,7 @@ $(function() {
 	$("#weekUserMode").datetimepicker("date", moment(dateValue, "DD-MM-YYYY"));
 
 	$("#weekUserMode").on("change.datetimepicker", function(e) {
-		let strDate = moment(e.date).format("DD-MM-YYYY");
+		const strDate = moment(e.date).format("DD-MM-YYYY");
 		setCookie("weekUser", strDate);
 		reload();
 	});
@@ -72,6 +72,25 @@ $(function() {
 		format: "HH:mm",
 		stepping: 15,
 		forceMinuteStep: true
+	});
+	//endregion
+
+	//region Admin mode ---------------------------------------------------------------------------------------
+	$("#weekAdminMode").datetimepicker({
+		format: "DD-MM-YYYY",
+		daysOfWeekDisabled: [0, 2, 3, 4, 5, 6],
+		locale: moment.locale("fr", {
+			week: { dow: 1 }
+		})
+	});
+
+	const dateAdminValue = getCookie("weekAdmin");
+	$("#weekAdminMode").datetimepicker("date", moment(dateAdminValue, "DD-MM-YYYY"));
+
+	$("#weekAdminMode").on("change.datetimepicker", function(e) {
+		const strDate = moment(e.date).format("DD-MM-YYYY");
+		setCookie("weekAdmin", strDate);
+		reload();
 	});
 	//endregion
 

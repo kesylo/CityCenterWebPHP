@@ -66,7 +66,8 @@ if (!isset($_COOKIE['selectedTab'])) {
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item" id="test">
-                    <a class="nav-link <?php echo $fRun; ?> <?php echo $_COOKIE['selectedTab'] == 1 ? 'active' : ''; ?>"
+                    <a class="nav-link <?php echo $fRun; ?> 
+                        <?php echo $_COOKIE['selectedTab'] == 1 ? 'active' : ''; ?>"
                        id="home-tab" data-toggle="tab" href="#home" onclick="tab1()"
                        role="tab" aria-controls="home" aria-selected="true">Disponibilités
                     </a>
@@ -86,7 +87,8 @@ if (!isset($_COOKIE['selectedTab'])) {
             </ul>
         </div>
         <div class="tab-content">
-            <div class="tab-pane m-2 <?php echo $fRun; ?> <?php echo $_COOKIE['selectedTab'] == 1 ? 'active' : ''; ?>"
+            <div class="tab-pane m-2 <?php echo $fRun; ?> 
+                <?php echo $_COOKIE['selectedTab'] == 1 ? 'active' : ''; ?>"
                  id="home" role="tabpanel" aria-labelledby="home-tab">
                 <!-- Content for first tab -->
                 <?php require APPROOT . '/views/pages/listPlanning.php'; ?>
@@ -114,13 +116,13 @@ if (!isset($_COOKIE['selectedTab'])) {
 
 <script>
     function tab1() {
-        document.cookie = "selectedTab" + "=" + 1;
+        setCookie("selectedTab", 1);
     }
     function tab2() {
-        document.cookie = "selectedTab" + "=" + 2;
+        setCookie("selectedTab", 2);
     }
     function tab3() {
-        document.cookie = "selectedTab" + "=" + 3;
+        setCookie("selectedTab", 3);
     }
 
 </script>

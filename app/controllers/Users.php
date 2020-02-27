@@ -19,10 +19,9 @@ class Users extends Controller
 		$_SESSION['lastName'] = $user->lastName;
 		$_SESSION['role'] = $user->role;
 
-
-        // create Base cookies for dates
-        $monday = date('d-m-Y', strtotime('monday this week'));
-        setcookie("weekUser", $monday, time() + (86400 * 30), "/");
+		// create Base cookies for dates
+		$monday = date('d-m-Y', strtotime('monday this week'));
+		setcookie("weekUser", $monday, time() + 86400 * 30, "/");
 
 		if ($user->role > 3) {
 			redirect('plannings/admin');
@@ -42,7 +41,10 @@ class Users extends Controller
 		unset($_SESSION['role']);
 
 		session_destroy();
-        //setcookie("weekUser", "", time() + 2 * 24 * 60 * 60);
+
+		//destroy cookies
+		setcookie("weekUser", "", time() + 86400 * 30, "/");
+		setcookie("selectedTab", "", time() + 86400 * 30, "/");
 
 		redirect('users/login');
 	}
@@ -113,7 +115,6 @@ class Users extends Controller
 
 	public function login()
 	{
-
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			// make sure text field are clean
 			$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -126,8 +127,7 @@ class Users extends Controller
 				'password_err' => ''
 			];
 
-
-            // validate email
+			// validate email
 			if (empty($data['pseudo'])) {
 				$data['pseudo'] = 'Entrez un pseudo valide.';
 			}

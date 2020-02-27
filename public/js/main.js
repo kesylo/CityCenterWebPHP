@@ -19,59 +19,59 @@ $(function() {
 	//endregion
 
 	//region Linked datePickers create -----------------------------------------------------------------------
-	$('#weekAdd').datetimepicker({
-		format: 'DD-MM-YYYY',
-		date : moment(moment().startOf('isoWeek'), 'DD-MM-YYYY'),
-		daysOfWeekDisabled:[0,2,3,4,5,6],
-		locale:  moment.locale('fr', {
+	$("#weekAdd").datetimepicker({
+		format: "DD-MM-YYYY",
+		date: moment(moment().startOf("isoWeek"), "DD-MM-YYYY"),
+		daysOfWeekDisabled: [0, 2, 3, 4, 5, 6],
+		locale: moment.locale("fr", {
 			week: { dow: 1 }
-		}),
+		})
 	});
 
-	const min = moment(moment().startOf('isoWeek'), 'DD-MM-YYYY');
+	const min = moment(moment().startOf("isoWeek"), "DD-MM-YYYY");
 	const minCl = min.clone();
-	const max = minCl.add(6, 'days');
+	const max = minCl.add(6, "days");
 
-	$('#dayAdd').datetimepicker({
-		format: 'DD-MM-YYYY',
-		date : moment(new Date(), 'DD-MM-YYYY'),
+	$("#dayAdd").datetimepicker({
+		format: "DD-MM-YYYY",
+		date: moment(new Date(), "DD-MM-YYYY"),
 		minDate: min,
-		maxDate : max,
-		locale:  moment.locale('fr', {
+		maxDate: max,
+		locale: moment.locale("fr", {
 			week: { dow: 1 }
-		}),
+		})
 	});
 
-	$("#weekAdd").on("change.datetimepicker", function (e) {
+	$("#weekAdd").on("change.datetimepicker", function(e) {
 		let current = e.date.clone();
 
-		$('#dayAdd').datetimepicker("destroy");
-		$('#dayAdd').datetimepicker({
-			format: 'DD-MM-YYYY',
+		$("#dayAdd").datetimepicker("destroy");
+		$("#dayAdd").datetimepicker({
+			format: "DD-MM-YYYY",
 			ignoreReadonly: true,
 			minDate: current,
-			date : current,
+			date: current,
 			maxDate: e.date.add(6, "day"),
 			autoClose: true,
-			locale:  moment.locale('fr', {
+			locale: moment.locale("fr", {
 				week: { dow: 1 }
-			}),
+			})
 		});
 	});
 	//endregion
 
 	//region TimePickers -------------------------------------------------------------------------------------
-	$('#timeStart').datetimepicker({
-		format: 'HH:mm',
+	$("#timeStart").datetimepicker({
+		format: "HH:mm",
 		stepping: 15,
-		forceMinuteStep: true,
+		forceMinuteStep: true
 	});
-	$('#timeStart').datetimepicker('date', moment(getCurrentTime(), 'HH:mm') );
+	$("#timeStart").datetimepicker("date", moment(getCurrentTime(), "HH:mm"));
 
-	$('#timeEnd').datetimepicker({
-		format: 'HH:mm',
+	$("#timeEnd").datetimepicker({
+		format: "HH:mm",
 		stepping: 15,
-		forceMinuteStep: true,
+		forceMinuteStep: true
 	});
 	//endregion
 

@@ -42,29 +42,31 @@
                             </div>
 
                             Heure de début:
-                            <div class="input-group date" id="timeStart" data-target-input="nearest">
-                                <input type="text" name="startTime" data-target="#timeStart"
+                            <div class="input-group date" id="timeStartEdit" data-target-input="nearest">
+                                <input type="text" name="startTime" data-target="#timeStartEdit"
                                        class="form-control datetimepicker-input <?php echo (!empty($data['timeStart_err'])) ? 'is-invalid' : ''; ?>"
                                        value="<?php echo $data['startTime']; ?>"
                                        onkeydown="return false;"
                                 />
-                                <div class="input-group-append" data-target="#timeStart" data-toggle="datetimepicker">
+                                <div class="input-group-append" data-target="#timeStartEdit" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
                                 </div>
                             </div>
 
                             Heure de fin:
-                            <div class="input-group date" id="timeEnd" data-target-input="nearest">
-                                <input type="text" name="endTime" data-target="#timeEnd"
+                            <div class="input-group date" id="timeEndEdit" data-target-input="nearest">
+                                <input type="text" name="endTime" data-target="#timeEndEdit"
                                        class="form-control datetimepicker-input <?php echo (!empty($data['timeEnd_err'])) ? 'is-invalid' : ''; ?>"
                                        value="<?php echo $data['endTime']; ?>"
                                        onkeydown="return false;"
                                 />
-                                <div class="input-group-append" data-target="#timeEnd" data-toggle="datetimepicker">
+                                <div class="input-group-append" data-target="#timeEndEdit" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
                                 </div>
                             </div>
 
+                            <!-- hidden input to store data -->
+                            <input name="status" type="hidden" value="<?php echo $data['status']; ?>"/>
                         </div>
 
 

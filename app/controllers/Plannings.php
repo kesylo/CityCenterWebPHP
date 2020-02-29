@@ -108,7 +108,7 @@ class Plannings extends Controller
 				'date' => trim($_POST['date']),
 				'startTime' => trim($_POST['startTime']),
 				'endTime' => trim($_POST['endTime']),
-				'status' => 'En attente',
+				'status' => trim($_POST['status']),
 				'callRedirect' => trim($_POST['callRedirect']),
 				'timeStart_err' => '',
 				'timeEnd_err' => '',
@@ -655,24 +655,23 @@ class Plannings extends Controller
 
 	public function delete($id_planning, $admin)
 	{
-		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			if ($this->planningModel->deletePlanning($id_planning)) {
-				flash('post_message', 'Votre planning a été supprimé!');
-				if ($admin == 1) {
-					redirect('plannings/admin');
-				} else {
-					redirect('plannings/dashboard');
-				}
-			} else {
-				die("error deleting");
-			}
-		} else {
-			if ($admin == 1) {
-				redirect('plannings/admin');
-			} else {
-				redirect('plannings/dashboard');
-			}
-		}
+
+        if ($this->planningModel->deletePlanning($id_planning)) {
+            flash('post_message', 'Votre planning a été supprimé!');
+            if ($admin == 1) {
+                redirect('plannings/admin');
+            } else {
+                redirect('plannings/dashboard');
+            }
+        } else {
+            die("error deleting");
+        }
+
+        if ($admin == 1) {
+            redirect('plannings/admin');
+        } else {
+            redirect('plannings/dashboard');
+        }
 	}
 
 	public function deleteEffective($id_planning, $admin)
@@ -699,125 +698,123 @@ class Plannings extends Controller
 
 	public function deny($id_planning, $email)
 	{
-		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			if ($this->planningModel->denyPlanning($id_planning)) {
-				flashError(
-					'planning_message',
-					'Le planning a été refusé! Un email a été envoyé a ' . $email
-				);
+        if ($this->planningModel->denyPlanning($id_planning)) {
+            flashError(
+                'planning_message',
+                'Le planning a été refusé! Un email a été envoyé a ' . $email
+            );
 
-				// get the planning details to send via mail
-				$planning = $this->planningModel->getPlanningById($id_planning);
+            // get the planning details to send via mail
+            $planning = $this->planningModel->getPlanningById($id_planning);
 
-				//region Email
-				$subject = utf8_decode('Planning du ' . $planning->date . ' refusé!');
-				$body = utf8_decode(
-					'Semaine du: ' .
-						$planning->week .
-						' <br> Heure de début: ' .
-						$planning->startTime .
-						' <br> Heure de fin: ' .
-						$planning->endTime .
-						' <br> Rédirection des appels: ' .
-						$planning->callRedirect .
-						' <br> Status: ' .
-						$planning->status
-				);
+            //region Email
+            $subject = utf8_decode('Planning du ' . $planning->date . ' refusé!');
+            $body = utf8_decode(
+                'Semaine du: ' .
+                $planning->week .
+                ' <br> Heure de début: ' .
+                $planning->startTime .
+                ' <br> Heure de fin: ' .
+                $planning->endTime .
+                ' <br> Rédirection des appels: ' .
+                $planning->callRedirect .
+                ' <br> Status: ' .
+                $planning->status
+            );
 
-				$mail = new PHPMailer(true);
-				try {
-					//$mail->isSMTP();                                            // Send using SMTP
-					$mail->Host = 'smtp.gmail.com'; // Set the SMTP server to send through
-					$mail->SMTPAuth = true; // Enable SMTP authentication
-					$mail->Username = 'test4cash.1@gmail.com'; // SMTP username
-					$mail->Password = 'Azerty.1994'; // SMTP password
-					$mail->SMTPSecure = 'ssl'; // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-					$mail->Port = 465; // TCP port to connect to
+            $mail = new PHPMailer(true);
+            try {
+                //$mail->isSMTP();                                            // Send using SMTP
+                $mail->Host = 'smtp.gmail.com'; // Set the SMTP server to send through
+                $mail->SMTPAuth = true; // Enable SMTP authentication
+                $mail->Username = 'test4cash.1@gmail.com'; // SMTP username
+                $mail->Password = 'Azerty.1994'; // SMTP password
+                $mail->SMTPSecure = 'ssl'; // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+                $mail->Port = 465; // TCP port to connect to
 
-					//Recipients
-					$mail->setFrom('test4cash.1@gmail.com', 'City Center Planner');
-					$mail->addAddress($email); // Add a recipient
+                //Recipients
+                $mail->setFrom('test4cash.1@gmail.com', 'City Center Planner');
+                $mail->addAddress($email); // Add a recipient
 
-					// Content
-					$mail->isHTML(true); // Set email format to HTML
-					$mail->Subject = $subject;
-					$mail->Body = $body;
-					$mail->AltBody = $body;
+                // Content
+                $mail->isHTML(true); // Set email format to HTML
+                $mail->Subject = $subject;
+                $mail->Body = $body;
+                $mail->AltBody = $body;
 
-					$mail->send();
-				} catch (Exception $e) {
-					echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-				}
-				//endregion*/
+                //$mail->send();
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+            //endregion*/
 
-				redirect('plannings/admin');
-			} else {
-				die("error deny");
-			}
-		} else {
-			redirect('plannings/admin');
-		}
+            redirect('plannings/admin');
+        } else {
+            die("error deny");
+        }
 	}
 
 	public function accept($id_planning, $email)
 	{
-		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			if ($this->planningModel->acceptPlanning($id_planning)) {
-				flash(
-					'planning_message',
-					'Le planning a été accepté! Un email a été envoyé a ' . $email
-				);
+		/*if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-				// get the planning details to send via mail
-				$planning = $this->planningModel->getPlanningById($id_planning);
-
-				//region Email
-				$subject = utf8_decode('Planning du ' . $planning->date . ' accepté!');
-				$body = utf8_decode(
-					'Semaine du: ' .
-						$planning->week .
-						' <br> Heure de début: ' .
-						$planning->startTime .
-						' <br> Heure de fin: ' .
-						$planning->endTime .
-						' <br> Rédirection des appels: ' .
-						$planning->callRedirect .
-						' <br> Status: ' .
-						$planning->status
-				);
-
-				$mail = new PHPMailer(true);
-				try {
-					//$mail->isSMTP();  // do not use this on some hosting servers. eg: SiteGroung and hostinger
-					$mail->Host = 'smtp.gmail.com';
-					$mail->SMTPAuth = true;
-					$mail->Username = 'test4cash.1@gmail.com';
-					$mail->Password = 'Azerty.1994';
-					$mail->SMTPSecure = 'ssl';
-					$mail->Port = 465;
-
-					//Recipients
-					$mail->setFrom('test4cash.1@gmail.com', 'City Center Planner');
-					$mail->addAddress($email); // Add a recipient
-
-					// Content
-					$mail->isHTML(true);
-					$mail->Subject = $subject;
-					$mail->Body = $body;
-					$mail->AltBody = $body;
-
-					$mail->send();
-				} catch (Exception $e) {
-					echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-				}
-				//endregion*/
-
-				redirect('plannings/admin');
-			} else {
-				die("error accept");
-			}
 		} else {
 			redirect('plannings/admin');
-		}
+		}*/
+
+        if ($this->planningModel->acceptPlanning($id_planning)) {
+            flash(
+                'planning_message',
+                'Le planning a été accepté! Un email a été envoyé a ' . $email
+            );
+
+            // get the planning details to send via mail
+            $planning = $this->planningModel->getPlanningById($id_planning);
+
+            //region Email
+            $subject = utf8_decode('Planning du ' . $planning->date . ' accepté!');
+            $body = utf8_decode(
+                'Semaine du: ' .
+                $planning->week .
+                ' <br> Heure de début: ' .
+                $planning->startTime .
+                ' <br> Heure de fin: ' .
+                $planning->endTime .
+                ' <br> Rédirection des appels: ' .
+                $planning->callRedirect .
+                ' <br> Status: ' .
+                $planning->status
+            );
+
+            $mail = new PHPMailer(true);
+            try {
+                //$mail->isSMTP();  // do not use this on some hosting servers. eg: SiteGroung and hostinger
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'test4cash.1@gmail.com';
+                $mail->Password = 'Azerty.1994';
+                $mail->SMTPSecure = 'ssl';
+                $mail->Port = 465;
+
+                //Recipients
+                $mail->setFrom('test4cash.1@gmail.com', 'City Center Planner');
+                $mail->addAddress($email); // Add a recipient
+
+                // Content
+                $mail->isHTML(true);
+                $mail->Subject = $subject;
+                $mail->Body = $body;
+                $mail->AltBody = $body;
+
+                //$mail->send();
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+            //endregion*/
+
+            redirect('plannings/admin');
+        } else {
+            die("error accept");
+        }
 	}
 }

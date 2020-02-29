@@ -3,6 +3,7 @@
         "phpmailer/phpmailer": "^6.1",
       "ext-pdo": "*",
       "ext-mbstring": "*",
-      "ext-mysqli": "*"
+      "ext-mysqli": "*",
+      "ext-json": "*"
     }
 }

@@ -60,3 +60,26 @@ flash("planning_message");
 
 <!--add footer-->
 <?php require APPROOT . '/views/includes/footer.php'; ?>
+
+
+<script type="text/javascript">
+
+    window.addEventListener("load", function(event) {
+        //document.documentElement.scrollTop = document.body.scrollTop = 300;
+        setCookie('scroll', 0);
+    });
+
+    const scroll = getCookie('scroll');
+    window.scrollTo({
+        top: scroll,
+        left: 0,
+        behavior: 'smooth'
+    });
+
+    window.addEventListener('scroll', () => {
+        const scrolLevel = window.pageYOffset;
+        setCookie('scroll', scrolLevel);
+
+    })
+
+</script>

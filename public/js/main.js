@@ -99,9 +99,24 @@ $(function() {
 		//console.log("selected " + $("#dropDownBulk").prop('selectedIndex'));
 		createCookie("idSelectedUser", $("#dropDownBulk").prop("selectedIndex"));
 	});
+
+	//region TimePickers Edit-------------------------------------------------------------------------------------
+	$("#timeStartEdit").datetimepicker({
+		format: "HH:mm",
+		stepping: 15,
+		forceMinuteStep: true
+	});
+
+	$("#timeEndEdit").datetimepicker({
+		format: "HH:mm",
+		stepping: 15,
+		forceMinuteStep: true
+	});
+	//endregion
 });
 
 //region Functions ------------------------------------------------------------------------
+
 function getCurrentTime() {
 	const today = new Date();
 	return today.getHours() + ":" + today.getMinutes();

@@ -76,3 +76,8 @@ td {
 .table td {
     text-align: center;
 }
+
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+}

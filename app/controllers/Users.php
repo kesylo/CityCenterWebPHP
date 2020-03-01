@@ -47,6 +47,11 @@ class Users extends Controller
 		setcookie("weekUser", "", time() + 86400 * 30, "/");
 		setcookie("selectedTab", "", time() + 86400 * 30, "/");
 		setcookie("weekAdmin", "", time() + 86400 * 30, "/");
+		setcookie("PHPSESSID", "", time() + 86400 * 30, "/");
+		setcookie("dayBulk", "", time() + 86400 * 30, "/");
+		setcookie("idSelectedUser", "", time() + 86400 * 30, "/");
+		setcookie("scroll", "", time() + 86400 * 30, "/");
+		setcookie("weekBulk", "", time() + 86400 * 30, "/");
 
 		redirect('users/login');
 	}

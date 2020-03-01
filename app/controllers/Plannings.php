@@ -742,7 +742,7 @@ class Plannings extends Controller
                 $mail->Body = $body;
                 $mail->AltBody = $body;
 
-                //$mail->send();
+                $mail->send();
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
@@ -806,7 +806,7 @@ class Plannings extends Controller
                 $mail->Body = $body;
                 $mail->AltBody = $body;
 
-                //$mail->send();
+                $mail->send();
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }

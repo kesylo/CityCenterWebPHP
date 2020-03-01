@@ -4,10 +4,10 @@
 
     <a href="#" onclick="this.parentNode.submit()" id="editLink"
        class="card-link <?php echo $d["status"] == "Accepté"
-           ? "text-success"
-           : ($d["status"] == "Refusé"
-               ? "text-danger"
-               : ""); ?>" data-toggle="tooltip" title="Modifier" data-placement="top">
+       	? "text-success"
+       	: ($d["status"] == "Refusé"
+       		? "text-danger"
+       		: ""); ?>" data-toggle="tooltip" title="Modifier" data-placement="top">
 
         <?php echo $d["time"]; ?>
     </a>

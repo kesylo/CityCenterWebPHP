@@ -28,7 +28,8 @@ sort($users);
                             <div class="input-group">
                                 <select class="form-control" name="idBulk" id="dropDownBulk">
                                     <?php foreach ($users as $key => $user) : ?>
-                                        <option <?php echo $_COOKIE["idSelectedUser"] == $key ? "selected" : "" ?>>
+                                        <option <?php echo (isset($_COOKIE["idSelectedUser"])
+                                            && $_COOKIE["idSelectedUser"] == $key) ? "selected" : "" ?>>
                                             <?php echo $user->firstName . " " . $user->lastName?>
                                         </option>
                                     <?php endforeach; ?>
@@ -38,24 +39,24 @@ sort($users);
                             <hr>
 
                             Semaine du :
-                            <div class="input-group" id="weekDatePickerBulk" data-target-input="nearest">
+                            <div class="input-group" id="weekBulk" data-target-input="nearest">
                                 <input type="text" name="week" class="form-control datetimepicker-input"
-                                       data-target="#weekDatePickerBulk" value="<?php echo $data['week']; ?>"
+                                       data-target="#weekBulk" value="<?php echo $_COOKIE['weekBulk']; ?>"
                                        onkeydown="return false;"
                                 />
-                                <div class="input-group-append" data-target="#weekDatePickerBulk" data-toggle="datetimepicker">
+                                <div class="input-group-append" data-target="#weekBulk" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
                             </div>
 
                             Date :
-                            <div class="input-group" id="dayDatePickerBulk" data-target-input="nearest">
+                            <div class="input-group" id="dayBulk" data-target-input="nearest">
                                 <input type="text" name="date"
                                        class="form-control datetimepicker-input <?php echo (!empty($data['date_err'])) ? 'is-invalid' : ''; ?>"
-                                       data-target="#dayDatePickerBulk" value="<?php echo $data['date']; ?>"
+                                       data-target="#dayBulk"
                                        onkeydown="return false;"
                                 />
-                                <div class="input-group-append" data-target="#dayDatePickerBulk" data-toggle="datetimepicker">
+                                <div class="input-group-append" data-target="#dayBulk" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
                             </div>
@@ -133,3 +134,58 @@ sort($users);
 
 <!--add footer-->
 <?php require APPROOT . '/views/includes/footer.php'; ?>
+
+<script>
+    $("#weekBulk").datetimepicker({
+        format: "DD-MM-YYYY",
+        date: moment(moment().startOf("isoWeek"), "DD-MM-YYYY"),
+        daysOfWeekDisabled: [0, 2, 3, 4, 5, 6],
+        locale: moment.locale("fr", {
+            week: { dow: 1 }
+        })
+    });
+
+    let min = moment(getCookie("dayBulk"), 'DD-MM-YYYY');
+    let minCl = min.clone();
+    let max = minCl.add(6, 'days');
+
+    $("#dayBulk").datetimepicker({
+        format: 'DD-MM-YYYY',
+        minDate: min,
+        maxDate : max,
+        locale:  moment.locale('fr', {
+            week: { dow: 1 }
+        }),
+    });
+
+    // set globally
+    $("#weekBulk").on("change.datetimepicker", function(e) {
+        setCookie('weekBulk', moment(e.date).format('DD-MM-YYYY'))
+    });
+    $("#dayBulk").on("change.datetimepicker", function(e) {
+        setCookie('dayBulk', moment(e.date).format('DD-MM-YYYY'))
+    });
+
+    // retrieve
+    const dateValue = getCookie("weekBulk");
+    const dateValue2 = getCookie("dayBulk");
+    $("#weekBulk").datetimepicker("date", moment(dateValue, "DD-MM-YYYY"));
+    $("#dayBulk").datetimepicker("date", moment(dateValue2, "DD-MM-YYYY"));
+
+    $("#weekBulk").on("change.datetimepicker", function (e) {
+            const current = e.date.clone();
+            const current2 = e.date.clone();
+
+            $("#dayBulk").datetimepicker("destroy");
+            $("#dayBulk").datetimepicker({
+                format: 'DD-MM-YYYY',
+                minDate: current,
+                date : current2,
+                maxDate: e.date.add(6, "day"),
+                autoClose: true,
+                locale:  moment.locale('fr', {
+                    week: { dow: 1 }
+                }),
+            });
+    });
+</script>

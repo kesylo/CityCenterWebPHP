@@ -21,7 +21,6 @@ $(function() {
 	//region Linked datePickers create -----------------------------------------------------------------------
 	$("#weekAdd").datetimepicker({
 		format: "DD-MM-YYYY",
-		date: moment(moment().startOf("isoWeek"), "DD-MM-YYYY"),
 		daysOfWeekDisabled: [0, 2, 3, 4, 5, 6],
 		locale: moment.locale("fr", {
 			week: { dow: 1 }
@@ -97,7 +96,7 @@ $(function() {
 	// combobox change event ------------------------------------------------------------------------
 	$("#dropDownBulk").change(function() {
 		//console.log("selected " + $("#dropDownBulk").prop('selectedIndex'));
-		createCookie("idSelectedUser", $("#dropDownBulk").prop("selectedIndex"));
+		setCookie("idSelectedUser", $("#dropDownBulk").prop("selectedIndex"));
 	});
 
 	//region TimePickers Edit-------------------------------------------------------------------------------------
@@ -111,6 +110,34 @@ $(function() {
 		format: "HH:mm",
 		stepping: 15,
 		forceMinuteStep: true
+	});
+	//endregion
+
+
+	//region Linked datePickers Bulk -----------------------------------------------------------------------
+
+
+
+
+
+	const min3 = moment(moment().startOf("isoWeek"), "DD-MM-YYYY");
+	const minCl3 = min3.clone();
+	const max3 = minCl3.add(6, "days");
+
+	$("#dayBulk").datetimepicker({
+		format: "DD-MM-YYYY",
+		date: moment(new Date(), "DD-MM-YYYY"),
+		minDate: min3,
+		maxDate: max3,
+		locale: moment.locale("fr", {
+			week: { dow: 1 }
+		})
+	});
+
+
+
+	$("#dayBulk").on("change.datetimepicker", function(e) {
+		setCookie('dayBulk', moment(e.date).format('DD-MM-YYYY'))
 	});
 	//endregion
 });

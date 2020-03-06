@@ -136,18 +136,20 @@ sort($users);
 <?php require APPROOT . '/views/includes/footer.php'; ?>
 
 <script>
+
+    const dateWeek = moment(getCookie("weekBulk"), 'DD-MM-YYYY');
     $("#weekBulk").datetimepicker({
         format: "DD-MM-YYYY",
-        date: moment(moment().startOf("isoWeek"), "DD-MM-YYYY"),
+        date: dateWeek,
         daysOfWeekDisabled: [0, 2, 3, 4, 5, 6],
         locale: moment.locale("fr", {
             week: { dow: 1 }
         })
     });
 
-    let min = moment(getCookie("dayBulk"), 'DD-MM-YYYY');
-    let minCl = min.clone();
-    let max = minCl.add(6, 'days');
+    const min = moment(getCookie("weekBulk"), 'DD-MM-YYYY');
+    const minCl = min.clone();
+    const max = minCl.add(6, 'days');
 
     $("#dayBulk").datetimepicker({
         format: 'DD-MM-YYYY',

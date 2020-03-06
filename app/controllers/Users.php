@@ -21,6 +21,7 @@ class Users extends Controller
 
 		// create Base cookies for dates
 		$currentMonday = date('d-m-Y', strtotime('monday this week'));
+		$nextMonday = date('d-m-Y', strtotime('next monday'));
 		$currentWeek = date('d-m-Y', strtotime('today'));
 		setcookie("weekUser", $currentMonday, time() + 86400 * 30, "/");
 		setcookie("weekAdmin", $currentMonday, time() + 86400 * 30, "/");

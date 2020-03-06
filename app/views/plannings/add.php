@@ -34,7 +34,9 @@
                             Date :
                             <div class="input-group date" id="dayAdd" data-target-input="nearest">
                                 <input type="text" name="date"
-                                       class="form-control datetimepicker-input <?php echo (!empty($data['date_err'])) ? 'is-invalid' : ''; ?>"
+                                       class="form-control datetimepicker-input <?php echo !empty($data['date_err'])
+                                       	? 'is-invalid'
+                                       	: ''; ?>"
                                        data-target="#dayAdd" value="<?php echo $data['date']; ?>"
                                        onkeydown="return false;"
                                 />
@@ -46,7 +48,11 @@
                             Heure de début:
                             <div class="input-group date" id="timeStart" data-target-input="nearest">
                                 <input type="text" name="startTime" data-target="#timeStart"
-                                       class="form-control datetimepicker-input <?php echo (!empty($data['timeStart_err'])) ? 'is-invalid' : ''; ?>"
+                                       class="form-control datetimepicker-input <?php echo !empty(
+                                       	$data['timeStart_err']
+                                       )
+                                       	? 'is-invalid'
+                                       	: ''; ?>"
                                        value="<?php echo $data['startTime']; ?>"
                                        onkeydown="return false;"
                                 />
@@ -58,7 +64,9 @@
                             Heure de fin:
                             <div class="input-group date" id="timeEnd" data-target-input="nearest">
                                 <input type="text" name="endTime" data-target="#timeEnd"
-                                       class="form-control datetimepicker-input <?php echo (!empty($data['timeEnd_err'])) ? 'is-invalid' : ''; ?>"
+                                       class="form-control datetimepicker-input <?php echo !empty($data['timeEnd_err'])
+                                       	? 'is-invalid'
+                                       	: ''; ?>"
                                        value="<?php echo $data['endTime']; ?>"
                                        onkeydown="return false;"
                                 />
@@ -100,6 +108,61 @@
     </div>
 </div>
 
-
 <!--add footer-->
 <?php require APPROOT . '/views/includes/footer.php'; ?>
+
+<script>
+
+    const dateWeekUser = moment(getCookie("weekAdd"), 'DD-MM-YYYY');
+    $("#weekAdd").datetimepicker({
+        format: "DD-MM-YYYY",
+        date: dateWeekUser,
+        daysOfWeekDisabled: [0, 2, 3, 4, 5, 6],
+        locale: moment.locale("fr", {
+            week: { dow: 1 }
+        })
+    });
+
+    const minClUser = dateWeekUser.clone();
+    const maxUser = minClUser.add(6, 'days');
+
+    $("#dayAdd").datetimepicker({
+        format: 'DD-MM-YYYY',
+        minDate: dateWeekUser,
+        maxDate : maxUser,
+        locale:  moment.locale('fr', {
+            week: { dow: 1 }
+        }),
+    });
+
+    // set globally
+    $("#weekAdd").on("change.datetimepicker", function(e) {
+        setCookie('weekAdd', moment(e.date).format('DD-MM-YYYY'))
+    });
+    $("#dayAdd").on("change.datetimepicker", function(e) {
+        setCookie('dayAdd', moment(e.date).format('DD-MM-YYYY'))
+    });
+
+    // retrieve
+    const dateWeekAdd = getCookie("weekAdd");
+    const dateDayAdd = getCookie("dayAdd");
+    $("#weekAdd").datetimepicker("date", moment(dateWeekAdd, "DD-MM-YYYY"));
+    $("#dayAdd").datetimepicker("date", moment(dateDayAdd, "DD-MM-YYYY"));
+
+    $("#weekAdd").on("change.datetimepicker", function (e) {
+        const currentAdd = e.date.clone();
+        const current2Add = e.date.clone();
+
+        $("#dayAdd").datetimepicker("destroy");
+        $("#dayAdd").datetimepicker({
+            format: 'DD-MM-YYYY',
+            minDate: currentAdd,
+            date : current2Add,
+            maxDate: e.date.add(6, "day"),
+            autoClose: true,
+            locale:  moment.locale('fr', {
+                week: { dow: 1 }
+            }),
+        });
+    });
+</script>

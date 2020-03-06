@@ -19,13 +19,13 @@
                         <div class="form-group">
 
                             Semaine du :
-                            <div class="input-group date" id="weekAdd" data-target-input="nearest">
+                            <div class="input-group date" id="weekAddEff" data-target-input="nearest">
                                 <input type="text" name="week" class="form-control datetimepicker-input"
-                                       data-target="#weekAdd"
+                                       data-target="#weekAddEff"
                                        disabled='disabled'
                                        onkeydown="return false;"
                                 />
-                                <div class="input-group-append" data-target="#weekAdd" data-toggle="datetimepicker">
+                                <div class="input-group-append" data-target="#weekAddEff" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
                             </div>
@@ -33,14 +33,14 @@
                             <hr>
 
                             Date :
-                            <div class="input-group date" id="dayAdd" data-target-input="nearest">
+                            <div class="input-group date" id="dayAddEff" data-target-input="nearest">
                                 <input type="text" name="date"
                                        class="form-control datetimepicker-input"
-                                       data-target="#dayAdd"
+                                       data-target="#dayAddEff"
                                        disabled='disabled'
                                        onkeydown="return false;"
                                 />
-                                <div class="input-group-append" data-target="#dayAdd" data-toggle="datetimepicker">
+                                <div class="input-group-append" data-target="#dayAddEff" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
                             </div>
@@ -111,13 +111,24 @@
 
 <script type="text/javascript">
     $(function () {
-
-        $('#dayDatePickerAE').datetimepicker({
-            format: 'DD-MM-YYYY',
-            date : moment(moment(), 'DD-MM-YYYY'),
-            locale:  moment.locale('fr', {
+        const currentWeek = moment(getCookie("currentWeek"), 'DD-MM-YYYY');
+        $("#weekAddEff").datetimepicker({
+            format: "DD-MM-YYYY",
+            date: currentWeek,
+            daysOfWeekDisabled: [0, 2, 3, 4, 5, 6],
+            locale: moment.locale("fr", {
                 week: { dow: 1 }
-            }),
+            })
+        });
+
+        const currentDay = moment(getCookie("currentWDay"), 'DD-MM-YYYY');
+        $("#dayAddEff").datetimepicker({
+            format: "DD-MM-YYYY",
+            date: currentDay,
+            daysOfWeekDisabled: [0, 2, 3, 4, 5, 6],
+            locale: moment.locale("fr", {
+                week: { dow: 1 }
+            })
         });
     });
 </script>

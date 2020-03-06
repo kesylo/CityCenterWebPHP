@@ -22,11 +22,19 @@ class Users extends Controller
 		// create Base cookies for dates
 		$currentMonday = date('d-m-Y', strtotime('monday this week'));
 		$nextMonday = date('d-m-Y', strtotime('next monday'));
-		$currentWeek = date('d-m-Y', strtotime('today'));
+		$today = date('d-m-Y', strtotime('today'));
+
+        setcookie("currentWeek", $currentMonday, time() + 86400 * 30, "/");
+        setcookie("currentDay", $today, time() + 86400 * 30, "/");
+
 		setcookie("weekUser", $currentMonday, time() + 86400 * 30, "/");
 		setcookie("weekAdmin", $currentMonday, time() + 86400 * 30, "/");
+
 		setcookie("weekBulk", $currentMonday, time() + 86400 * 30, "/");
-		setcookie("dayBulk", $currentWeek, time() + 86400 * 30, "/");
+		setcookie("dayBulk", $today, time() + 86400 * 30, "/");
+
+		setcookie("weekAdd", $currentMonday, time() + 86400 * 30, "/");
+        setcookie("dayAdd", $today, time() + 86400 * 30, "/");
 
 		if ($user->role > 3) {
 			redirect('plannings/admin');
@@ -49,13 +57,17 @@ class Users extends Controller
 
 		//destroy cookies
 		setcookie("weekUser", "", time() + 86400 * 30, "/");
-		setcookie("selectedTab", "", time() + 86400 * 30, "/");
-		setcookie("weekAdmin", "", time() + 86400 * 30, "/");
+        setcookie("weekAdmin", "", time() + 86400 * 30, "/");
+        setcookie("selectedTab", "", time() + 86400 * 30, "/");
 		setcookie("PHPSESSID", "", time() + 86400 * 30, "/");
 		setcookie("dayBulk", "", time() + 86400 * 30, "/");
 		setcookie("idSelectedUser", "", time() + 86400 * 30, "/");
 		setcookie("scroll", "", time() + 86400 * 30, "/");
 		setcookie("weekBulk", "", time() + 86400 * 30, "/");
+		setcookie("weekAdd", "", time() + 86400 * 30, "/");
+		setcookie("dayAdd", "", time() + 86400 * 30, "/");
+		setcookie("currentWeek", "", time() + 86400 * 30, "/");
+		setcookie("currentDay", "", time() + 86400 * 30, "/");
 
 		redirect('users/login');
 	}

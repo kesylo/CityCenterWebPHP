@@ -3,8 +3,6 @@
 require APPROOT . '/views/includes/header.php';
 flash("planning_message");
 sort($users);
-
-
 ?>
 
 
@@ -27,10 +25,12 @@ sort($users);
                             Utilisateur :
                             <div class="input-group">
                                 <select class="form-control" name="idBulk" id="dropDownBulk">
-                                    <?php foreach ($users as $key => $user) : ?>
-                                        <option <?php echo (isset($_COOKIE["idSelectedUser"])
-                                            && $_COOKIE["idSelectedUser"] == $key) ? "selected" : "" ?>>
-                                            <?php echo $user->firstName . " " . $user->lastName?>
+                                    <?php foreach ($users as $key => $user): ?>
+                                        <option <?php echo isset($_COOKIE["idSelectedUser"]) &&
+                                        $_COOKIE["idSelectedUser"] == $key
+                                        	? "selected"
+                                        	: ""; ?>>
+                                            <?php echo $user->firstName . " " . $user->lastName; ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
@@ -52,7 +52,9 @@ sort($users);
                             Date :
                             <div class="input-group" id="dayBulk" data-target-input="nearest">
                                 <input type="text" name="date"
-                                       class="form-control datetimepicker-input <?php echo (!empty($data['date_err'])) ? 'is-invalid' : ''; ?>"
+                                       class="form-control datetimepicker-input <?php echo !empty($data['date_err'])
+                                       	? 'is-invalid'
+                                       	: ''; ?>"
                                        data-target="#dayBulk"
                                        onkeydown="return false;"
                                 />
@@ -64,7 +66,11 @@ sort($users);
                             Heure de début:
                             <div class="input-group" id="timeStart" data-target-input="nearest">
                                 <input type="text" name="startTime" data-target="#timeStart"
-                                       class="form-control datetimepicker-input <?php echo (!empty($data['timeStart_err'])) ? 'is-invalid' : ''; ?>"
+                                       class="form-control datetimepicker-input <?php echo !empty(
+                                       	$data['timeStart_err']
+                                       )
+                                       	? 'is-invalid'
+                                       	: ''; ?>"
                                        value="<?php echo $data['startTime']; ?>"
                                        onkeydown="return false;"
                                 />
@@ -76,7 +82,9 @@ sort($users);
                             Heure de fin:
                             <div class="input-group" id="timeEnd" data-target-input="nearest">
                                 <input type="text" name="endTime" data-target="#timeEnd"
-                                       class="form-control datetimepicker-input <?php echo (!empty($data['timeEnd_err'])) ? 'is-invalid' : ''; ?>"
+                                       class="form-control datetimepicker-input <?php echo !empty($data['timeEnd_err'])
+                                       	? 'is-invalid'
+                                       	: ''; ?>"
                                        value="<?php echo $data['endTime']; ?>"
                                        onkeydown="return false;"
                                 />
